@@ -1,0 +1,15 @@
+<% title "Event" %>
+
+<p>
+  <strong>Description:</strong>
+  <%=h @event.description %>
+</p>
+<p>
+  <strong>Result:</strong>
+  <%=h @event.result %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_event_path(@event) %> |
+  <%= link_to "View All", events_path %>
+</p>

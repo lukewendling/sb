@@ -1,0 +1,23 @@
+- title "Comments for #{h truncate(@challenge.event.description, :length => 20)}"
+
+- unless @challenge_comments.empty?
+  %table
+    %tr
+      %th By
+      %th Message
+      %th When?
+    - for challenge_comment in @challenge_comments
+      %tr
+        %td= h challenge_comment.friend.name
+        %td= h truncate(challenge_comment.content, :length => 50)
+        %td= time_ago_in_words(challenge_comment.created_at) + ' ago'
+        %td= link_to 'Show', challenge_comment_path(challenge_comment.challenge, challenge_comment)
+        %td
+          = link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment) ) if challenge_comment.friend == current_friend
+
+  = will_paginate @challenge_comments
+  
+%p
+  = link_to "New Comment", new_challenge_comment_path(@challenge)
+  |
+  = link_to "Back to Challenge", @challenge

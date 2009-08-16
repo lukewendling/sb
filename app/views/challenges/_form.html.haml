@@ -1,0 +1,35 @@
+- form_for @challenge do |f|
+  = f.error_messages
+
+  %p
+    = f.label :challenged_email, 'Recipient email address to send challenge'
+    %br
+    = f.text_field :challenged_email
+  %p
+    = f.label :event_description
+    %br
+    = f.text_area :event_description, :size => '40x3'
+  %p
+    = f.label :prediction
+    %br
+    = f.text_area :prediction, :size => '40x3'
+  - unless @challenge.new_record?
+    - field_set_tag 'Outcome' do
+      %p
+        = f.label :result
+        %br
+        = f.text_area :result, :size => '40x2'
+      %p
+        = f.label :winner_id
+        %br
+        = f.radio_button :winner_id, @challenge.friends.first.id
+        = @challenge.friends.first.name
+        %br
+        = f.radio_button :winner_id, @challenge.friends.last.id
+        = @challenge.friends.last.name
+      %p
+        = f.label :contested, 'Contested?'
+        %br
+        = f.check_box :contested
+  %p
+    = f.submit "Submit"

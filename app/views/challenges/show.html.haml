@@ -1,0 +1,34 @@
+- title "Challenge"
+
+%p
+  %strong Challenged:
+  =h @challenge.challenged.name
+%p
+  %strong Event:
+  ~h @challenge.event.description
+%p
+  %strong Prediction:
+  ~h @challenge.prediction
+- if @challenge.complete?
+  %p
+    %strong Result:
+    ~h @challenge.result
+  %p
+    %strong Winner:
+    =h @challenge.winner.try(:name)
+  %p
+    %strong Contested?:
+    =@challenge.contested? ? 'Yes' : 'No'
+%p
+  %strong Created:
+  =@challenge.created_at.to_date.to_s(:db)
+%p
+  %strong Updated:
+  =@challenge.updated_at.to_date.to_s(:db)
+
+%p
+  - links = []
+  - links << link_to( "Edit", edit_challenge_path(@challenge) ) if @challenge.challenger == current_friend
+  - links << link_to( "View Comments", challenge_comments_path(@challenge) )
+  - links << link_to( "View All", challenges_path )
+  = links.join(' | ')

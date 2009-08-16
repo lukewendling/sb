@@ -1,0 +1,9 @@
+from_luke:
+  friend: luke
+  challenge: linwood_to_luke
+  content: lorem ipsum dolor
+
+from_linwood:
+  friend: linwood
+  challenge: linwood_to_luke
+  content: lorem ipsum dolor

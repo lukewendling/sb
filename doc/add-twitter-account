@@ -1,0 +1,15 @@
+-# add your twitter account
+- if current_friend.twitter_account.nil?
+  - if current_friend.settings[:twitter_on]
+    challenge.tweet
+  - else
+  
+- else
+  if has twitter acct?
+    enter twitter acct login
+  else
+    instructions for adding twitter acct in settings
+  
+# logged in
+# check for twitter account
+# prompt for login credentials

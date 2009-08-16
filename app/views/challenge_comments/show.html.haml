@@ -1,0 +1,21 @@
+- title "Challenge Comment"
+
+%p
+  %strong To:
+  =h((@challenge.friends - [@challenge_comment.friend]).first.try(:name))
+%p
+  %strong= link_to('Challenge', @challenge)
+  ~h @challenge.event.description
+%p
+  %strong Prediction:
+  ~h @challenge.prediction  
+%p
+  %strong Message:
+  ~h @challenge_comment.content
+
+%p
+  - links = []
+  - links << link_to( "Edit", edit_challenge_comment_path(@challenge, @challenge_comment) ) if @challenge_comment.friend == current_friend
+  - links << link_to( "Reply", new_challenge_comment_path(@challenge) )
+  - links << link_to( "View All", challenge_comments_path )
+  = links.join(' | ')

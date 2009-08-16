@@ -1,0 +1,6 @@
+luke_to_linwood:
+  sender: luke
+  recipient_email: linwood@example.com
+  token: abc123
+  sent_at: <%= 1.day.ago.to_s(:db) %>
+

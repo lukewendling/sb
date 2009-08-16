@@ -1,0 +1,40 @@
+= render :partial => 'shared/email_top'
+
+:plain
+  Event
+  -----
+~ h(@challenge.event.description)
+
+
+- unless @challenge.result.blank?
+  :plain
+    Result
+    ------
+    ~ h(@challenge.result)
+    
+    
+- if @challenge.winner
+  :plain
+    Winner
+    ------
+  = h(@challenge.winner.name)
+    
+    
+:plain
+  Event page
+  ----------
+= challenge_url(@challenge)
+
+
+:plain
+  Status
+  ------ 
+== Challenge #{(@challenge.accepted? ? 'accepted!' : 'not accepted')}
+
+
+:plain
+  Prediction
+  ----------
+~ h(@challenge.prediction)
+  
+= render :partial => 'shared/email_bottom', :locals => {:challenge_id => @challenge.hashed_id}

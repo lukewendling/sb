@@ -1,0 +1,22 @@
+:plain
+  Challenger
+  ----------
+= h(@challenge.challenger.name)
+
+
+:plain
+  Event
+  -----
+~ h(@challenge.event.description)
+
+
+:plain
+  Prediction
+  ----------
+~ h(@challenge.prediction)
+
+
+:plain
+  Now what?
+  --------
+= accept_challenge_url(@challenge.hashed_id)

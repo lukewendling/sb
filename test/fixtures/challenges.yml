@@ -1,0 +1,14 @@
+linwood_to_luke:
+  challenger: linwood 
+  challenged: luke
+  event: gators_v_vols
+  hashed_id: abc
+  prediction: gators roll
+  accepted: true
+luke_to_linwood:
+  challenger: luke 
+  challenged: linwood
+  event: ou_v_ut
+  hashed_id: def
+  prediction: sooners
+  accepted: false

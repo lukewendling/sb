@@ -1,0 +1,12 @@
+<% form_for @event do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :result %><br />
+    <%= f.text_field :result %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

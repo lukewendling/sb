@@ -1,0 +1,28 @@
+# password: "secret"
+luke:
+  username: luke
+  email: luke@example.com
+  name: Luke Wendling
+  password_hash: 3488f5f7efecab14b91eb96169e5e1ee518a569f
+  password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
+  atoken: 61802075-t31Q3hd8TrPrpaGXYqlvPZRtKrctUy8FXVWwU4FgR
+  asecret: Z2fRZeHjc6BOE4kCwzYElEkGEpQ5iwNp95OMhItTZN0
+  invitation_limit: 10
+     
+linwood:
+  username: linwood
+  email: linwood@example.com
+  name: Linwood Taliaferro
+  password_hash: 3488f5f7efecab14b91eb96169e5e1ee518a569f
+  password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
+  atoken: 61802075-t31Q3hd8TrPrpaGXYqlvPZRtKrctUy8FXVWwU4FgR
+  asecret: Z2fRZeHjc6BOE4kCwzYElEkGEpQ5iwNp95OMhItTZN0
+  
+mike:
+  username: mike
+  email: mike@example.com
+  name: Mike Dixon
+  password_hash: 3488f5f7efecab14b91eb96169e5e1ee518a569f
+  password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
+  atoken: 61802075-t31Q3hd8TrPrpaGXYqlvPZRtKrctUy8FXVWwU4FgR
+  asecret: Z2fRZeHjc6BOE4kCwzYElEkGEpQ5iwNp95OMhItTZN0

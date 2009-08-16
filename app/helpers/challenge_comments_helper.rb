@@ -1,0 +1,2 @@
+module ChallengeCommentsHelper
+end
