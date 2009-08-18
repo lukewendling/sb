@@ -1,15 +1,14 @@
 set :application, "shouldbet"
-set :domain, "68.233.8.236"
+set :domain, "shouldbet.com"
 server domain, :app, :web, :db, :primary => true
 
 set :user, "lukewen"
 set :deploy_to, "~/#{application}"
 set :use_sudo, false
+default_run_options[:pty] = true
 
 set :scm, "git"
-set :repository, "."
-set :deploy_via, :copy
-set :copy_remote_dir, "~/tmp"
+set :repository, "#{user}@#{domain}:~/git/shouldbet.git"
 set :branch, "master"
 
 namespace :deploy do
