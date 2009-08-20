@@ -1,6 +1,5 @@
 log/*.log
 tmp/**/*
-config/database.yml
 config/app_config.yml
 config/consumer.yml
 db/*.sqlite3

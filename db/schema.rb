@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090810025101) do
+ActiveRecord::Schema.define(:version => 20090820145711) do
 
   create_table "challenge_comments", :force => true do |t|
     t.integer  "friend_id"
@@ -54,20 +54,20 @@ ActiveRecord::Schema.define(:version => 20090810025101) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.string   "string"
     t.string   "atoken"
     t.string   "asecret"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "invitation_id"
     t.integer  "invitation_limit"
+    t.boolean  "tweets",           :default => true, :null => false
   end
 
   add_index "friends", ["email"], :name => "index_friends_on_email", :unique => true
 
   create_table "invitations", :force => true do |t|
-    t.integer  "sender_id",       :null => false
-    t.string   "recipient_email", :null => false
+    t.integer  "sender_id"
+    t.string   "recipient_email"
     t.string   "token"
     t.datetime "sent_at"
     t.datetime "created_at"

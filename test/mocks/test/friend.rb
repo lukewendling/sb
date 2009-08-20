@@ -2,10 +2,12 @@ require (Rails.root + 'app/models/friend')
 
 class Friend
   def client
-    self
+    @dummy ||= TwitterDumDum.new
   end
   
-  def update(msg)
-    logger.debug "Tweeted: #{msg}"
+  class TwitterDumDum
+    def update(msg)
+      Rails.logger.debug "Tweeted: #{msg}"
+    end
   end
 end

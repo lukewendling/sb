@@ -49,6 +49,9 @@ class ChallengesController < ApplicationController
   
   def accept
     @challenge = Challenge.find_by_hashed_id(params[:id])
+    if @challenge.challenged != current_friend
+      render(:text => 'Unauthorized', :status => 401)
+    end and return
     @challenge.toggle!(:accepted)
     flash[:notice] = "Challenge #{(@challenge.accepted? ? 'accepted!' : 'not accepted')}"
     redirect_to challenges_path

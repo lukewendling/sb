@@ -12,7 +12,7 @@ class AuthorizationsController < ApplicationController
     
     session['rtoken'] = nil
     session['rsecret'] = nil
-    
+    logger.debug current_friend.to_yaml
     current_friend.update_attributes({
       :atoken => oauth.access_token.token, 
       :asecret => oauth.access_token.secret,
