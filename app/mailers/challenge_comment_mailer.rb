@@ -4,7 +4,7 @@ class ChallengeCommentMailer < ApplicationMailer
     subject    "RE: #{challenge_comment.challenge.event.description.to_s[0..40]}"
     chumps = challenge_comment.challenge.friends - [challenge_comment.friend]
     recipients chumps.map(&:email)
-    from       AppConfig[:postman]
+    from       AppConfig[:reply_to]
     sent_on    Time.now
     content_type "text/plain"
 
