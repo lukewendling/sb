@@ -20,14 +20,15 @@ class Challenge < ActiveRecord::Base
     super
     @new_challenge = true # flag to halt update notification
     ChallengeMailer.deliver_the_challenge(self)
-    challenger.client.update("#{AppConfig[:domain]} challenge issued to #{challenged.name}: #{prediction}")
+    challenger.client.update("#{AppConfig[:domain]} challenge issued to #{challenged.username}: \"#{prediction}\"")
   end
   
   def after_save
     super
     unless @new_challenge
       ChallengeMailer.deliver_update(self)
-      challenger.client.update("#{AppConfig[:domain]} challenge update: \"#{event.description}\"")
+      challenger.client.update("#{AppConfig[:domain]} challenge update: (#{challenged.username}) \"#{prediction}\"")
+      challenged.client.update("#{AppConfig[:domain]} challenge update: (#{challenger.username}) \"#{prediction}\"")
     end
   end
   

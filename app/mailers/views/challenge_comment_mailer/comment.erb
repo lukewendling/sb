@@ -1,0 +1,28 @@
+<%= render :partial => 'shared/email_top' %>
+
+
+From
+----
+<%= h(@challenge_comment.friend.name) %>
+
+
+  
+Event
+-----
+<%= h(@challenge_comment.challenge.event.description) %>
+
+
+  
+Message
+-------
+<%= h(@challenge_comment.content) %>
+
+
+
+See all comments
+
+<%= challenge_comments_url(@challenge_comment.challenge) %>
+
+
+
+<%= render :partial => 'shared/email_bottom', :locals => {:challenge_id => @challenge_comment.challenge.hashed_id} %>

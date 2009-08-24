@@ -12,6 +12,6 @@ class ChallengeComment < ActiveRecord::Base
     super
     ChallengeCommentMailer.deliver_comment(self)
     recipient = (challenge.friends - [friend]).first
-    recipient.client.update(content)
+    recipient.client.update("Commented on #{AppConfig[:domain]} to #{recipient.username}: \"#{content}\"")
   end
 end

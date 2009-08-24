@@ -1,0 +1,44 @@
+<%= render :partial => 'shared/email_top' %>
+
+
+Event
+-----
+<%= h(@challenge.event.description) %>
+
+
+
+<% unless @challenge.result.blank? -%>
+  Result
+  ------
+  <%= h(@challenge.result) %>
+<% end -%>
+
+
+
+<% if @challenge.winner -%>    
+  Winner
+  ------
+  <%= h(@challenge.winner.name) %>
+<% end -%>
+    
+
+    
+Event page
+----------
+<%= challenge_url(@challenge) %>
+
+
+
+Status
+------ 
+<%= "Challenge #{(@challenge.accepted? ? 'accepted!' : 'not accepted')}" %>
+
+
+
+Prediction
+----------
+<%= h(@challenge.prediction) %>
+
+
+
+<%= render :partial => 'shared/email_bottom', :locals => {:challenge_id => @challenge.hashed_id} %>
