@@ -1,0 +1,24 @@
+site: &site
+  title: App Name
+  postman: somebody@gmail.com
+  
+imap: &imap
+  imap_server: imap.gmail.com
+  imap_port: 993
+  imap_username: username
+  imap_pwd: password
+  
+development:
+  domain: 'localhost:3000'
+  <<: *imap
+  <<: *site
+  
+test:
+  domain: test.host
+  <<: *imap
+  <<: *site
+  
+production:
+  domain: shouldbet.com
+  <<: *imap
+  <<: *site
