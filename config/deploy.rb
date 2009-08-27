@@ -28,6 +28,8 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/app_config.yml #{release_path}/config/app_config.yml"
     run "ln -nfs #{shared_path}/config/consumer.yml #{release_path}/config/consumer.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
+#    can't get smtp auth to work with non-admin accts, so storing credentials in production.rb and symlinking
+    run "ln -nfs #{shared_path}/config/production.rb #{release_path}/config/environments/production.rb"
     run "rm -rf ~/public_html"
     run "ln -nfs #{release_path}/public ~/public_html"
   end
