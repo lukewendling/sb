@@ -3,6 +3,8 @@
 
 class ApplicationController < ActionController::Base
   include Authentication
+  include ExceptionNotifiable
+
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -13,6 +15,10 @@ class ApplicationController < ActionController::Base
   
   #rescue twitter gem auth errors globally
   rescue_from Twitter::Unauthorized, :with => :twitter_unauthorized
+  
+  def boom
+    raise 'boom'
+  end
   
   private
     def twitter_unauthorized(exception)

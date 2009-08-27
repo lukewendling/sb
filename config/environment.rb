@@ -17,6 +17,9 @@ Rails::Initializer.run do |config|
     :version => '1.4.3'
   config.gem 'haml',
     :version => '2.0.9'
+  config.gem 'jeremyevans-exception_notification',
+    :version => '1.0.20090728',
+    :lib => 'exception_notification'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
