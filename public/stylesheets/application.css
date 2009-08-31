@@ -23,12 +23,14 @@ a {
 .float-right {
   float: right; }
 
-.little-pad-right {
+.pad-right {
   padding-right: 1em; }
 
-.little-pad-left {
+.pad-left {
   padding-left: 1em; }
 
+#navigation {
+  font-size: .9em; }
 
 #container {
   width: 75%;
