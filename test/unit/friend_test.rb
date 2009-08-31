@@ -100,12 +100,11 @@ class FriendTest < ActiveSupport::TestCase
   end
   
   def test_should_fetch_twitter_details
-    friend = new_friend
-    friend.twitter_screen_name = ''
-    friend.twitter_profile_image_url = ''
-    assert friend.save 
-    assert !friend.twitter_screen_name.blank?
-    assert !friend.twitter_profile_image_url.blank?
+    @luke.twitter_screen_name = ''
+    @luke.twitter_profile_image_url = ''
+    assert @luke.save 
+    assert !@luke.twitter_screen_name.blank?
+    assert !@luke.twitter_profile_image_url.blank?
   end
   
   def test_should_notify_inviter

@@ -11,7 +11,7 @@ class Friend < ActiveRecord::Base
   
   attr_accessor :password
   before_save :prepare_password
-  after_save :fetch_twitter_details
+  before_update :fetch_twitter_details
   before_create :set_invitation_limit
   after_create :notify_inviter
   
@@ -77,6 +77,13 @@ class Friend < ActiveRecord::Base
   def invitation_token=(token)
     self.invitation = Invitation.find_by_token(token)
   end
+    
+  def fetch_twitter_details
+    unless twitter_user.nil?
+      self.twitter_screen_name = twitter_user.screen_name
+      self.twitter_profile_image_url = twitter_user.profile_image_url
+    end
+  end
   
   private
   
@@ -84,13 +91,6 @@ class Friend < ActiveRecord::Base
       unless password.blank?
         self.password_salt = Digest::SHA1.hexdigest([Time.now, rand].join)
         self.password_hash = encrypt_password(password)
-      end
-    end
-    
-    def fetch_twitter_details
-      unless twitter_user.nil?
-        self.twitter_screen_name = twitter_user.screen_name
-        self.twitter_profile_image_url = twitter_user.profile_image_url
       end
     end
     
