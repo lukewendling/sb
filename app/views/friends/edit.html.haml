@@ -25,3 +25,11 @@
     = f.password_field :password_confirmation
   %p
     = f.submit "Update"
+    
+- if @friend.twitter_user
+  %h3 Tweeting as...
+  %p
+    = image_tag @friend.twitter_profile_image_url
+    %br
+    = @friend.twitter_screen_name
+    

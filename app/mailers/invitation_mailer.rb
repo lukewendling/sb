@@ -8,4 +8,12 @@ class InvitationMailer < ApplicationMailer
     content_type  'text/html'
     invitation.update_attribute(:sent_at, Time.now)
   end
+  
+  def invite_complete(invitation)
+    subject    "#{invitation.recipient.name} has joined #{AppConfig[:domain]}!"
+    recipients invitation.sender.email
+    from       AppConfig[:mail_from]
+    body       :invitation => invitation
+    content_type  'text/html'
+  end
 end

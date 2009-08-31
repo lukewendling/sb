@@ -1,6 +1,8 @@
 site: &site
   title: App Name
-  postman: somebody@gmail.com
+  reply_to: reply@example.com
+  mail_from: app@example.com
+
   
 imap: &imap
   imap_server: imap.gmail.com

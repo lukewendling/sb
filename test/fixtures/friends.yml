@@ -8,6 +8,8 @@ luke:
   atoken: 61802075-t31Q3hd8TrPrpaGXYqlvPZRtKrctUy8FXVWwU4FgR
   asecret: Z2fRZeHjc6BOE4kCwzYElEkGEpQ5iwNp95OMhItTZN0
   invitation_limit: 10
+  twitter_screen_name: bostonleander
+  twitter_profile_image_url: "http://s.twimg.com/a/1251493570/images/default_profile_normal.png"
      
 linwood:
   username: linwood
@@ -17,6 +19,10 @@ linwood:
   password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
   atoken: 61802075-t31Q3hd8TrPrpaGXYqlvPZRtKrctUy8FXVWwU4FgR
   asecret: Z2fRZeHjc6BOE4kCwzYElEkGEpQ5iwNp95OMhItTZN0
+  invitation: luke_to_linwood
+  invitation_limit: 10
+  twitter_screen_name: bostonleander
+  twitter_profile_image_url: "http://s.twimg.com/a/1251493570/images/default_profile_normal.png"
   
 mike:
   username: mike
@@ -26,3 +32,5 @@ mike:
   password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
   atoken: 61802075-t31Q3hd8TrPrpaGXYqlvPZRtKrctUy8FXVWwU4FgR
   asecret: Z2fRZeHjc6BOE4kCwzYElEkGEpQ5iwNp95OMhItTZN0
+  twitter_screen_name: bostonleander
+  twitter_profile_image_url: "http://s.twimg.com/a/1251493570/images/default_profile_normal.png"

@@ -11,7 +11,9 @@ class Friend < ActiveRecord::Base
   
   attr_accessor :password
   before_save :prepare_password
+  after_save :fetch_twitter_details
   before_create :set_invitation_limit
+  after_create :notify_inviter
   
   validates_presence_of :email, :username
   validates_uniqueness_of :username, :email, :allow_blank => true
@@ -47,6 +49,16 @@ class Friend < ActiveRecord::Base
     !atoken.blank? && !asecret.blank?
   end
   
+  def twitter_id
+    atoken.split('-').first if can_tweet?
+  end
+  
+  def twitter_user
+    unless twitter_id.nil?
+      @twitter_user ||= Twitter.user(twitter_id)
+    end
+  end
+  
   def oauth
     @oauth ||= Twitter::OAuth.new(ConsumerConfig['token'], ConsumerConfig['secret'])
   end
@@ -72,6 +84,19 @@ class Friend < ActiveRecord::Base
       unless password.blank?
         self.password_salt = Digest::SHA1.hexdigest([Time.now, rand].join)
         self.password_hash = encrypt_password(password)
+      end
+    end
+    
+    def fetch_twitter_details
+      unless twitter_user.nil?
+        self.twitter_screen_name = twitter_user.screen_name
+        self.twitter_profile_image_url = twitter_user.profile_image_url
+      end
+    end
+    
+    def notify_inviter
+      unless invitation.nil?
+        InvitationMailer.deliver_invite_complete(invitation)
       end
     end
     

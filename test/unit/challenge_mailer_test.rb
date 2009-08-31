@@ -1,12 +1,30 @@
 require 'test_helper'
 
 class ChallengeMailerTest < ActionMailer::TestCase
-  test "extend" do
-    @expected.subject = 'ChallengeMailer#extend'
-    @expected.body    = read_fixture('extend')
-    @expected.date    = Time.now
-
-    assert_equal @expected.encoded, ChallengeMailer.create_extend(@expected.date).encoded
+  tests ChallengeMailer 
+  
+  def setup
+    @challenge = challenges(:linwood_to_luke)
   end
-
+  
+  def test_the_challenge
+    # Send the email, then test that it got queued  
+    email = ChallengeMailer.deliver_the_challenge(@challenge)  
+    assert !ActionMailer::Base.deliveries.empty? 
+    # Test the body of the sent email contains what we expect it to  
+    assert_equal [@challenge.challenged.email], email.to 
+    assert_equal "You've been challenged!", email.subject 
+    assert_match /http:\/\/test.host\/challenge_accepted\/#{@challenge.hashed_id}/, email.body  
+  end
+  
+  def test_update
+    # Send the email, then test that it got queued  
+    email = ChallengeMailer.deliver_update(@challenge)  
+    assert !ActionMailer::Base.deliveries.empty? 
+    # Test the body of the sent email contains what we expect it to  
+    assert_equal @challenge.email_addresses, email.to 
+    assert_equal "#{@challenge.challenged.name}'s challenge has been updated", email.subject 
+    assert_match /||#{@challenge.hashed_id}||/, email.body
+    assert_match /Reply above this line/, email.body
+  end
 end

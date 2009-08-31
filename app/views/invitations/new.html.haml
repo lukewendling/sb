@@ -1,6 +1,7 @@
 - title 'Invite a friend'
 
 - form_for @invitation do |f|
+  = f.error_messages
   %p
     = f.label :recipient_email, "Friend's email address"
     %br
