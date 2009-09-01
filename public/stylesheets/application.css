@@ -1,5 +1,7 @@
 body {
-  background-color: #4b7399;
+  background-color: #3f3534;
+  background-image: url('/images/background.png');
+  background-repeat: no-repeat;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px; }
 
@@ -33,12 +35,10 @@ a {
   font-size: .9em; }
 
 #container {
-  width: 75%;
-  margin: 0 auto;
+  width: 1060px;
+  margin: 80px 60px;
   background: #fff;
-  padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px; }
+  padding: 0; }
 
 #flash_notice,
 #flash_error {
