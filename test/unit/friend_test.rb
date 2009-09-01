@@ -28,52 +28,52 @@ class FriendTest < ActiveSupport::TestCase
   def test_should_require_username
     @luke.username = ''
     @luke.valid?
-    assert @luke.errors.on(:username)
+    assert @luke.errors.invalid?(:username)
   end
   
   def test_should_require_password
     friend = new_friend
     friend.password = ''
     friend.valid?
-    assert friend.errors.on(:password)
+    assert friend.errors.invalid?(:password)
   end
   
   def test_should_require_well_formed_email
     @luke.email = 'foo@bar@example.com'
     @luke.valid?
-    assert @luke.errors.on(:email)
+    assert @luke.errors.invalid?(:email)
   end
   
   def test_should_validate_uniqueness_of_email
     friend = new_friend
     friend.email = @luke.email
     friend.valid?
-    assert friend.errors.on(:email)
+    assert friend.errors.invalid?(:email)
   end
   
   def test_should_validate_uniqueness_of_username
     friend = new_friend
     friend.username = @luke.username
     friend.valid?
-    assert friend.errors.on(:username)
+    assert friend.errors.invalid?(:username)
   end
   
   def test_should_validate_odd_characters_in_username
     @luke.username = 'odd ^&(@)'
     @luke.valid?
-    assert @luke.errors.on(:username)
+    assert @luke.errors.invalid?(:username)
   end
   
   def test_should_validate_password_length
     @luke.password = 'bad'
     @luke.valid?
-    assert @luke.errors.on(:password)
+    assert @luke.errors.invalid?(:password)
   end
   
   def test_should_require_matching_password_confirmation
     @luke.password_confirmation = 'nonmatching'
     @luke.valid?
-    assert @luke.errors.on(:password)
+    assert @luke.errors.invalid?(:password)
   end
   
   def test_should_generate_password_hash_and_salt_on_create
@@ -99,7 +99,7 @@ class FriendTest < ActiveSupport::TestCase
     assert_nil Friend.authenticate(@luke.username, 'badpassword')
   end
   
-  def test_should_fetch_twitter_details
+  def test_should_cache_twitter_details
     @luke.twitter_screen_name = ''
     @luke.twitter_profile_image_url = ''
     assert @luke.save 
