@@ -1,5 +1,5 @@
 body {
-  background-color: #3f3534;
+  background-color: #73d86c;
   background-image: url('/images/background.png');
   background-repeat: no-repeat;
   font-family: Verdana, Helvetica, Arial;
@@ -47,22 +47,22 @@ a {
 
 #flash_notice {
   background-color: #CFC;
-  border: solid 1px #6C6; }
+  border: solid 1px #0ED800; }
 
 #flash_error {
-  background-color: #FCC;
-  border: solid 1px #C66; }
+  background-color: #EDB1B8;
+  border: solid 1px #ED001B; }
 
 .fieldWithErrors {
   display: inline; }
 
 #errorExplanation {
   width: 400px;
-  border: 2px solid #CF0000;
+  border: 2px solid #ED001B;
   padding: 0;
   padding-bottom: 12px;
   margin-bottom: 20px;
-  background-color: #f0f0f0; }
+  background-color: #EDB1B8; }
   #errorExplanation h2 {
     text-align: left;
     padding: 5px 5px 5px 15px;
