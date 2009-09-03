@@ -1,0 +1,21 @@
+<%= javascript_tag <<-EOJ
+  var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
+  document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
+EOJ
+%>
+
+<%= javascript_tag <<-EOJ
+  UserVoice.Tab.show({ 
+    /* required */
+    key: 'shouldbet',
+    host: 'shouldbet.uservoice.com', 
+    forum: '28081', 
+    /* optional */
+    alignment: 'left',
+    background_color:'#000', 
+    text_color: 'white',
+    hover_color: '#73D86C',
+    lang: 'en'
+  })
+EOJ
+%>
