@@ -15,6 +15,7 @@ class InvitationMailerTest < ActionMailer::TestCase
     assert_equal [@invitation.recipient_email], email.to 
     assert_equal "Invitation to join #{AppConfig[:domain]}", email.subject 
     assert_match /http:\/\/test.host\/signup_url/, email.body  
+    assert_match /#{@invitation.sender.name} invited you to join/, email.body
   end
   
   def test_invite_complete

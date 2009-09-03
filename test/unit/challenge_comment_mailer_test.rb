@@ -13,8 +13,7 @@ class ChallengeCommentMailerTest < ActionMailer::TestCase
     email = ChallengeCommentMailer.deliver_comment(@challenge_comment)  
     assert !ActionMailer::Base.deliveries.empty? 
     # Test the body of the sent email contains what we expect it to  
-#    assert_equal [@challenge.challenged.email], email.to 
-    assert_equal (@challenge.friends - [@challenge_comment.friend]).map(&:email), email.to
+    assert_equal @challenge.email_addresses, email.to
     assert_equal "RE: #{@challenge.event.description.to_s[0..40]}", email.subject 
     assert_match /#{@challenge_comment.content}/, email.body  
   end
