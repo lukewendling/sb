@@ -4,8 +4,7 @@ class ChallengesController < ApplicationController
   
   def index
 #    TODO: WTF? current_friend.challenges pukes on page refresh
-    @challenges = Challenge.all(:conditions => {:challenged_id => current_friend.id})
-    @bets = Challenge.all(:conditions => {:challenger_id => current_friend.id})
+    @challenges = Challenge.paginate(:page => params[:page], :order => 'updated_at DESC', :conditions => ["challenger_id = ? or challenged_id = ?", current_friend.id, current_friend.id])
   end
   
   def show

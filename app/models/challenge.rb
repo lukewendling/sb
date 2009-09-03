@@ -10,6 +10,9 @@ class Challenge < ActiveRecord::Base
   
   attr_protected :hashed_id
   
+  def self.per_page
+    Rails.env == 'development' ? 1 : 15
+  end
   
   def before_validation_on_create
     super

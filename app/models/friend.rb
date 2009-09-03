@@ -35,6 +35,10 @@ class Friend < ActiveRecord::Base
     self[:email].downcase
   end
     
+  def twitter_screen_name
+    "@" + self[:twitter_screen_name]
+  end
+
   # login can be either username or email address
   def self.authenticate(login, pass)
     friend = find_by_username(login) || find_by_email(login)

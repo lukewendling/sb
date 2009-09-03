@@ -2,45 +2,29 @@
 
 %p= link_to "New Challenge", new_challenge_path
 
-- unless @bets.empty?
-  %table
-    %tr
-      %th I Challenged
-      %th Event
-      %th Updated
-      %th Accepted?
-      %th Recent comments
-    - for challenge in @bets
-      %tr
-        %td= h challenge.challenged.name
-        %td= h truncate(challenge.event.description, 20)
-        %td= challenge.updated_at.to_date.to_s(:db)
-        %td= (challenge.accepted? ? 'Yes' : 'No')
-        %td
-          - challenge.comments[0..1].each do |c|
-            = link_to truncate(h(c.content), :length => 20), challenge_comment_path(challenge, c)
-            %br
-        %td= link_to 'Show', challenge
-        %td= link_to 'Edit', edit_challenge_path(challenge)
-        %td= link_to 'All Comments', challenge_comments_path(challenge)
-
 - unless @challenges.empty?
   %table
     %tr
-      %th I was Challenged by
+      %th Friend
       %th Event
       %th Updated
       %th Accepted?
       %th Recent comments
     - for challenge in @challenges
       %tr
-        %td= h challenge.challenger.name
-        %td= h truncate(challenge.event.description, 20)
-        %td= challenge.updated_at.to_date.to_s(:db)
-        %td= link_to( (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
+        %td= h( (challenge.friends - [current_friend]).first.name )
+        %td= h truncate(challenge.event.description, 30)
+        %td= time_ago_in_words(challenge.updated_at) + ' ago'
+        - if challenge.challenged == current_friend
+          %td= link_to( (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
+        - else
+          %td= (challenge.accepted? ? 'Yes' : 'No')
         %td
           - challenge.comments[0..1].each do |c|
             = link_to truncate(h(c.content), :length => 20), challenge_comment_path(challenge, c)
             %br
         %td= link_to 'Show', challenge
+        %td= link_to( 'Edit', edit_challenge_path(challenge) ) if challenge.challenger == current_friend
         %td= link_to 'All Comments', challenge_comments_path(challenge)
+
+  = will_paginate @challenges
