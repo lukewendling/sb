@@ -53,6 +53,10 @@ class Friend < ActiveRecord::Base
     !atoken.blank? && !asecret.blank?
   end
   
+  def remove_twitter!
+    update_attributes!(:atoken => nil, :asecret => nil)
+  end
+  
   def twitter_id
     atoken.split('-').first if can_tweet?
   end

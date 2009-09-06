@@ -33,3 +33,5 @@
     %br
     = @friend.twitter_screen_name
     
+  %p
+    = link_to 'Change associated Twitter account', {:controller => 'twitter_accounts', :action => 'update'}, :method => 'post', :confirm => 'You will be redirected to Twitter to provide another username and password'

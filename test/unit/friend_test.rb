@@ -113,4 +113,10 @@ class FriendTest < ActiveSupport::TestCase
       assert friend.save
     end
   end
+  
+  def test_remove_twitter!
+    assert @luke.can_tweet?
+    @luke.remove_twitter!
+    assert !@luke.can_tweet?
+  end
 end
