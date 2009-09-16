@@ -52,7 +52,9 @@ class Challenge < ActiveRecord::Base
   end
   
   def event_description
-    @event_description ||= event.try(:description)  
+    unless event.nil?
+      @event_description ||= event.description
+    end  
   end
   
   def challenged_email=(email)
@@ -60,6 +62,8 @@ class Challenge < ActiveRecord::Base
   end
   
   def challenged_email
-    @challenged_email ||= challenged.try(:email)
+    unless challenged.nil?
+      @challenged_email ||= challenged.email
+    end
   end
 end

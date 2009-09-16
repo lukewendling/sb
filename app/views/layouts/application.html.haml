@@ -11,7 +11,7 @@
   %body
     #container
       #navigation
-        = render 'shared/navigation' if logged_in?
+        = render( :partial => 'shared/navigation' ) if logged_in?
       - flash.each do |name, msg|
         = content_tag :div, msg, :id => "flash_#{name}"
       
@@ -20,4 +20,4 @@
       
       ~ yield
       
-    = render 'shared/uservoice'
+    = render :partial => 'shared/uservoice'

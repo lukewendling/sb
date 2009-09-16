@@ -16,7 +16,7 @@ class InvitationsController < ApplicationController
         redirect_to login_url
       end
     else
-      render 'new'
+      render :action => 'new'
     end
   end
 

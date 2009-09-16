@@ -15,7 +15,7 @@
     ~h @challenge.result
   %p
     %strong Winner:
-    =h @challenge.winner.try(:name)
+    =h( @challenge.winner.name ) if @challenge.winner
   %p
     %strong Contested?:
     =@challenge.contested? ? 'Yes' : 'No'

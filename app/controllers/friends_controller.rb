@@ -15,7 +15,7 @@ class FriendsController < ApplicationController
       flash[:notice] = "Thank you for signing up! You are now logged in."
       redirect_to root_url
     else
-      render 'new'
+      render :action => 'new'
     end
   end
   
@@ -29,7 +29,7 @@ class FriendsController < ApplicationController
       flash[:notice] = "Account updated!"
       redirect_to root_url
     else
-      render 'edit'
+      render :action => 'edit'
     end
   end
   

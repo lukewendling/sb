@@ -21,7 +21,7 @@ class ChallengesController < ApplicationController
       flash[:notice] = "Successfully created challenge."
       redirect_to @challenge
     else
-      render 'new'
+      render :action => 'new'
     end
   end
   
@@ -35,7 +35,7 @@ class ChallengesController < ApplicationController
       flash[:notice] = "Successfully updated challenge."
       redirect_to @challenge
     else
-      render 'edit'
+      render :action => 'edit'
     end
   end
   

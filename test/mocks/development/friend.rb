@@ -1,4 +1,4 @@
-require (Rails.root + 'app/models/friend')
+require File.join(Rails.root, 'app', 'models', 'friend')
 
 class Friend
   def client

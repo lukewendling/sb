@@ -2,7 +2,7 @@
 
 %p
   %strong To:
-  =h((@challenge.friends - [@challenge_comment.friend]).first.try(:name))
+  =h( (@challenge.friends - [@challenge_comment.friend]).first.name )
 %p
   %strong= link_to('Challenge', @challenge)
   ~h @challenge.event.description

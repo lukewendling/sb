@@ -22,7 +22,7 @@ class ChallengeCommentsController < ApplicationController
       flash[:notice] = "Successfully created comment."
       redirect_to challenge_comment_path(@challenge, @challenge_comment)
     else
-      render 'new'
+      render :action => 'new'
     end
   end
   
@@ -36,7 +36,7 @@ class ChallengeCommentsController < ApplicationController
       flash[:notice] = "Successfully updated comment."
       redirect_to challenge_comment_path(@challenge, @challenge_comment)
     else
-      render 'edit'
+      render :action => 'edit'
     end
   end
   
