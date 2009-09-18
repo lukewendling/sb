@@ -4,8 +4,10 @@
   %strong To:
   =h( (@challenge.friends - [@challenge_comment.friend]).first.name )
 %p
-  %strong= link_to('Challenge', @challenge)
+  %strong Challenge:
   ~h @challenge.event.description
+  %br
+  = link_to 'Show challenge', @challenge
 %p
   %strong Prediction:
   ~h @challenge.prediction  

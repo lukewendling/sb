@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class FriendTest < ActiveSupport::TestCase
+  should_have_many :challenges
+  
   def new_friend
     invite = Invitation.new
     invite.sender = @luke

@@ -1,0 +1,12 @@
+- title "Edit Preferences"
+
+%p
+  %strong Challenge:
+  ~h @challenge.event.description
+  %br
+  = link_to 'Show challenge', @challenge
+  
+- form_for :challenge_preference, :url => challenge_preference_path(@challenge, @challenge_preference), :html => { :method => :put } do |f|
+  = render :partial => 'form', :locals => {:f => f}
+
+%p= link_to "Back to List", challenges_path

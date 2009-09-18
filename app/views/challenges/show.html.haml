@@ -25,7 +25,9 @@
 %p
   %strong Updated:
   =@challenge.updated_at.to_date.to_s(:db)
-
+%p
+  %strong Preferences:
+  = link_to 'Edit', edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id))
 %p
   - links = []
   - links << link_to( "Edit", edit_challenge_path(@challenge) ) if @challenge.challenger == current_friend

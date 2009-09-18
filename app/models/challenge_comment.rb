@@ -5,7 +5,7 @@ class ChallengeComment < ActiveRecord::Base
   validates_presence_of :challenge, :friend, :content
   
   def self.per_page
-    Rails.env == 'development' ? 3 : 15
+    Rails.env == 'development' ? 3 : 10
   end
   
   def after_create

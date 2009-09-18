@@ -4,14 +4,15 @@ class Challenge < ActiveRecord::Base
   belongs_to :winner, :class_name => 'Friend'
   belongs_to :event
 
-  has_many :comments, :class_name => 'ChallengeComment', :order => 'created_at desc'
+  has_many :comments, :class_name => 'ChallengeComment', :order => 'created_at desc', :dependent => :delete_all
+  has_many :preferences, :class_name => 'ChallengePreference', :dependent => :delete_all
   
   validates_presence_of :challenger, :challenged, :hashed_id, :prediction
   
   attr_protected :hashed_id
   
   def self.per_page
-    Rails.env == 'development' ? 1 : 15
+    Rails.env == 'development' ? 3 : 10
   end
   
   def before_validation_on_create
@@ -21,6 +22,8 @@ class Challenge < ActiveRecord::Base
   
   def after_create
     super
+#    create default prefs
+    friends.each{ |f| preferences.create(:friend => f) }
     @new_challenge = true # flag to halt update notification
     ChallengeMailer.deliver_the_challenge(self)
     challenger.client.update("#{AppConfig[:domain]} challenge issued to #{challenged.twitter_screen_name}: \"#{prediction}\"")

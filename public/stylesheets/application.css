@@ -31,6 +31,18 @@ a {
 .pad-left {
   padding-left: 1em; }
 
+.pad-top {
+  padding-top: 1em; }
+
+.pad-bottom {
+  padding-bottom: 1em; }
+
+.align-right {
+  text-align: right; }
+
+.align-left {
+  text-align: left; }
+
 #navigation {
   font-size: .9em; }
 

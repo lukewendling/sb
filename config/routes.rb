@@ -1,13 +1,15 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :invitations, :only => [:new, :create]
   map.resource :authorization
   map.resources :events
   map.resources :challenges do |challenge|
     challenge.resources :challenge_comments, :name_prefix => nil, :as => 'comments' 
+    challenge.resources :challenge_preferences, :name_prefix => nil, :as => 'preferences', :member => {:toggle_hidden => :put}
   end
   map.resources :sessions, :only => [:new, :create, :destroy]
   map.resources :friends
-
+  
 #  uncomment after removing beta invites
 #  map.signup 'signup', :controller => 'friends', :action => 'new'
 #  beta invites signup route

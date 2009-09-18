@@ -35,4 +35,11 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def login_with(login, password = nil)
+    orig_controller = @controller
+    @controller = SessionsController.new
+    post :create, :login => login, :password => ( password )
+    assert session[:friend_id]
+    @controller = orig_controller    
+  end
 end

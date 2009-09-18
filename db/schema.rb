@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090829231551) do
+ActiveRecord::Schema.define(:version => 20090916203106) do
 
   create_table "challenge_comments", :force => true do |t|
     t.integer  "friend_id"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(:version => 20090829231551) do
 
   add_index "challenge_comments", ["challenge_id"], :name => "index_challenge_comments_on_challenge_id"
   add_index "challenge_comments", ["friend_id"], :name => "index_challenge_comments_on_friend_id"
+
+  create_table "challenge_preferences", :force => true do |t|
+    t.integer  "challenge_id"
+    t.integer  "friend_id"
+    t.boolean  "hidden",       :default => false, :null => false
+    t.boolean  "flagged",      :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "challenge_preferences", ["challenge_id"], :name => "index_challenge_preferences_on_challenge_id"
+  add_index "challenge_preferences", ["friend_id"], :name => "index_challenge_preferences_on_friend_id"
 
   create_table "challenges", :force => true do |t|
     t.integer  "challenger_id",                    :null => false
@@ -60,9 +72,10 @@ ActiveRecord::Schema.define(:version => 20090829231551) do
     t.datetime "updated_at"
     t.integer  "invitation_id"
     t.integer  "invitation_limit"
-    t.boolean  "tweets",                    :default => true, :null => false
+    t.boolean  "tweets",                    :default => true,  :null => false
     t.string   "twitter_screen_name"
     t.string   "twitter_profile_image_url"
+    t.boolean  "show_hidden_challenges",    :default => false, :null => false
   end
 
   add_index "friends", ["email"], :name => "index_friends_on_email", :unique => true

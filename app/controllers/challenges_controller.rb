@@ -3,8 +3,13 @@ class ChallengesController < ApplicationController
   before_filter :authorize, :only => [:show, :edit, :update, :destroy]
   
   def index
-#    TODO: WTF? current_friend.challenges pukes on page refresh
-    @challenges = Challenge.paginate(:page => params[:page], :order => 'updated_at DESC', :conditions => ["challenger_id = ? or challenged_id = ?", current_friend.id, current_friend.id])
+    where = \
+    if current_friend.show_hidden_challenges?
+      ["(challenger_id = ? or challenged_id = ?) and challenge_preferences.friend_id = ?", *([current_friend.id] * 3)]
+    else
+      ["challenge_preferences.hidden = ? and (challenger_id = ? or challenged_id = ?) and challenge_preferences.friend_id = ?", false, *([current_friend.id] * 3)]
+    end
+    @challenges = Challenge.paginate(:page => params[:page], :joins => :preferences, :order => 'challenge_preferences.flagged DESC, updated_at DESC', :conditions => where)
   end
   
   def show

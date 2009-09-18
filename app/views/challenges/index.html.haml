@@ -1,5 +1,9 @@
-- title "#{h(current_friend.name)}'s Challenges"
+- title "#{h(current_friend.name)}'s Challenges", false
 
+%h1
+  = image_tag current_friend.twitter_profile_image_url
+  = "#{h(current_friend.name)}'s Challenges"
+  
 %p= link_to "New Challenge", new_challenge_path
 
 - unless @challenges.empty?
@@ -11,20 +15,22 @@
       %th Accepted?
       %th Recent comments
     - for challenge in @challenges
+      - preference = challenge.preferences.detect { |p| p.friend == current_friend}
       %tr
         %td= h( (challenge.friends - [current_friend]).first.name )
-        %td= h truncate(challenge.event.description, 30)
+        %td= link_to h( truncate(challenge.event.description) ), challenge
         %td= time_ago_in_words(challenge.updated_at) + ' ago'
-        - if challenge.challenged == current_friend
-          %td= link_to( (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
-        - else
-          %td= (challenge.accepted? ? 'Yes' : 'No')
+        %td= link_to_if( (challenge.challenged == current_friend), (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
         %td
           - challenge.comments[0..1].each do |c|
             = link_to truncate(h(c.content), :length => 20), challenge_comment_path(challenge, c)
             %br
-        %td= link_to 'Show', challenge
-        %td= link_to( 'Edit', edit_challenge_path(challenge) ) if challenge.challenger == current_friend
+        %td= link_to_if( (challenge.challenger == current_friend), 'Edit', edit_challenge_path(challenge) )
         %td= link_to 'All Comments', challenge_comments_path(challenge)
+        %td
+          - if preference.hidden?
+            = link_to 'Unhide', toggle_hidden_challenge_preference_path(challenge, preference), :method => 'put'
+          - else
+            = link_to 'Hide', toggle_hidden_challenge_preference_path(challenge, preference), :method => 'put', :confirm => "Hide this challenge from view? You can later view hidden challenges by updating your settings in My Account."
 
   = will_paginate @challenges

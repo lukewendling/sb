@@ -1,0 +1,20 @@
+one:
+  challenge: linwood_to_luke
+  friend: luke
+  hidden: false
+  flagged: true
+two:
+  challenge: linwood_to_luke
+  friend: linwood
+  hidden: false
+  flagged: false
+three:
+  challenge: luke_to_linwood
+  friend: luke
+  hidden: false
+  flagged: false
+four:
+  challenge: luke_to_linwood
+  friend: linwood
+  hidden: false
+  flagged: false

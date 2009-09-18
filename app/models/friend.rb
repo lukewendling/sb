@@ -8,6 +8,7 @@ class Friend < ActiveRecord::Base
   attr_accessible :username, :name, :email, :password, :password_confirmation
   attr_accessible :atoken, :asecret
   attr_accessible :invitation_token
+  attr_accessible :show_hidden_challenges
   
   attr_accessor :password
   before_save :prepare_password

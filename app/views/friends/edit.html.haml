@@ -24,6 +24,10 @@
     %br
     = f.password_field :password_confirmation
   %p
+    = f.label :show_hidden_challenges
+    %br
+    = f.check_box :show_hidden_challenges
+  %p
     = f.submit "Update"
     
 - if @friend.twitter_user
