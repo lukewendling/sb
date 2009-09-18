@@ -1,7 +1,8 @@
 class ChallengesController < ApplicationController
   before_filter :mash_current_friend_into_params, :only => [:create, :update]
   before_filter :authorize, :only => [:show, :edit, :update, :destroy]
-  
+  skip_before_filter :verify_authenticity_token
+
   def index
 #    TODO: WTF? current_friend.challenges pukes on page refresh
     @challenges = Challenge.paginate(:page => params[:page], :order => 'updated_at DESC', :conditions => ["challenger_id = ? or challenged_id = ?", current_friend.id, current_friend.id])
@@ -54,6 +55,14 @@ class ChallengesController < ApplicationController
     @challenge.toggle!(:accepted)
     flash[:notice] = "Challenge #{(@challenge.accepted? ? 'accepted!' : 'not accepted')}"
     redirect_to challenges_path
+  end
+  
+  def auto_complete_for_challenge_challenged_email
+    p = params[:challenge][:challenged_email]
+    debugger
+    @email_addrs = current_friend.bets.select { |challenge| (challenge.challenged.name.downcase == p.downcase) || (challenge.challenged.email.downcase == p.downcase) }.map { |challenge| "challenge.challenged.name <challenge.challenged.email>" }
+    @email_addrs.concat( current_friend.challenges.select { |challenge| (challenge.challenger.name.downcase == p.downcase) || (challenge.challenger.email.downcase == p.downcase) }.map { |challenge| "challenge.challenger.name <challenge.challenger.email>" } )
+    render :inline => "<%= auto_complete_result @email_addrs, 'challenged_email', p %>"
   end
   
   protected
