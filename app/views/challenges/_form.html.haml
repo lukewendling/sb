@@ -4,7 +4,8 @@
   %p
     = f.label :challenged_email, 'Recipient email address to send challenge'
     %br
-    = f.text_field :challenged_email
+    -#= f.text_field :challenged_email
+    = text_field_with_auto_complete(:challenge, :challenged_email, {}, {:min_chars => 2, :with => "\"authenticity_token=#{form_authenticity_token}&search=\" + $F('challenge_challenged_email')"})
   %p
     = f.label :event_description
     %br

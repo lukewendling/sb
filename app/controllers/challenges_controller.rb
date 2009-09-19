@@ -1,7 +1,7 @@
 class ChallengesController < ApplicationController
   before_filter :mash_current_friend_into_params, :only => [:create, :update]
   before_filter :authorize, :only => [:show, :edit, :update, :destroy]
-  
+
   def index
     where = \
     if current_friend.show_hidden_challenges?
@@ -59,6 +59,13 @@ class ChallengesController < ApplicationController
     @challenge.toggle!(:accepted)
     flash[:notice] = "Challenge #{(@challenge.accepted? ? 'accepted!' : 'not accepted')}"
     redirect_to challenges_path
+  end
+  
+  def auto_complete_for_challenge_challenged_email
+    p = params[:search]
+    @friends = current_friend.bets.select { |challenge| challenge.challenged.name.match(/#{p}/i) || challenge.challenged.email.match(/#{p}/i) }.map { |challenge| challenge.challenged }
+    @friends.concat( current_friend.challenges.select { |challenge| challenge.challenger.name.match(/#{p}/i) || challenge.challenger.email.match(/#{p}/i) }.map { |challenge| challenge.challenger } )
+    render :inline => "<%= auto_complete_result(@friends.uniq, 'email', params[:search]) %>"
   end
   
   protected
