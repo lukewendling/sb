@@ -1,4 +1,4 @@
-require File.join(Rails.root, 'lib', 'short_url')
+require_dependency File.join(Rails.root, 'lib', 'short_url')
 
 class ShortUrl
   
