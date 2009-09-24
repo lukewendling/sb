@@ -68,14 +68,22 @@ class Friend < ActiveRecord::Base
     end
   end
   
+  def twitter_profile_image_url
+    self[:twitter_profile_image_url] || '/images/rails.png'
+  end
+
   def oauth
     @oauth ||= Twitter::OAuth.new(ConsumerConfig['token'], ConsumerConfig['secret'])
   end
   
   def client
     @client ||= begin
-      oauth.authorize_from_access(atoken, asecret)
-      Twitter::Base.new(oauth)
+      if can_tweet?
+        oauth.authorize_from_access(atoken, asecret)
+        Twitter::Base.new(oauth)
+      else
+        NonTweeterer.new
+      end
     end
   end
     
@@ -88,7 +96,7 @@ class Friend < ActiveRecord::Base
   end
     
   def cache_twitter_details
-    unless twitter_user.nil?
+    if can_tweet?
       self.twitter_screen_name = twitter_user.screen_name
       self.twitter_profile_image_url = twitter_user.profile_image_url
     end
@@ -96,6 +104,13 @@ class Friend < ActiveRecord::Base
   
   private
   
+#    send tweets into the ether for non-tweeterers
+    class NonTweeterer
+      def update(msg)
+        Rails.logger.debug "Would have tweeted: #{msg}"
+      end
+    end
+    
     def prepare_password
       unless password.blank?
         self.password_salt = Digest::SHA1.hexdigest([Time.now, rand].join)

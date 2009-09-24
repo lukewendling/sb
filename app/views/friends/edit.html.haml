@@ -30,12 +30,21 @@
   %p
     = f.submit "Update"
     
-- if @friend.twitter_user
+- if @friend.can_tweet?
   %h3 Tweeting as...
   %p
     = image_tag @friend.twitter_profile_image_url
     %br
     = @friend.twitter_screen_name
     
-  %p
-    = link_to 'Change associated Twitter account', {:controller => 'twitter_accounts', :action => 'update'}, :method => 'post', :confirm => 'You will be redirected to Twitter to provide another username and password'
+  %div
+    = link_to 'Change associated Twitter account', {:controller => 'twitter_accounts', :action => 'update'}, :method => 'put', :confirm => 'You will be redirected to Twitter to provide another username and password'
+  %div
+    = link_to 'Remove my Twitter account', {:controller => 'twitter_accounts', :action => 'destroy'}, :method => 'delete', :confirm => 'Your ShouldBet challenges will no longer be posted to Twitter'
+- else
+  = link_to 'Add your Twitter account to begin posting ShouldBet challenges!', {:controller => 'twitter_accounts', :action => 'create'}
+  
+%p
+  %small
+    %strong How is my Twitter account used? 
+    When you add your Twitter account to ShouldBet, all of your challenges' descriptions and comments are posted to Twitter. It's fun, try it out!

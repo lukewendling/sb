@@ -2,7 +2,11 @@ require_dependency File.join(Rails.root, 'app', 'models', 'friend')
 
 class Friend
   def client
-    @dummy ||= TwitterDumDum.new
+    if can_tweet?
+      @dummy ||= TwitterDumDum.new
+    else
+      NonTweeterer.new
+    end
   end
   
   def twitter_user

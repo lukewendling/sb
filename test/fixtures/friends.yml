@@ -35,3 +35,15 @@ mike:
   twitter_screen_name: bostonleander
   twitter_profile_image_url: "http://s.twimg.com/a/1251493570/images/default_profile_normal.png"
   show_hidden_challenges: false
+birdie:
+  username: birdie
+  email: birdie@example.com
+  name: Birdie Wally
+  password_hash: 3488f5f7efecab14b91eb96169e5e1ee518a569f
+  password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
+  atoken:
+  asecret:
+  invitation_limit: 10
+  twitter_screen_name:
+  twitter_profile_image_url:
+  show_hidden_challenges: false

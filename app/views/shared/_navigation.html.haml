@@ -4,4 +4,6 @@
   .float-left.pad-left= link_to 'invite!', new_invitation_path
   .float-left.pad-left= link_to 'my account', edit_friend_path(current_friend)
   .float-left.pad-left= link_to 'logout', logout_path
-  .float-left.pad-left== (logged in as #{current_friend.username} / #{link_to current_friend.twitter_screen_name, "http://twitter.com/#{current_friend.twitter_screen_name.gsub('@','')}", :target => '_blank'})
+  .float-left.pad-left== (logged in as #{current_friend.username})
+  - if current_friend.can_tweet?
+    .float-left.pad-left= link_to(current_friend.twitter_screen_name, "http://twitter.com/#{current_friend[:twitter_screen_name]}", :target => '_blank')
