@@ -37,7 +37,7 @@ class Friend < ActiveRecord::Base
   end
     
   def twitter_screen_name
-    "@" + self[:twitter_screen_name]
+    "@" + self[:twitter_screen_name].to_s
   end
 
   # login can be either username or email address
