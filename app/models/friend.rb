@@ -11,7 +11,7 @@ class Friend < ActiveRecord::Base
   attr_accessible :show_hidden_challenges
   
   attr_accessor :password
-  before_save :prepare_password
+  before_save :prepare_password, :keep_it_on_the_low_down
   before_update :cache_twitter_details
   before_create :set_invitation_limit
   after_create :notify_inviter
@@ -30,10 +30,6 @@ class Friend < ActiveRecord::Base
 
   def name
     self[:name] || username
-  end
-
-  def email
-    self[:email].downcase
   end
     
   def twitter_screen_name
@@ -132,4 +128,10 @@ class Friend < ActiveRecord::Base
       self.invitation_limit = 10
     end
 
+    def keep_it_on_the_low_down
+      username_will_change! #force update
+      email_will_change!
+      username.downcase!
+      email.downcase!
+    end
 end

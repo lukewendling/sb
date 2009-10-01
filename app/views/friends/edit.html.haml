@@ -18,7 +18,8 @@
   %p
     = f.label :password
     %br
-    = f.password_field :password
+    = f.password_field :password, :value => ''
+    %small Leave blank unless you want to change your password
   %p
     = f.label :password_confirmation, "Confirm Password"
     %br
