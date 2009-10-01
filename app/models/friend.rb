@@ -38,7 +38,7 @@ class Friend < ActiveRecord::Base
 
   # login can be either username or email address
   def self.authenticate(login, pass)
-    friend = find_by_username(login) || find_by_email(login)
+    friend = find_by_username(login.downcase) || find_by_email(login.downcase)
     return friend if friend && friend.matching_password?(pass)
   end
   
