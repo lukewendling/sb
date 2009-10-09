@@ -33,6 +33,13 @@ namespace :deploy do
     run "rm -rf ~/public_html"
     run "ln -nfs #{release_path}/public ~/public_html"
   end
+
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :app do
+    # TODO: set env var dynamically
+    run "cd #{release_path} && whenever --update-crontab #{application} --set environment=production"
+  end
+
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared'
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab'
