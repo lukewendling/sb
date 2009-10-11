@@ -37,7 +37,7 @@ namespace :deploy do
   desc "Update the crontab file"
   task :update_crontab, :roles => :app do
     # TODO: set env var dynamically
-    run "cd #{release_path} && vendor/gems/javan-whenever-0.3.7/bin/whenever --update-crontab #{application} --set environment=production"
+    run "cd #{release_path} && whenever --update-crontab #{application} --set environment=production"
   end
 
 end
