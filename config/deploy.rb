@@ -36,8 +36,13 @@ namespace :deploy do
 
   desc "Update the crontab file"
   task :update_crontab, :roles => :app do
-    # TODO: set env var dynamically
-    run "cd #{release_path} && whenever --update-crontab #{application} --set environment=production"
+    # TODO: set env var dynamically for use with future staging env
+#    steps to configure whenever to work in shared hosting env:
+#    1. gem install javan-whenever (home dir install)
+#    2. add ~/gem/ruby/bin to deploy user PATH (host-specific local gem path)
+#    3. set GEM_HOME in bash session (setting permanent GEM vars in ~/.gemrc caused problems)
+#    4. read http://www.hostingrails.com/wiki/2/Install-and-freeze-your-own-RubyGems for a primer
+    run "cd #{release_path} && export GEM_HOME=$HOME/ruby/gems && whenever --update-crontab #{application} --set environment=production"
   end
 
 end
