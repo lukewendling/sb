@@ -19,5 +19,5 @@
 
 # Learn more: http://github.com/javan/whenever
 every 15.minutes do
-  runner "~/shouldbet/current/script/fetch_mail"
+  runner "/home/lukewen/shouldbet/current/script/fetch_mail"
 end
