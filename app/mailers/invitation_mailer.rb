@@ -16,4 +16,14 @@ class InvitationMailer < ApplicationMailer
     body       :invitation => invitation
     content_type  'text/html'
   end
+    
+  def request(invitation_request, controller)
+    subject    "New invitation request"
+    recipients "debug@shouldbet.com"
+    from       AppConfig[:mail_from]
+    body       :invitation_request => invitation_request, 
+               :request => controller.request,
+               :host => (controller.request.env["HTTP_X_FORWARDED_HOST"] || controller.request.env["HTTP_HOST"])
+    content_type  'text/plain'
+  end
 end

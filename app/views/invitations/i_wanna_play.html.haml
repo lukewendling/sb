@@ -1,0 +1,19 @@
+- title "Request an invitation to play!"
+
+- form_tag( :action => 'send_request' ) do |f|
+  .pad-top
+    = label :invitation_request, :email, "Your email address"
+    %br
+    = text_field :invitation_request, :email
+  .pad-top
+    = label :invitation_request, :message, "How do we know that you're a human? (Have fun with this)"
+    %br
+    = text_area :invitation_request, :message, :size => "60x5"
+  .pad-top
+    = label :invitation_request, :answer, "What is 9 + 6?"
+    %br
+    = text_field :invitation_request, :answer, :size => 4
+  .pad-top
+    = submit_tag 'Submit'
+
+= render :partial => 'shared/what_is_this'

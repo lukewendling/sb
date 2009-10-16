@@ -1,6 +1,6 @@
 - title "Log in"
 
--#%p== Don't have an account? #{link_to "Sign up!", signup_path}
+%p== Don't have an account? #{link_to "Request an invitation!", :controller => 'invitations', :action => 'i_wanna_play'}
 
 - form_tag sessions_path do
   %p
@@ -15,3 +15,5 @@
     = submit_tag "Log in"
     
 = javascript_tag "$('login').activate()"
+
+= render :partial => 'shared/what_is_this'
