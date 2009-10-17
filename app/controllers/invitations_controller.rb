@@ -28,7 +28,7 @@ class InvitationsController < ApplicationController
   def send_request
     @invitation_request = InvitationRequest.new(params[:invitation_request])
     if @invitation_request.valid?
-      InvitationMailer.deliver_request(@invitation_request, self)
+      InvitationMailer.deliver_guest_request(@invitation_request, self)
       redirect_to login_url
       flash[:notice] = "Thank you. We will send an invitation shortly!"
     else

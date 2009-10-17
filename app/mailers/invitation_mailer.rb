@@ -17,7 +17,7 @@ class InvitationMailer < ApplicationMailer
     content_type  'text/html'
   end
     
-  def request(invitation_request, controller)
+  def guest_request(invitation_request, controller)
     subject    "New invitation request"
     recipients "debug@shouldbet.com"
     from       AppConfig[:mail_from]
