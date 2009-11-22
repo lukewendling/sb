@@ -43,6 +43,9 @@ a {
 .align-left {
   text-align: left; }
 
+.align-center {
+  text-align: center; }
+
 #navigation {
   font-size: .9em; }
 
@@ -51,6 +54,11 @@ a {
   margin: 80px 60px;
   background: #fff;
   padding: 0; }
+
+#footer {
+  font-size: .75em; }
+  #footer a {
+    color: #999; }
 
 #flash_notice,
 #flash_error {

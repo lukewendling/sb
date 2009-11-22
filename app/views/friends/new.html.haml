@@ -28,4 +28,8 @@
     %br
     = f.password_field :password_confirmation
   %p
+    = f.check_box :terms_of_use
+    = f.label :terms_of_use, "I agree to the #{link_to 'terms of use', '/terms.html'}"
+
+  %p
     = f.submit "Sign up"

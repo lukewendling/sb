@@ -9,6 +9,7 @@ class Friend < ActiveRecord::Base
   attr_accessible :atoken, :asecret
   attr_accessible :invitation_token
   attr_accessible :show_hidden_challenges
+  attr_accessible :terms_of_use
   
   attr_accessor :password
   before_save :prepare_password, :keep_it_on_the_low_down
@@ -16,6 +17,7 @@ class Friend < ActiveRecord::Base
   before_create :set_invitation_limit
   after_create :notify_inviter
   
+  validates_acceptance_of :terms_of_use, :on => :create, :allow_nil => false
   validates_presence_of :email, :username
   validates_uniqueness_of :username, :email, :allow_blank => true
   validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
