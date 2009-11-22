@@ -1,10 +1,9 @@
 class ChallengeCommentsController < ApplicationController
   before_filter :instantiate_challenge
-  before_filter :authorize, :only => [:show, :edit, :update, :destroy]
+  before_filter :authorize, :only => [:index, :show, :edit, :update, :destroy]
   
   def index
     @challenge_comments = ChallengeComment.paginate_by_challenge_id(@challenge.id, :page => params[:page], :order => 'created_at DESC')
-
   end
   
   def show
