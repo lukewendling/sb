@@ -1,6 +1,6 @@
 class ChallengeCommentsController < ApplicationController
   before_filter :instantiate_challenge
-  before_filter :authorize, :only => [:show, :edit, :update, :destroy]
+  before_filter :authorize, :only => [:index, :show, :edit, :update, :destroy]
   
   def index
     @challenge_comments = ChallengeComment.paginate_by_challenge_id(@challenge.id, :page => params[:page], :order => 'created_at DESC')
@@ -56,7 +56,7 @@ class ChallengeCommentsController < ApplicationController
     #    only challenger can update/destroy, friends can view
     def authorize
       @challenge ||= Challenge.find(params[:challenge_id])
-      @challenge_comment = @challenge.comments.find(params[:id])
+      @challenge_comment = @challenge.comments.find(params[:id]) if params[:id] # index action case
       if %w(edit update destroy).include?(action_name)
         render(:text => 'Unauthorized', :status => 401) unless @challenge_comment.friend == current_friend
       else
