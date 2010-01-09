@@ -6,8 +6,6 @@
 %p
   %strong Challenge:
   ~h @challenge.event.description
-  %br
-  = link_to 'Show challenge', @challenge
 %p
   %strong Prediction:
   ~h @challenge.prediction  
@@ -19,5 +17,6 @@
   - links = []
   - links << link_to( "Edit", edit_challenge_comment_path(@challenge, @challenge_comment) ) if @challenge_comment.friend == current_friend
   - links << link_to( "Reply", new_challenge_comment_path(@challenge) )
-  - links << link_to( "View All", challenge_comments_path )
+  - links << link_to( "All Comments", challenge_comments_path )
+  - links << link_to( 'Back to Challenge', @challenge )
   = links.join(' | ')
