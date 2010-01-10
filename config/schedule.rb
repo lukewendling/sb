@@ -18,6 +18,13 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+# fetch mail routine
 every 15.minutes do
   runner "/home/lukewen/shouldbet/current/script/fetch_mail"
+end
+
+# test outgoing email
+every 1.day, :at => "6am" do
+  runner "InvitationMailer.deliver_invite_complete(Invitation.find(8))"
 end
