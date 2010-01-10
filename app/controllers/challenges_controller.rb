@@ -9,7 +9,7 @@ class ChallengesController < ApplicationController
     else
       ["challenge_preferences.hidden = ? and (challenger_id = ? or challenged_id = ?) and challenge_preferences.friend_id = ?", false, *([current_friend.id] * 3)]
     end
-    @challenges = Challenge.paginate(:page => params[:page], :joins => :preferences, :order => 'challenge_preferences.flagged DESC, updated_at DESC', :conditions => where)
+    @challenges = Challenge.paginate(:page => params[:page], :joins => :preferences, :order => 'challenges.updated_at DESC', :conditions => where)
   end
   
   def show

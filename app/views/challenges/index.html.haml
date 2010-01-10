@@ -25,7 +25,11 @@
           - challenge.comments[0..1].each do |c|
             = link_to truncate(h(c.content), :length => 20), challenge_comment_path(challenge, c)
             %br
-        %td= link_to_if( (challenge.challenger == current_friend), 'Edit', edit_challenge_path(challenge) )
+        %td
+          - if challenge.challenger == current_friend
+            = link_to 'Edit', edit_challenge_path(challenge)
+          - else
+            %span.disabled Edit
         %td= link_to 'All Comments', challenge_comments_path(challenge)
         %td
           - if preference.hidden?

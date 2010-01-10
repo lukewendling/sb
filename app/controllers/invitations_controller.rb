@@ -10,7 +10,7 @@ class InvitationsController < ApplicationController
     if @invitation.save
       if logged_in?
         InvitationMailer.deliver_invitation(@invitation, signup_url(@invitation.token))
-        flash[:notice] = "Thank you, invitation sent."
+        flash[:notice] = "Thank you, invitation sent. You'll be notified by email when your friend signs up."
         redirect_to challenges_url
       else
         flash[:notice] = "Thank you, we will notify when we are ready."

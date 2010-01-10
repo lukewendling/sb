@@ -1,13 +1,16 @@
 class Challenge < ActiveRecord::Base
   belongs_to :challenger, :class_name => 'Friend'
   belongs_to :challenged, :class_name => 'Friend'
+#  synonym for challenged
+  belongs_to :recipient, :class_name => 'Friend', :foreign_key => 'challenged_id'
   belongs_to :winner, :class_name => 'Friend'
   belongs_to :event
 
   has_many :comments, :class_name => 'ChallengeComment', :order => 'created_at desc', :dependent => :delete_all
   has_many :preferences, :class_name => 'ChallengePreference', :dependent => :delete_all
   
-  validates_presence_of :challenger, :challenged, :hashed_id, :prediction
+  validates_presence_of :challenger, :hashed_id, :prediction
+  validates_presence_of :recipient, :message => 'email address not found. You must first invite a friend before sending them a challenge.'
   
   attr_protected :hashed_id
   
@@ -61,7 +64,7 @@ class Challenge < ActiveRecord::Base
   end
   
   def challenged_email=(email)
-    self.challenged = Friend.find_or_create_by_email(email)
+    self.challenged = Friend.find_by_email(email)
   end
   
   def challenged_email
