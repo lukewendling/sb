@@ -15,6 +15,7 @@ class FriendTest < ActiveSupport::TestCase
     friend.email = 'nathanarizona@example.com'
     friend.name = 'Nathan Arizona'
     friend.invitation = invite
+    friend.terms_of_use = "1"
     friend
   end
   
