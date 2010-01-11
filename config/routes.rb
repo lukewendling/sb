@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     challenge.resources :challenge_preferences, :name_prefix => nil, :as => 'preferences', :member => {:toggle_hidden => :put}
   end
   map.resources :sessions, :only => [:new, :create, :destroy]
-  map.resources :friends
+  map.resources :friends, :member => {:contact_list => :get}
   
 #  uncomment after removing beta invites
 #  map.signup 'signup', :controller => 'friends', :action => 'new'

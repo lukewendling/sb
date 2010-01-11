@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class FriendTest < ActiveSupport::TestCase
-  should_have_many :challenges
+  should_have_many :challenges, :bets, :sent_invitations
+  should_belong_to :invitation
   
   def new_friend
     invite = Invitation.new
@@ -22,6 +23,10 @@ class FriendTest < ActiveSupport::TestCase
   def setup
     @luke = friends(:luke)
     @linwood = friends(:linwood)
+  end
+  
+  def test_should_have_contact_list
+    assert !@luke.contact_list.empty?
   end
   
   def test_should_be_valid

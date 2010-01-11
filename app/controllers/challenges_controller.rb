@@ -17,7 +17,7 @@ class ChallengesController < ApplicationController
   end
   
   def new
-    @challenge = Challenge.new
+    @challenge = Challenge.new(:challenged_id => params[:recipient_id])
   end
   
   def create

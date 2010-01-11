@@ -34,8 +34,16 @@ class Friend < ActiveRecord::Base
     self[:name] || username
   end
     
+  def contacts
+    ContactList.new(self).contacts
+  end
+  
   def twitter_screen_name
-    "@" + self[:twitter_screen_name].to_s
+    if self[:twitter_screen_name].nil?
+      username
+    else
+      "@" + self[:twitter_screen_name]
+    end
   end
 
   # login can be either username or email address

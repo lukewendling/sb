@@ -1,0 +1,6 @@
+- title 'My Contacts'
+- items = current_friend.contacts.map{|c| link_to "#{c.name} (#{c.email})", new_challenge_path(:recipient_id => c.id)}.uniq
+
+%ul
+  - items.each do |item|
+    %li= item

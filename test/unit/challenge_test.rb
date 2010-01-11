@@ -4,7 +4,7 @@ class ChallengeTest < ActiveSupport::TestCase
   should_belong_to :challenger, :challenged, :winner
   should_have_many :comments, :preferences
   
-  should_validate_presence_of :challenger, :challenged, :hashed_id, :prediction
+  should_validate_presence_of :challenger, :hashed_id, :prediction #,:challenged
   
   def setup
     @challenge = challenges(:linwood_to_luke)
