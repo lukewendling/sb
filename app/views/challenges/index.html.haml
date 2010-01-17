@@ -9,12 +9,12 @@
     %em You don't have any registered friends just yet...
   %p
     = link_to 'Invite a friend', new_invitation_path
-      
-- if @challenges.empty?
+- else
   %p
     Create new challenge from
     = link_to 'my contacts', contact_list_friend_path(current_friend)
-- else
+
+- unless @challenges.empty?
   %table
     %tr
       %th Friend
