@@ -29,13 +29,24 @@ class Friend < ActiveRecord::Base
   validates_presence_of :invitation_id, :message => 'is required', :on => :create
   validates_uniqueness_of :invitation_id, :on => :create
 
-
+  validates_presence_of :hashed_id
+  validates_uniqueness_of :hashed_id, :on => :create
+  
+  def to_param
+    hashed_id
+  end
+  
+  def before_validation_on_create
+    super
+    self.hashed_id = Digest::SHA1.hexdigest([Time.now, rand].join)
+  end
+  
   def name
     self[:name] || username
   end
     
   def contacts
-    ContactList.new(self).contacts
+    (ContactList.new(self).contacts + sent_invitations.map{|invitation| invitation.recipient}).uniq.compact
   end
   
   def twitter_screen_name

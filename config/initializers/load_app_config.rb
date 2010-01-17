@@ -7,4 +7,4 @@ ExceptionNotifier.exception_recipients = %w(debug@shouldbet.com)
 ExceptionNotifier.sender_address = %("Application Error" <debug@shouldbet.com>)
 ExceptionNotifier.email_prefix = "[Oops] "
 
-
+INVALID_CONTENT_PATTERN = /<iframe|<script|<frame|\.\.\//i

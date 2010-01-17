@@ -1,6 +1,6 @@
 class ContactList
   def initialize(friend)
-    @contacts = (friend.bets.map{|c| Contact.new(c.challenged)} + friend.challenges.map{|c| Contact.new(c.challenger)})
+    @contacts = (friend.bets.map{|c| Contact.new(c.challenged).friend} + friend.challenges.map{|c| Contact.new(c.challenger).friend}).uniq
   end
   
   def contacts
@@ -8,6 +8,8 @@ class ContactList
   end
   
   class Contact
+    attr_reader :friend
+    
     def initialize(friend)
       @friend = friend
     end

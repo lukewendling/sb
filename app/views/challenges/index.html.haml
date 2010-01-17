@@ -3,10 +3,18 @@
 %h1
   = image_tag current_friend.twitter_profile_image_url
   = "#{h(current_friend.name)}'s Challenges"
-  
-%p= link_to "New Challenge", new_challenge_path
 
-- unless @challenges.empty?
+- if current_friend.contacts.empty?
+  %p
+    %em You don't have any registered friends just yet...
+  %p
+    = link_to 'Invite a friend', new_invitation_path
+      
+- if @challenges.empty?
+  %p
+    Create new challenge from
+    = link_to 'my contacts', contact_list_friend_path(current_friend)
+- else
   %table
     %tr
       %th Friend

@@ -9,13 +9,24 @@ class Challenge < ActiveRecord::Base
   has_many :comments, :class_name => 'ChallengeComment', :order => 'created_at desc', :dependent => :delete_all
   has_many :preferences, :class_name => 'ChallengePreference', :dependent => :delete_all
   
-  validates_presence_of :challenger, :hashed_id, :prediction
-  validates_presence_of :recipient, :message => 'email address not found. You must first invite a friend before sending them a challenge.'
+  validates_presence_of :challenger, :challenged, :hashed_id, :prediction, :event_description
   
   attr_protected :hashed_id
   
   def self.per_page
     Rails.env == 'development' ? 3 : 10
+  end
+  
+  validates_each :prediction, :event_description, :result do |record, attr, value|
+    record.errors.add attr, 'contains invalid content.' if value && value.match( INVALID_CONTENT_PATTERN )
+  end
+  
+  def before_validation
+    super
+    unless challenger.contacts.map(&:id).uniq.include?(challenged_id)
+      errors.add_to_base "Recipient email address not found. You must first <a href='/invitations/new'>invite a friend</a> before sending a challenge."
+      return false
+    end
   end
   
   def before_validation_on_create

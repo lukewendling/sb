@@ -1,6 +1,12 @@
 - title 'My Contacts'
-- items = current_friend.contacts.map{|c| link_to "#{c.name} (#{c.email})", new_challenge_path(:recipient_id => c.id)}.uniq
+- items = current_friend.contacts.map{|c| link_to "#{c.name} (#{c.email})", new_challenge_path(:recipient_id => c.hashed_id)}
 
-%ul
-  - items.each do |item|
-    %li= item
+- if items.empty?
+  %p
+    %em You don't have any registered friends just yet...
+  %p
+    = link_to 'Invite a friend', new_invitation_path
+- else
+  %ul
+    - items.each do |item|
+      %li= item
