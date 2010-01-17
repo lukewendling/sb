@@ -20,11 +20,11 @@ class FriendsController < ApplicationController
   end
   
   def edit
-    @friend ||= Friend.find(params[:id])
+    @friend ||= Friend.find_by_hashed_id(params[:id])
   end
   
   def update
-    @friend ||= Friend.find(params[:id])
+    @friend ||= Friend.find_by_hashed_id(params[:id])
     if @friend.update_attributes(params[:friend])
       flash[:notice] = "Account updated!"
       redirect_to root_url
@@ -35,7 +35,7 @@ class FriendsController < ApplicationController
   
   private
     def authorize
-      @friend = Friend.find(params[:id])
+      @friend = Friend.find_by_hashed_id(params[:id])
       render(:text => 'Unauthorized', :status => 401) unless @friend == current_friend
     end
 end

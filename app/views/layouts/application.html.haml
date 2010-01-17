@@ -26,4 +26,4 @@
       #footer.align-center.pad-top
         = link_to 'terms of use', '/terms.html'
     = render :partial => 'shared/uservoice'
-    = render :partial => 'shared/google_analytics'
+    = render :partial => 'shared/google_analytics' if Rails.env == 'production'

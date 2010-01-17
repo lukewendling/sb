@@ -1,11 +1,6 @@
 - title "New Challenge"
 
-%p
-  %em How do I create a challenge?
-  %ul
-    %li If you've challenged your friend, Sally, to a challenge before, enter her email address below, along with the new challenge details. (Hint: Start typing her name, or email address, in the recipient field). 
-    %li== To add a new friend #{link_to 'you must first send an invitation', new_invitation_path}. You'll be notified by email when your friend signs up. (Ask your friend to check their Spam folder if they don't receive an invitation)
-
 = render :partial => 'form'
 
-%p= link_to "Back to List", challenges_path
+%p
+  = link_to "Back to List", challenges_path

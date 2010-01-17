@@ -8,6 +8,10 @@ class ChallengeComment < ActiveRecord::Base
     Rails.env == 'development' ? 3 : 10
   end
   
+  validates_each :content do |record, attr, value|
+    record.errors.add attr, 'contains invalid content.' if value && value.match( INVALID_CONTENT_PATTERN )
+  end
+  
   def after_create
     super
     ChallengeCommentMailer.deliver_comment(self)

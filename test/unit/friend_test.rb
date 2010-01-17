@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class FriendTest < ActiveSupport::TestCase
-  should_have_many :challenges
+  should_have_many :challenges, :bets, :sent_invitations
+  should_belong_to :invitation
   
   def new_friend
     invite = Invitation.new
@@ -16,12 +17,17 @@ class FriendTest < ActiveSupport::TestCase
     friend.name = 'Nathan Arizona'
     friend.invitation = invite
     friend.terms_of_use = "1"
+    friend.hashed_id = Time.now.to_i
     friend
   end
   
   def setup
     @luke = friends(:luke)
     @linwood = friends(:linwood)
+  end
+  
+  def test_should_have_contacts
+    assert !@luke.contacts.empty?
   end
   
   def test_should_be_valid
@@ -121,5 +127,11 @@ class FriendTest < ActiveSupport::TestCase
     assert @luke.can_tweet?
     @luke.remove_twitter!
     assert !@luke.can_tweet?
+  end
+  
+  def test_should_set_hashed_id
+    f = new_friend
+    f.valid?
+    assert_not_nil f.hashed_id
   end
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090916203106) do
+ActiveRecord::Schema.define(:version => 20100116213852) do
 
   create_table "challenge_comments", :force => true do |t|
     t.integer  "friend_id"
@@ -76,9 +76,11 @@ ActiveRecord::Schema.define(:version => 20090916203106) do
     t.string   "twitter_screen_name"
     t.string   "twitter_profile_image_url"
     t.boolean  "show_hidden_challenges",    :default => false, :null => false
+    t.string   "hashed_id"
   end
 
   add_index "friends", ["email"], :name => "index_friends_on_email", :unique => true
+  add_index "friends", ["hashed_id"], :name => "index_friends_on_hashed_id", :unique => true
 
   create_table "invitations", :force => true do |t|
     t.integer  "sender_id"

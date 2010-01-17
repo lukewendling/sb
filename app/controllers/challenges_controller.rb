@@ -17,7 +17,13 @@ class ChallengesController < ApplicationController
   end
   
   def new
-    @challenge = Challenge.new
+#    if coming from contact list
+    if params[:recipient_id]
+      recipient = current_friend.contacts.detect{|contact| contact.hashed_id == params[:recipient_id]}
+      @challenge = (recipient ? Challenge.new(:challenged_id => recipient.id) : Challenge.new)
+    else
+      @challenge = Challenge.new
+    end
   end
   
   def create

@@ -10,7 +10,8 @@ luke:
   invitation_limit: 10
   twitter_screen_name: bostonleander
   twitter_profile_image_url: "http://s.twimg.com/a/1251493570/images/default_profile_normal.png"
-  show_hidden_challenges: false     
+  show_hidden_challenges: false
+  hashed_id: '1'     
 linwood:
   username: linwood
   email: linwood@example.com
@@ -24,6 +25,7 @@ linwood:
   twitter_screen_name: bostonleander
   twitter_profile_image_url: "http://s.twimg.com/a/1251493570/images/default_profile_normal.png"
   show_hidden_challenges: false
+  hashed_id: '2'
 mike:
   username: mike
   email: mike@example.com
@@ -35,6 +37,7 @@ mike:
   twitter_screen_name: bostonleander
   twitter_profile_image_url: "http://s.twimg.com/a/1251493570/images/default_profile_normal.png"
   show_hidden_challenges: false
+  hashed_id: '3'
 birdie:
   username: birdie
   email: birdie@example.com
@@ -47,3 +50,4 @@ birdie:
   twitter_screen_name:
   twitter_profile_image_url:
   show_hidden_challenges: false
+  hashed_id: '4'
