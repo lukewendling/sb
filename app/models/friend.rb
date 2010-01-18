@@ -46,9 +46,9 @@ class Friend < ActiveRecord::Base
   end
     
   def contacts
-    contacts = (ContactList.new(self).contacts + sent_invitations.map(&:recipient)).uniq.compact
+    contacts = (ContactList.new(self).contacts + sent_invitations.map(&:recipient)).compact
     contacts += [invitation.sender] if invitation # seeded friend has bogus invitation
-    contacts
+    contacts.uniq.sort_by(&:name)
   end
   
   def twitter_screen_name
