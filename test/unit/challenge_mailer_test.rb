@@ -9,7 +9,9 @@ class ChallengeMailerTest < ActionMailer::TestCase
   
   def test_the_challenge
     # Send the email, then test that it got queued  
-    email = ChallengeMailer.deliver_the_challenge(@challenge)  
+    SentMail.delete_all
+    email = ChallengeMailer.deliver_the_challenge(@challenge)
+    assert_equal 1, SentMail.count  
     assert !ActionMailer::Base.deliveries.empty? 
     # Test the body of the sent email contains what we expect it to  
     assert_equal [@challenge.challenged.email], email.to 
