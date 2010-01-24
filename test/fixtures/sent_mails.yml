@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sender: MyString
+  recipients: MyString
+  subject: MyString
+  mailer_type: MyString
+  serialized_mail: MyText
+
+two:
+  sender: MyString
+  recipients: MyString
+  subject: MyString
+  mailer_type: MyString
+  serialized_mail: MyText

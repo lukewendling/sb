@@ -1,6 +1,5 @@
 class ChallengeMailer < ApplicationMailer
   
-
   def the_challenge(challenge)
     subject    "You've been challenged!"
     recipients challenge.challenged.email

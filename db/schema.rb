@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100116213852) do
+ActiveRecord::Schema.define(:version => 20100124224831) do
 
   create_table "challenge_comments", :force => true do |t|
     t.integer  "friend_id"
@@ -92,6 +92,16 @@ ActiveRecord::Schema.define(:version => 20100116213852) do
   end
 
   add_index "invitations", ["sender_id"], :name => "index_invitations_on_sender_id"
+
+  create_table "sent_mails", :force => true do |t|
+    t.string   "sender"
+    t.string   "recipients"
+    t.string   "subject"
+    t.string   "mailer_type"
+    t.text     "serialized_mail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
