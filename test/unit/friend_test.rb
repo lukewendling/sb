@@ -134,4 +134,11 @@ class FriendTest < ActiveSupport::TestCase
     f.valid?
     assert_not_nil f.hashed_id
   end
+  
+  def test_should_reset_password
+    old = @luke.password_hash
+    @luke.reset_password!
+    assert_not_nil @luke.temp_password
+    assert_not_equal old, @luke.password_hash
+  end
 end

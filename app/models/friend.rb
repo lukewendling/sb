@@ -1,4 +1,8 @@
+require 'random_string'
+
 class Friend < ActiveRecord::Base
+  include RandomString
+  
   has_many :challenges, :foreign_key => 'challenged_id', :order => 'created_at desc'
   has_many :bets, :foreign_key => 'challenger_id', :class_name => 'Challenge', :order => 'created_at desc'
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
@@ -11,7 +15,7 @@ class Friend < ActiveRecord::Base
   attr_accessible :show_hidden_challenges
   attr_accessible :terms_of_use
   
-  attr_accessor :password
+  attr_accessor :password, :temp_password
   before_save :prepare_password, :keep_it_on_the_low_down
   before_update :cache_twitter_details
   before_create :set_invitation_limit
@@ -119,6 +123,14 @@ class Friend < ActiveRecord::Base
       self.twitter_screen_name = twitter_user.screen_name
       self.twitter_profile_image_url = twitter_user.profile_image_url
     end
+  end
+  
+  def reset_password!
+    self.password = generate_random_string(8)
+    prepare_password
+    self.temp_password = password
+    ForgotPasswordMailer.deliver_reset_notification(self)
+    save!
   end
   
   private

@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-
+  map.resources :forgot_passwords, :only => [:index, :new, :create], :controller => 'forgot_password', :as => 'forgot_password'
   map.resources :invitations, :only => [:new, :create]
   map.resource :authorization
   map.resources :events
