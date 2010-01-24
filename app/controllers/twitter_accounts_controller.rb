@@ -13,6 +13,6 @@ class TwitterAccountsController < ApplicationController
   def destroy
     current_friend.remove_twitter!
     flash[:notice] = "Your Twitter account has been removed"
-    redirect_to root_url
+    redirect_to challenges_url
   end
 end

@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
     friend = Friend.authenticate(params[:login], params[:password])
     if friend
       session[:friend_id] = friend.id
-      flash[:notice] = "Logged in successfully."
+      flash[:notice] = "You are logged in!"
       original_uri = session[:original_uri]
       session[:original_uri] = nil if original_uri
-      redirect_to original_uri || root_url
+      redirect_to original_uri || challenges_url
     else
       flash.now[:error] = "Invalid login or password."
       render :action => 'new'

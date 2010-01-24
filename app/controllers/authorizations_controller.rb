@@ -18,6 +18,6 @@ class AuthorizationsController < ApplicationController
       :asecret => oauth.access_token.secret,
     })
     
-    redirect_to root_path
+    redirect_to challenges_path
   end
 end

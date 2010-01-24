@@ -13,7 +13,7 @@ class FriendsController < ApplicationController
     if @friend.save
       session[:friend_id] = @friend.id
       flash[:notice] = "Thank you for signing up! You are now logged in."
-      redirect_to root_url
+      redirect_to challenges_url
     else
       render :action => 'new'
     end
@@ -27,7 +27,7 @@ class FriendsController < ApplicationController
     @friend ||= Friend.find_by_hashed_id(params[:id])
     if @friend.update_attributes(params[:friend])
       flash[:notice] = "Account updated!"
-      redirect_to root_url
+      redirect_to challenges_url
     else
       render :action => 'edit'
     end

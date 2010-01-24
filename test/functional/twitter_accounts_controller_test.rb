@@ -26,6 +26,6 @@ class TwitterAccountsControllerTest < ActionController::TestCase
     delete :destroy, {}, :friend_id => @linwood.id
     
     assert !@linwood.reload.can_tweet?
-    assert_redirected_to root_path
+    assert_redirected_to challenges_path
   end
 end
