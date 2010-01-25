@@ -118,7 +118,7 @@ class FriendTest < ActiveSupport::TestCase
   
   def test_should_notify_inviter
     friend = new_friend
-    assert_difference "ActionMailer::Base.deliveries.size" do
+    assert_difference "SentMail.count" do
       assert friend.save
     end
   end

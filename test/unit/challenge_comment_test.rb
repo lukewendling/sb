@@ -14,7 +14,7 @@ class ChallengeCommentTest < ActiveSupport::TestCase
     comment = @challenge.comments.build
     comment.friend = @challenge.friends.first
     comment.content = 'sucker!'
-    assert_difference "ActionMailer::Base.deliveries.size" do
+    assert_difference "SentMail.count" do
       comment.save!
     end
   end

@@ -1,15 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  sender: MyString
-  recipients: MyString
-  subject: MyString
-  mailer_type: MyString
-  serialized_mail: MyText
+  sender: shouldbet@shouldbet.com
+  recipients: linwood@example.com
+  subject: The Challenge
+  mailer_type: ChallengeMailer
+  serialized_mail: <%#= ChallengeMailer.create_the_challenge(Challenge.first) %>
+  complete: false
 
 two:
-  sender: MyString
-  recipients: MyString
-  subject: MyString
-  mailer_type: MyString
-  serialized_mail: MyText
+  sender: shouldbet@shouldbet.com
+  recipients: luke@example.com
+  subject: The Challenge
+  mailer_type: ChallengeMailer
+  serialized_mail: <%#= ChallengeMailer.create_the_challenge(Challenge.last) %>
+  complete: false

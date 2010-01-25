@@ -25,7 +25,7 @@ class ChallengeTest < ActiveSupport::TestCase
         assert @new_challenge.save
       end
       
-      should_change "::ActionMailer::Base.deliveries.size", :by => 1
+      should_change "SentMail.count", :by => 1
       should_change "Challenge.count", :by => 1
       should_change "@new_challenge.preferences.size", :by => 2
       should "set hashed id" do

@@ -1,0 +1,4 @@
+SentMail.all(:conditions => {:complete => false}).each do |m| 
+  ApplicationMailer.deliver_without_serialization(m.serialized_mail)
+  m.toggle!(:complete)
+end

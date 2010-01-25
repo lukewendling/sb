@@ -6,7 +6,13 @@ class ApplicationMailer < ActionMailer::Base
 #      debugger
       SentMail.create!(:sender => mail.from.join(','), :recipients => mail.to.join(','), :subject => mail.subject, :serialized_mail => mail, :mailer_type => self.class.to_s)
     end
-    deliver_without_serialization!(@mail)
+#    deliver_without_serialization!(@mail)
   end
   alias_method_chain :deliver!, :serialization
+  
+  class << self
+    def deliver_without_serialization(mail)
+      new.deliver_without_serialization!(mail)
+    end
+  end
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100124224831) do
+ActiveRecord::Schema.define(:version => 20100125030229) do
 
   create_table "challenge_comments", :force => true do |t|
     t.integer  "friend_id"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20100124224831) do
     t.text     "serialized_mail"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "complete",        :default => false
   end
 
   create_table "sessions", :force => true do |t|
