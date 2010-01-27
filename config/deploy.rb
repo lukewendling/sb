@@ -40,7 +40,9 @@ namespace :deploy do
 #    1. gem install javan-whenever (home dir install). NOTE: output of 'gem env' gemhome var (~/ruby/gems) did not match error from script/console re: gem repo location (~/.gem/ruby/1.8), so i symlinked ~/.gem/ruby/1.8 to ~/ruby/gems
 #    2. add ~/ruby/gems/bin to deploy user PATH (host-specific local gem path) ... although I still had to 'export PATH...' below. could be something i don't understand about capistrano
 #    3. read "http://www.hostingrails.com/wiki/2/Install-and-freeze-your-own-RubyGems" for a primer. i also googled 'installing gems shared host' for some ideas.
-    run "cd #{release_path} && export PATH=$PATH:$HOME/ruby/gems/bin && whenever --update-crontab #{application} --set environment=production"
+
+#    change to --update-crontab to keep existing entries -- although this seems to create dupe entries
+    run "cd #{release_path} && export PATH=$PATH:$HOME/ruby/gems/bin && whenever --write-crontab #{application} --set environment=production"
     # TODO: set env var dynamically for use with future staging env
   end
 
