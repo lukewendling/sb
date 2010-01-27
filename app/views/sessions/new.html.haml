@@ -9,7 +9,7 @@
     = text_field_tag :login, params[:login]
   %p
     = label_tag :password
-    == (#{link_to 'forgot password?', new_forgot_password_path})
+    == (#{link_to 'forgot?', new_forgot_password_path, :tabindex => 999, :style => "text-decoration:none"})
     %br
     = password_field_tag :password
   %p
