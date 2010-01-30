@@ -3,10 +3,10 @@
   
   %head
     %title
-      == ShouldBet.com - #{h(yield(:title) || AppConfig[:title])} - weight loss challenge, fitness challenge, friendly bet
+      == ShouldBet.com - #{h(yield(:title) || AppConfig[:title])} - weight loss challenge, fitness challenge, friendly bet, track fitness
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    %meta{:description => "Shouldbet.com lets you issue friendly challenges to your buddies, and tell the world when you win!"}/
-    %meta{:keywords => "weight loss challenge, fitness challenge, friendly bet"}/
+    %meta{:description => "A fun, simple application to create and track fitness and weight loss challenges"}/
+    %meta{:keywords => "weight loss challenge, fitness challenge, friendly bet, track fitness"}/
     = javascript_include_tag :defaults, :cache => true
     = stylesheet_link_tag 'application'
     = yield(:head)
