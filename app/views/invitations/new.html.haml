@@ -7,3 +7,6 @@
     %br
     = f.text_field :recipient_email
   %p= f.submit "Invite!"
+  
+= javascript_tag "$('invitation_recipient_email').activate()"
+

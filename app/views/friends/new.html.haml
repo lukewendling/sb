@@ -1,6 +1,10 @@
 - title "Sign up"
 
-%p== Already have an account? #{link_to "Log in", login_path}.
+%p
+  = render :partial => 'shared/what_is_this'
+
+%p
+  == Already have an account? #{link_to "Log in", login_path}.
 
 - form_for @friend do |f|
   = f.error_messages
@@ -33,3 +37,6 @@
 
   %p
     = f.submit "Sign up"
+
+= javascript_tag "$('friend_username').activate()"
+

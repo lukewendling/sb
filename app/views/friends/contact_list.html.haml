@@ -10,3 +10,7 @@
   %ul
     - items.each do |item|
       %li= item
+  
+  %p
+    %h3 Want to invite someone else?
+    = link_to 'Invite a friend', new_invitation_path

@@ -13,7 +13,7 @@ class Invitation < ActiveRecord::Base
   private
 
     def recipient_is_already_registered
-      errors.add :recipient_email, 'is already registered' if Friend.find_by_email(recipient_email)
+      errors.add :recipient_email, 'is already registered' if Friend.find_by_email(recipient_email.downcase)
     end
 
     def sender_has_invitations
