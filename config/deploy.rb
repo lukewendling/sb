@@ -21,7 +21,7 @@ namespace :deploy do
     desc "#{t} task is a no-op with Passenger"
     task t, :roles => :app do ; end
   end
-  
+
   desc "Symlink shared configs and folders on each release."
   task :symlink_shared do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
