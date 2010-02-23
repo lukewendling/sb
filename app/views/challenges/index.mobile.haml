@@ -1,1 +1,29 @@
-.hi Hi
+- title "#{h(current_friend.name)}'s Challenges"
+
+%h1
+  = image_tag current_friend.twitter_profile_image_url
+  = "#{h(current_friend.name)}'s Challenges"
+
+- if current_friend.contacts.empty?
+  %p
+    %em You don't have any registered friends just yet...
+  %p
+    = link_to 'Invite a friend', new_invitation_path
+- else
+  %p
+    Create new challenge from
+    = link_to 'my contacts', contact_list_friend_path(current_friend)
+
+- unless @challenges.empty?
+  %ul
+    - for challenge in @challenges
+      - preference = challenge.preferences.detect { |p| p.friend == current_friend}
+      %li.arrow
+        = h( (challenge.friends - [current_friend]).first.name )
+        = link_to h( truncate(challenge.event.description) ), challenge
+        = time_ago_in_words(challenge.updated_at) + ' ago'
+        = link_to_if( (challenge.challenged == current_friend), (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
+        - if challenge.challenger == current_friend
+          = link_to 'Edit', edit_challenge_path(challenge)
+
+  = will_paginate @challenges
