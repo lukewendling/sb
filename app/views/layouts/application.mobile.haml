@@ -7,12 +7,12 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{:description => "A fun, simple application to create and track fitness and weight loss challenges"}/
     %meta{:keywords => "weight loss challenge, fitness challenge, friendly bet, track fitness"}/
-    = stylesheet_link_tag "/jqtouch/jqtouch/jqtouch.min.css", "/jqtouch/jqtouch/themes/apple/theme.min.css"
+    = stylesheet_link_tag "/jqtouch/jqtouch/jqtouch.min.css", "/jqtouch/jqtouch/themes/apple/theme.css"
     = javascript_include_tag "/jqtouch/jqtouch/jquery.1.3.2.min.js", "/jqtouch/jqtouch/jqtouch.js", "mobile"
     = yield(:head)
 
   %body
-    .current
+    #home
       - if show_title?
         .toolbar
           = link_to "Back", nil, :class => "back" unless current_page? root_path
