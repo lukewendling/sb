@@ -1,0 +1,16 @@
+- unless f.error_messages.empty?
+  .info
+    = f.error_messages
+/
+  %p
+    = f.label :flagged, 'Flag?'
+    %br
+    = f.check_box :flagged
+    %small Keep this challenge near the top of my challenges list
+%ul.rounded
+  %li
+    = f.label :hidden, 'Hide?'
+    %br
+    = f.check_box :hidden
+
+= link_to "Submit", nil, :class => "whiteButton submit"

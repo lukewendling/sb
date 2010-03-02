@@ -1,0 +1,19 @@
+- title "#{h(current_friend.username)}'s challenges"
+
+%ul
+  - if current_friend.contacts.empty?
+    %li.arrow
+      = link_to 'Invite a friend', new_invitation_path
+  - else
+    %li.arrow
+      = link_to 'Issue a challenge', contact_list_friend_path(current_friend)
+
+- unless @challenges.empty?
+  #challenges
+    %ul
+      - for challenge in @challenges
+        %li.arrow
+          = h( (challenge.friends - [current_friend]).first.name )
+          = link_to h( truncate(challenge.event.description) ), challenge
+          = time_ago_in_words(challenge.updated_at) + ' ago'
+

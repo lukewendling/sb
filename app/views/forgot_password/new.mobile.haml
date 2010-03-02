@@ -1,0 +1,14 @@
+- title "Reset Password"
+
+- form_for @forgot_password do |f|
+  - unless f.error_messages.empty?
+    .info
+      = f.error_messages
+      
+  %ul.rounded
+    %li
+      = f.label :email
+      %br
+      = f.text_field :email
+  
+  = link_to "Reset my password", nil, :class => "whiteButton submit"

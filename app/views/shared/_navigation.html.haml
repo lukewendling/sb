@@ -4,5 +4,7 @@
   .float-left.pad-left= link_to 'my account', edit_friend_path(current_friend)
   .float-left.pad-left= link_to 'logout', logout_path
   .float-left.pad-left== (logged in as #{current_friend.username})
+  .float-left.pad-left= link_to "mobile", :mobile => 1
+      
   - if current_friend.can_tweet?
     .float-left.pad-left= link_to(current_friend.twitter_screen_name, "http://twitter.com/#{current_friend[:twitter_screen_name]}", :target => '_blank')
