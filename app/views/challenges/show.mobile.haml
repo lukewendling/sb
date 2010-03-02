@@ -1,7 +1,8 @@
 - title "Challenge"
 
-- content_for :toolbar do
-  = link_to( "Edit", edit_challenge_path(@challenge), :class => 'button' ) if @challenge.challenger == current_friend
+- if @challenge.challenger == current_friend
+  - content_for :toolbar do
+    = link_to( "Edit", edit_challenge_path(@challenge), :class => 'button' )
 
 %ul
   %li
@@ -30,3 +31,4 @@
     = link_to( "View Comments", challenge_comments_path(@challenge) )
   %li.arrow
     = link_to 'Preferences', edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id))
+

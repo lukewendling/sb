@@ -1,0 +1,17 @@
+- title "Challenge your friends..."
+
+- form_tag sessions_path, :id => 'login_form' do
+  %ul.rounded
+    %li
+      = label_tag :login, "Username or Email Address"
+      %br
+      = text_field_tag :login, params[:login]
+    %li
+      = label_tag :password
+      %br
+      = password_field_tag :password
+
+  = link_to "Submit", nil, :class => "whiteButton submit"
+  
+%ul
+  %li.arrow= link_to 'Forgot password?', new_forgot_password_path, :tabindex => 999

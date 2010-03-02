@@ -15,7 +15,7 @@
     #home.current
       - if show_title?
         .toolbar
-          = link_to "Back", nil, :class => "back" unless current_page?(challenges_path)
+          = link_to "Back", nil, :class => "back" if !current_page?(challenges_path) and logged_in?
           %h1=h yield(:title)
           = yield(:toolbar) || link_to( "Full Site", root_url(:mobile => 0), :class => "button", :rel => "external")
 
@@ -25,5 +25,7 @@
             = content_tag :div, msg, :id => "flash_{name}"
 
       ~ yield
+
+      = render :partial => 'shared/footer'
 
     = render :partial => 'shared/google_analytics' if Rails.env == 'production'

@@ -1,0 +1,7 @@
+- if logged_in?
+  - unless current_page?(challenges_path)
+    %ul
+      %li.arrow= link_to('Back to Challenges', challenges_path)
+
+  %ul
+    %li.arrow= link_to('Log out', logout_path)
