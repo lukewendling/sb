@@ -1,0 +1,41 @@
+- form_for @challenge do |f|
+  - unless f.error_messages.empty?
+    .info
+      = f.error_messages
+
+  %ul.rounded
+    %li
+      - if @challenge.new_record?
+        = f.label :challenged_email, 'Recipient email address to send challenge'
+        = text_field_with_auto_complete(:challenge, :challenged_email, {:placeholder => "Recipient"}, {:min_chars => 2, :with => "\"authenticity_token=#{form_authenticity_token}&search=\" + $F('challenge_challenged_email')"})
+      - else
+        You challenged:
+        %br
+        == #{@challenge.challenged.name} (#{@challenge.challenged.email})
+    %li
+      = f.label :event_description
+      %br
+      = f.text_area :event_description, :size => '40x3', :placeholder => "Event"
+    %li
+      = f.label :prediction
+      %br
+      = f.text_area :prediction, :size => '40x3', :placeholder => "Prediction"
+    - unless @challenge.new_record?
+      %li
+        = f.label :result
+        %br
+        = f.text_area :result, :size => '40x2', :placeholder => "Result"
+      %li
+        = f.label :winner_id
+        %br
+        = f.radio_button :winner_id, @challenge.friends.first.id
+        = @challenge.friends.first.name
+        %br
+        = f.radio_button :winner_id, @challenge.friends.last.id
+        = @challenge.friends.last.name
+      %li
+        = f.label :contested, 'Contested?'
+        %br
+        = f.check_box :contested
+        
+  = link_to "Submit", nil, :class => "whiteButton submit"

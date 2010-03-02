@@ -1,0 +1,21 @@
+- title h(truncate(@challenge.event.description, :length => 20))
+
+- content_for :toolbar do
+  = link_to "Back to Challenge", @challenge, :class => 'button'
+
+%ul
+  %li.arrow= link_to "New Comment", new_challenge_comment_path(@challenge)
+  
+- unless @challenge_comments.empty?
+  %ul
+    - for challenge_comment in @challenge_comments
+      %li.arrow
+        = h challenge_comment.friend.name
+        %br
+        = h truncate(challenge_comment.content, :length => 25)
+        %br
+        = time_ago_in_words(challenge_comment.created_at) + ' ago'
+        %br
+        = link_to 'More ...', challenge_comment_path(challenge_comment.challenge, challenge_comment)
+      - if challenge_comment.friend == current_friend
+        %li.arrow= link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment))

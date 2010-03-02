@@ -186,7 +186,7 @@
                 
                 // Go to the top of the "current" page
                 $(currentPage).addClass('current');
-//                location.hash = $(currentPage).attr('id');
+                location.hash = $(currentPage).attr('id');
                 addPageToHistory(currentPage);
                 scrollTo(0, 0);
                 dumbLoopStart();

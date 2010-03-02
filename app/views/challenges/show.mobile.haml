@@ -1,0 +1,32 @@
+- title "Challenge"
+
+- content_for :toolbar do
+  = link_to( "Edit", edit_challenge_path(@challenge), :class => 'button' ) if @challenge.challenger == current_friend
+
+%ul
+  %li
+    Challenged:
+    =h @challenge.challenged.name
+  %li
+    Event:
+    ~h @challenge.event.description
+  %li
+    Prediction:
+    ~h @challenge.prediction
+  - if @challenge.complete?
+    %li
+      Result:
+      ~h @challenge.result
+    %li
+      Winner:
+      =h( @challenge.winner.name ) if @challenge.winner
+    %li
+      Contested?:
+      =@challenge.contested? ? 'Yes' : 'No'
+  %li
+    Updated:
+    =@challenge.updated_at.to_date.to_s(:db)
+  %li.arrow
+    = link_to( "View Comments", challenge_comments_path(@challenge) )
+  %li.arrow
+    = link_to 'Preferences', edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id))

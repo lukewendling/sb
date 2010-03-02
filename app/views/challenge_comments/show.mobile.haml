@@ -1,0 +1,23 @@
+- title "Challenge Comment"
+
+- content_for :toolbar do
+  = link_to( "Edit", edit_challenge_comment_path(@challenge, @challenge_comment), :class => 'button' ) if @challenge_comment.friend == current_friend
+  
+%ul
+  %li
+    To:
+    =h( (@challenge.friends - [@challenge_comment.friend]).first.name )
+  %li
+    Challenge:
+    ~h @challenge.event.description
+  %li
+    Prediction:
+    ~h @challenge.prediction  
+  %li
+    Message:
+    ~h @challenge_comment.content
+  %li.arrow= link_to( "Reply", new_challenge_comment_path(@challenge) )
+  
+%ul
+  %li.arrow= link_to( "All Comments", challenge_comments_path )
+  %li.arrow= link_to( 'Back to Challenge', @challenge )
