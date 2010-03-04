@@ -15,7 +15,7 @@
     #home.current
       - if show_title?
         .toolbar
-          = link_to_unless_current("Home", challenges_path, :class => "button"){"&nbsp;"} if logged_in?
+          = link_to_unless_current("Home", challenges_path, :class => "button leftButton"){"&nbsp;"} if logged_in?
           %h1=h yield(:title)
           = yield(:toolbar)
 
