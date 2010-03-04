@@ -15,7 +15,7 @@
     #home.current
       - if show_title?
         .toolbar
-          = link_to "Back", nil, :class => "back" if !current_page?(challenges_path) and logged_in?
+          = link_to "Back", "#", :class => "buttton back" if !current_page?(challenges_path) and logged_in?
           %h1=h yield(:title)
           = yield(:toolbar) || link_to( "Full Site", root_url(:mobile => 0), :class => "button", :rel => "external")
 
