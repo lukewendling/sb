@@ -1,7 +1,8 @@
 - if logged_in?
-  - unless current_page?(challenges_path)
+  .plastic
     %ul
-      %li.arrow= link_to('Back to Challenges', challenges_path)
-
+      %li.arrow= link_to('Log out', logout_path)
+    
+.plastic
   %ul
-    %li.arrow= link_to('Log out', logout_path)
+    %li= link_to( "Web version", root_url(:mobile => 0), :rel => "external")

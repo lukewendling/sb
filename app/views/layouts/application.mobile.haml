@@ -15,9 +15,9 @@
     #home.current
       - if show_title?
         .toolbar
-          = link_to "Back", "#", :class => "buttton back" if !current_page?(challenges_path) and logged_in?
+          = link_to_unless_current("Home", challenges_path, :class => "back button"){"&nbsp;"} if logged_in?
           %h1=h yield(:title)
-          = yield(:toolbar) || link_to( "Full Site", root_url(:mobile => 0), :class => "button", :rel => "external")
+          = yield(:toolbar)
 
       - unless flash.empty?
         .info
