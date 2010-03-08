@@ -1,4 +1,4 @@
-- title "#{h(current_friend.username)}'s challenges"
+- title "My Challenges"
 
 - if current_friend.contacts.empty?
   %ul
@@ -8,7 +8,11 @@
   - content_for :toolbar do
     = link_to 'New', contact_list_friend_path(current_friend), :class => 'add'
 
-- unless @challenges.empty?
+- if @challenges.empty?
+  %ul
+    %li.arrow
+      = link_to 'New Challenge', contact_list_friend_path(current_friend)
+- else
   #challenges
     %ul
       - for challenge in @challenges

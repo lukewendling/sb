@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     
   #rescue twitter gem auth errors globally
   rescue_from Twitter::Unauthorized, :with => :twitter_unauthorized
+  rescue_from ActionView::MissingTemplate, :with => :mobile_version_missing
   
   def boom
     raise 'boom'
@@ -35,8 +36,17 @@ class ApplicationController < ActionController::Base
       redirect_to new_authorization_url
     end
 
-   def prepare_for_mobile  
+    def mobile_version_missing
+      if mobile_device?
+        flash[:notice] = "Sorry, the mobile version of the page you requested has not been created. You'll have to use the plain ol' classic version for now..."
+        redirect_to request.path + "?mobile=0"
+      else
+        raise $!
+      end
+    end
+    
+    def prepare_for_mobile  
      session[:mobile_param] = params[:mobile] if params[:mobile]
      request.format = :mobile if mobile_device?
-   end 
+    end 
 end
