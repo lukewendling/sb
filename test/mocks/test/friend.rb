@@ -1,1 +1,1 @@
-require (Rails.root + '/test/mocks/development/friend')
+require (Rails.root + 'test/mocks/development/friend')
