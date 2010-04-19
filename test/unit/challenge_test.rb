@@ -5,14 +5,12 @@ class ChallengeTest < ActiveSupport::TestCase
   should_have_many :comments, :preferences
   
   should_validate_presence_of :hashed_id, :prediction, :event_description #challenger, :challenged
-  
-  def setup
-    @challenge = challenges(:linwood_to_luke)
-  end
-  
+
+  subject {challenges(:linwood_to_luke)}
+
   context "A new challenge" do
     setup do
-      @new_challenge = @challenge.clone
+      @new_challenge = challenges(:linwood_to_luke).clone
     end
   
     should "have 2 friends" do
@@ -25,9 +23,9 @@ class ChallengeTest < ActiveSupport::TestCase
         assert @new_challenge.save
       end
       
-      should_change "SentMail.count", :by => 1
-      should_change "Challenge.count", :by => 1
-      should_change "@new_challenge.preferences.size", :by => 2
+      should_change("The num of sent_mails", :by => 1) {SentMail.count}
+      should_change("The num of challenges", :by => 1) {Challenge.count}
+      should_change("The num of challenge preferences", :by => 2) {@new_challenge.preferences.size}
       should "set hashed id" do
         assert_not_nil @new_challenge.hashed_id
       end

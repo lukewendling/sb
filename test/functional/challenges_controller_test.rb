@@ -46,13 +46,13 @@ class ChallengesControllerTest < ActionController::TestCase
   end
   
   def test_update_invalid
-    Challenge.any_instance.stubs(:valid?).returns(false)
+    Challenge.any_instance.stubs(:save).returns(false)
     put :update, :id => @challenge.id, :challenge => {}
     assert_template 'edit'
   end
   
   def test_update_valid
-    Challenge.any_instance.stubs(:valid?).returns(true)
+    Challenge.any_instance.stubs(:save).returns(true)
     put :update, :id => @challenge.id, :challenge => {}
     assert_redirected_to challenge_url(assigns(:challenge))
     assert_match /Successfully updated challenge/, flash[:notice]
