@@ -29,6 +29,3 @@ config.action_mailer.default_url_options = { :host => "test.host" }
 # like if you have constraints or database-specific column types
 # config.active_record.schema_format = :sql
 
-config.gem 'mocha'
-config.gem 'thoughtbot-shoulda', 
-  :lib => 'shoulda'
