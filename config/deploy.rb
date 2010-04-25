@@ -46,10 +46,6 @@ namespace :deploy do
     # TODO: set env var dynamically for use with future staging env
   end
 
-  desc "Use bundled gems"
-  task :bundle_new_release, :roles => :app do
-    run "cd #{release_path} && bundle install"
-  end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab', 'deploy:bundle_new_release'
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab'
