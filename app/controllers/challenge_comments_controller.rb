@@ -1,18 +1,19 @@
 class ChallengeCommentsController < ApplicationController
-  before_filter :instantiate_challenge
-  before_filter :authorize, :only => [:index, :show, :edit, :update, :destroy]
+  before_filter :instantiate_challenge # why doesn't load_resource do this?
+#  before_filter :authorize, :only => [:index, :show, :edit, :update, :destroy]
+  load_resource :nested => :comment
+  authorize_resource :except => [:index, :new, :create]
   
   def index
     @challenge_comments = ChallengeComment.paginate_by_challenge_id(@challenge.id, :page => params[:page], :order => 'created_at DESC')
-
   end
   
   def show
-    @challenge_comment ||= @challenge.comments.find(params[:id])
+#    @challenge_comment ||= @challenge.comments.find(params[:id])
   end
   
   def new
-    @challenge_comment = @challenge.comments.build
+#    @challenge_comment = @challenge.comments.build
   end
   
   def create
@@ -22,12 +23,12 @@ class ChallengeCommentsController < ApplicationController
       flash[:notice] = "Successfully created comment."
       redirect_to challenge_comment_path(@challenge, @challenge_comment)
     else
-      render :action => 'new'
+      render 'new'
     end
   end
   
   def edit
-    @challenge_comment ||= @challenge.comments.find(params[:id])
+#    @challenge_comment ||= @challenge.comments.find(params[:id])
   end
   
   def update
@@ -36,7 +37,7 @@ class ChallengeCommentsController < ApplicationController
       flash[:notice] = "Successfully updated comment."
       redirect_to challenge_comment_path(@challenge, @challenge_comment)
     else
-      render :action => 'edit'
+      render 'edit'
     end
   end
   
@@ -50,17 +51,17 @@ class ChallengeCommentsController < ApplicationController
   private
 #    nested resource params always challenge_id
     def instantiate_challenge
-      @challenge = Challenge.find(params[:challenge_id])
+      @challenge ||= Challenge.find(params[:challenge_id])
     end
     
     #    only challenger can update/destroy, friends can view
-    def authorize
-      @challenge ||= Challenge.find(params[:challenge_id])
-      @challenge_comment = @challenge.comments.find(params[:id]) if params[:id] # index action case
-      if %w(edit update destroy).include?(action_name)
-        render(:text => 'Unauthorized', :status => 401) unless @challenge_comment.friend == current_friend
-      else
-        render(:text => 'Unauthorized',:status => 401) unless @challenge.friends.include?(current_friend)
-      end
-    end
+#    def authorize
+#      @challenge ||= Challenge.find(params[:challenge_id])
+#      @challenge_comment = @challenge.comments.find(params[:id]) if params[:id] # index action case
+#      if %w(edit update destroy).include?(action_name)
+#        render(:text => 'Unauthorized', :status => 401) unless @challenge_comment.friend == current_friend
+#      else
+#        render(:text => 'Unauthorized',:status => 401) unless @challenge.friends.include?(current_friend)
+#      end
+#    end
 end

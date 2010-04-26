@@ -17,7 +17,16 @@ class ApplicationController < ActionController::Base
   #rescue twitter gem auth errors globally
   rescue_from Twitter::Unauthorized, :with => :twitter_unauthorized
   rescue_from ActionView::MissingTemplate, :with => :mobile_version_missing
-  
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to pages_url(:oops)
+  end
+
+#  override cancan defaults
+  def current_ability
+    @current_ability ||= ChallengeAbility.new(current_friend)
+  end
+
   def boom
     raise 'boom'
   end

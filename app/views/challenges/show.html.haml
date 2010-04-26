@@ -15,7 +15,7 @@
     ~h @challenge.result
   %p
     %strong Winner:
-    =h( @challenge.winner.name ) if @challenge.winner
+    =h( @challenge.winner.try(:name) )
   %p
     %strong Contested?:
     =@challenge.contested? ? 'Yes' : 'No'
@@ -30,7 +30,7 @@
   = link_to 'Edit', edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id))
 %p
   - links = []
-  - links << link_to( "Edit", edit_challenge_path(@challenge) ) if @challenge.challenger == current_friend
+  - links << link_to( "Edit", edit_challenge_path(@challenge) ) if can?(:update, @challenge)
   - links << link_to( "View Comments", challenge_comments_path(@challenge) )
-  - links << link_to( "View All", challenges_path )
+  - links << link_to( "Back", challenges_path )
   = links.join(' | ')

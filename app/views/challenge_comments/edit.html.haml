@@ -3,4 +3,4 @@
 - form_for :challenge_comment, :url => challenge_comment_path(@challenge, @challenge_comment), :html => { :method => :put } do |f|
   = render :partial => 'form', :locals => {:f => f}
 
-%p= link_to "Back to List", challenge_comments_path
+%p= link_to "Back to Comments", challenge_comments_path

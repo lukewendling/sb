@@ -1,6 +1,9 @@
 class ChallengesController < ApplicationController
   before_filter :mash_current_friend_into_params, :only => [:create, :update]
-  before_filter :authorize, :only => [:show, :edit, :update, :destroy]
+#  before_filter :authorize, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_by_hashed_id, :only => [:accept]
+  load_resource :except => ['auto_complete_for_challenge_challenged_email']
+  authorize_resource :except => ['index', 'new', 'create', 'auto_complete_for_challenge_challenged_email']
 
   def index
     where = \
@@ -13,7 +16,7 @@ class ChallengesController < ApplicationController
   end
   
   def show
-    @challenge ||= Challenge.find(params[:id])
+#    @challenge ||= Challenge.find(params[:id])
   end
   
   def new
@@ -27,26 +30,26 @@ class ChallengesController < ApplicationController
   end
   
   def create
-    @challenge = Challenge.new(params[:challenge])
+#    @challenge = Challenge.new(params[:challenge])
     if @challenge.save
       flash[:notice] = "Successfully created challenge."
       redirect_to @challenge
     else
-      render :action => 'new'
+      render 'new'
     end
   end
   
   def edit
-    @challenge ||= Challenge.find(params[:id])
+#    @challenge ||= Challenge.find(params[:id])
   end
   
   def update
-    @challenge ||= Challenge.find(params[:id])
+#    @challenge ||= Challenge.find(params[:id])
     if @challenge.update_attributes(params[:challenge])
       flash[:notice] = "Successfully updated challenge."
       redirect_to @challenge
     else
-      render :action => 'edit'
+      render 'edit'
     end
   end
   
@@ -58,10 +61,10 @@ class ChallengesController < ApplicationController
 #  end
   
   def accept
-    @challenge = Challenge.find_by_hashed_id(params[:id])
-    if @challenge.challenged != current_friend
-      render(:text => 'Unauthorized', :status => 401)
-    end and return
+#    @challenge = Challenge.find_by_hashed_id(params[:id])
+#    if @challenge.challenged != current_friend
+#      raise CanCan::AccessDenied, "Denied, sucka!!"
+#    end
     @challenge.toggle!(:accepted)
     flash[:notice] = "Challenge #{(@challenge.accepted? ? 'accepted!' : 'not accepted')}"
     redirect_to challenges_path
@@ -79,13 +82,16 @@ class ChallengesController < ApplicationController
       params[:challenge][:challenger_id] = current_friend.id
     end
     
-#    only challenger can update/destroy, friends can view
-    def authorize
-      @challenge = Challenge.find(params[:id])
-      if %w(edit update destroy).include?(action_name)
-        render(:text => 'Unauthorized', :status => 401) unless @challenge.challenger == current_friend
-      else
-        render(:text => 'Unauthorized',:status => 401) unless @challenge.friends.include?(current_friend)
-      end
+    def find_by_hashed_id
+      @challenge = Challenge.find_by_hashed_id(params[:id])
     end
+#    only challenger can update/destroy, friends can view
+#    def authorize
+#      @challenge = Challenge.find(params[:id])
+#      if %w(edit update destroy).include?(action_name)
+#        render(:text => 'Unauthorized', :status => 401) unless @challenge.challenger == current_friend
+#      else
+#        render(:text => 'Unauthorized',:status => 401) unless @challenge.friends.include?(current_friend)
+#      end
+#    end
 end

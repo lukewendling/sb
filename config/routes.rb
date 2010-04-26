@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
   map.accept_challenge 'challenge_accepted/:id', :controller => 'challenges', :action => 'accept'
-
+  map.pages 'pages/:action', :controller => 'pages'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products

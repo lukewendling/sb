@@ -15,7 +15,7 @@
 
 %p
   - links = []
-  - links << link_to( "Edit", edit_challenge_comment_path(@challenge, @challenge_comment) ) if @challenge_comment.friend == current_friend
+  - links << link_to( "Edit", edit_challenge_comment_path(@challenge, @challenge_comment) ) if can?(:update, @challenge_comment)
   - links << link_to( "Reply", new_challenge_comment_path(@challenge) )
   - links << link_to( "All Comments", challenge_comments_path )
   - links << link_to( 'Back to Challenge', @challenge )

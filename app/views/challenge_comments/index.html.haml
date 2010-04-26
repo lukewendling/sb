@@ -13,7 +13,7 @@
         %td= time_ago_in_words(challenge_comment.created_at) + ' ago'
         %td= link_to 'Show', challenge_comment_path(challenge_comment.challenge, challenge_comment)
         %td
-          = link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment) ) if challenge_comment.friend == current_friend
+          = link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment) ) if can?(:update, challenge_comment)
 
   = will_paginate @challenge_comments
   

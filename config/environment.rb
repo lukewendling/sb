@@ -7,6 +7,7 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  config.gem 'cancan', :version => '1.1.1'
   config.gem 'javan-whenever',
     :lib => false
   config.gem 'mislav-will_paginate', 
