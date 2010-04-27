@@ -23,13 +23,11 @@ namespace :deploy do
   end
 
   desc "Symlink shared configs and folders on each release."
-  task :symlink_shared do
+  task :symlink_shared, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/app_config.yml #{release_path}/config/app_config.yml"
     run "ln -nfs #{shared_path}/config/consumer.yml #{release_path}/config/consumer.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
-#    can't get smtp auth to work with non-admin accts, so storing credentials in production.rb and symlinking
-    run "ln -nfs #{shared_path}/config/production.rb #{release_path}/config/environments/production.rb"
     run "rm -rf ~/public_html"
     run "ln -nfs #{release_path}/public ~/public_html"
   end
@@ -46,6 +44,11 @@ namespace :deploy do
     # TODO: set env var dynamically for use with future staging env
   end
 
+#  for running multiple apps under 1 shared hosting account (addon domains)
+  desc "Symlink addon apps"
+  task :symlink_addon_apps, :roles => :app do
+    run "ln -s ~/radiant_dev_blog/public/ ~/public_html/lukewendling.com"
+  end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab'
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab', 'deploy:symlink_addon_apps'
