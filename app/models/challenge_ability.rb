@@ -23,6 +23,11 @@ class ChallengeAbility
     can :update, Friend do |friend|
       friend == current_friend
     end
+    
+#    ChallengePreference
+    can [:update, :destroy, :toggle_hidden], ChallengePreference do |pref|
+      pref.friend == current_friend
+    end
   end
 end
 

@@ -1,6 +1,6 @@
 - title "Challenge"
 
-- if @challenge.challenger == current_friend
+- if can?(:update, @challenge)
   - content_for :toolbar do
     = link_to( "Edit", edit_challenge_path(@challenge), :class => 'button' )
 

@@ -1,6 +1,7 @@
 class ChallengePreferencesController < ApplicationController
   before_filter :instantiate_challenge
-  before_filter :authorize
+  authorize_resource
+#  before_filter :authorize
   
 #  def show
 #    @challenge_preference ||= @challenge.preferences.find(params[:id])
@@ -16,7 +17,7 @@ class ChallengePreferencesController < ApplicationController
       flash[:notice] = "Successfully updated preferences."
       redirect_to @challenge
     else
-      render :action => 'edit'
+      render 'edit'
     end
   end
   
@@ -37,12 +38,13 @@ class ChallengePreferencesController < ApplicationController
 #    nested resource params always challenge_id
     def instantiate_challenge
       @challenge = Challenge.find(params[:challenge_id])
+      @challenge_preference = @challenge.preferences.find(params[:id])
     end
     
     #    only current_friend can view or modify
-    def authorize
-      @challenge ||= Challenge.find(params[:challenge_id])
-      @challenge_preference = @challenge.preferences.find(params[:id])
-      render(:text => 'Unauthorized', :status => 401) unless @challenge_preference.friend == current_friend
-    end
+#    def authorize
+#      @challenge ||= Challenge.find(params[:challenge_id])
+#      @challenge_preference = @challenge.preferences.find(params[:id])
+#      render(:text => 'Unauthorized', :status => 401) unless @challenge_preference.friend == current_friend
+#    end
 end

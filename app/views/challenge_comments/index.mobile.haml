@@ -17,5 +17,5 @@
         = time_ago_in_words(challenge_comment.created_at) + ' ago'
         %br
         = link_to 'More ...', challenge_comment_path(challenge_comment.challenge, challenge_comment)
-      - if challenge_comment.friend == current_friend
+      - if can?(:update, challenge_comment)
         %li.arrow= link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment))
