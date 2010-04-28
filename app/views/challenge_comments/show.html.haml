@@ -2,16 +2,16 @@
 
 %p
   %strong To:
-  =h( (@challenge.friends - [@challenge_comment.friend]).first.name )
+  = @challenge.friends - [@challenge_comment.friend]).first.name
 %p
   %strong Challenge:
-  ~h @challenge.event.description
+  ~ @challenge.event.description
 %p
   %strong Prediction:
-  ~h @challenge.prediction  
+  ~ @challenge.prediction  
 %p
   %strong Message:
-  ~h @challenge_comment.content
+  ~ @challenge_comment.content
 
 %p
   - links = []

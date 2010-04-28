@@ -2,29 +2,29 @@
 
 %p
   %strong Challenged:
-  =h @challenge.challenged.name
+  = @challenge.challenged.name
 %p
   %strong Event:
-  ~h @challenge.event.description
+  ~ @challenge.event.description
 %p
   %strong Prediction:
-  ~h @challenge.prediction
+  ~ @challenge.prediction
 - if @challenge.complete?
   %p
     %strong Result:
-    ~h @challenge.result
+    ~ @challenge.result
   %p
     %strong Winner:
-    =h( @challenge.winner.try(:name) )
+    = @challenge.winner.try(:name)
   %p
     %strong Contested?:
-    =@challenge.contested? ? 'Yes' : 'No'
+    = @challenge.contested? ? 'Yes' : 'No'
 %p
   %strong Created:
-  =@challenge.created_at.to_date.to_s(:db)
+  = @challenge.created_at.to_date.to_s(:db)
 %p
   %strong Updated:
-  =@challenge.updated_at.to_date.to_s(:db)
+  = @challenge.updated_at.to_date.to_s(:db)
 %p
   %strong Preferences:
   = link_to 'Edit', edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id))

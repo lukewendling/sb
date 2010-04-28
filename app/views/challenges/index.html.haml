@@ -26,14 +26,14 @@
       - preference = challenge.preferences.detect { |p| p.friend == current_friend}
       %tr
         %td
-          = h( (challenge.friends - [current_friend]).first.name )
+          = challenge.friends - [current_friend]).first.name
           = '*' if challenge.challenger == current_friend
-        %td= link_to h( truncate(challenge.event.description) ), challenge
+        %td= link_to truncate(challenge.event.description), challenge
         %td= time_ago_in_words(challenge.updated_at) + ' ago'
         %td= link_to_if( can?(:accept, challenge), (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
         %td
           - challenge.comments[0..1].each do |c|
-            = link_to truncate(h(c.content), :length => 20), challenge_comment_path(challenge, c)
+            = link_to truncate(c.content, :length => 20), challenge_comment_path(challenge, c)
             %br
         %td
           - if can? :update, challenge

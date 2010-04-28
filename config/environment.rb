@@ -19,10 +19,13 @@ Rails::Initializer.run do |config|
   config.gem 'lockfile',
     :version => '1.4.3'
   config.gem 'haml',
-    :version => '2.0.9'
+    :version => '2.2.24'
   config.gem 'jeremyevans-exception_notification',
     :version => '1.0.20090728',
     :lib => 'exception_notification'
+#  erubis for rails_xss plugin
+  config.gem 'erubis',
+    :version => '2.6.5'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

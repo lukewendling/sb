@@ -6,16 +6,16 @@
 %ul
   %li
     To:
-    =h( (@challenge.friends - [@challenge_comment.friend]).first.name )
+    = @challenge.friends - [@challenge_comment.friend]).first.name
   %li
     Challenge:
-    ~h @challenge.event.description
+    ~ @challenge.event.description
   %li
     Prediction:
-    ~h @challenge.prediction  
+    ~ @challenge.prediction  
   %li
     Message:
-    ~h @challenge_comment.content
+    ~ @challenge_comment.content
   %li.arrow= link_to( "Reply", new_challenge_comment_path(@challenge) )
   
 %ul

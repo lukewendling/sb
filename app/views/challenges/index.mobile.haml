@@ -17,7 +17,7 @@
     %ul
       - for challenge in @challenges
         %li.arrow
-          = h( (challenge.friends - [current_friend]).first.name )
-          = link_to h( truncate(challenge.event.description) ), challenge
+          = challenge.friends - [current_friend]).first.name
+          = link_to truncate(challenge.event.description), challenge
           = time_ago_in_words(challenge.updated_at) + ' ago'
 

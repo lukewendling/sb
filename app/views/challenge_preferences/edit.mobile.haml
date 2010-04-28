@@ -3,7 +3,7 @@
 %ul
   %li
     Challenge:
-    ~h @challenge.event.description
+    ~ @challenge.event.description
   
 - form_for :challenge_preference, :url => challenge_preference_path(@challenge, @challenge_preference), :html => { :method => :put } do |f|
   = render :partial => 'form', :locals => {:f => f}

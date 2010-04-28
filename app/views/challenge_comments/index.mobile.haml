@@ -1,4 +1,4 @@
-- title h(truncate(@challenge.event.description, :length => 20))
+- title truncate(@challenge.event.description, :length => 20)
 
 - content_for :toolbar do
   = link_to "Back to Challenge", @challenge, :class => 'button'
@@ -10,9 +10,9 @@
   %ul
     - for challenge_comment in @challenge_comments
       %li.arrow
-        = h challenge_comment.friend.name
+        = challenge_comment.friend.name
         %br
-        = h truncate(challenge_comment.content, :length => 25)
+        = truncate(challenge_comment.content, :length => 25)
         %br
         = time_ago_in_words(challenge_comment.created_at) + ' ago'
         %br

@@ -8,8 +8,8 @@
       %th When?
     - for challenge_comment in @challenge_comments
       %tr
-        %td= h challenge_comment.friend.name
-        %td= h truncate(challenge_comment.content, :length => 50)
+        %td= challenge_comment.friend.name
+        %td= truncate(challenge_comment.content, :length => 50)
         %td= time_ago_in_words(challenge_comment.created_at) + ' ago'
         %td= link_to 'Show', challenge_comment_path(challenge_comment.challenge, challenge_comment)
         %td

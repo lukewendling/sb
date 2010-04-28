@@ -3,7 +3,7 @@
   
   %head
     %title
-      == ShouldBet.com - #{h(yield(:title) || AppConfig[:title])} - weight loss challenge, fitness challenge, friendly bet, track fitness
+      == ShouldBet.com - #{yield(:title) || AppConfig[:title]} - weight loss challenge, fitness challenge, friendly bet, track fitness
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{:description => "A fun, simple application to create and track fitness and weight loss challenges"}/
     %meta{:keywords => "weight loss challenge, fitness challenge, friendly bet, track fitness"}/
@@ -16,7 +16,7 @@
       - if show_title?
         .toolbar
           = link_to_unless_current("Home", challenges_path, :class => "button leftButton"){"&nbsp;"}
-          %h1=h yield(:title)
+          %h1= yield(:title)
           = yield(:toolbar)
 
       - unless flash.empty?
