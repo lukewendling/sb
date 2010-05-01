@@ -24,7 +24,7 @@ class Challenge < ActiveRecord::Base
   def before_validation
     super
     unless challenger.contacts.map(&:id).uniq.include?(challenged_id)
-      errors.add_to_base "Recipient email address not found. You must first <a href='/invitations/new'>invite a friend</a> before sending a challenge."
+      errors.add_to_base "Recipient email address not found. You must first <a href='/invitations/new'>invite a friend</a> before sending a challenge.".html_safe!
       return false
     end
   end

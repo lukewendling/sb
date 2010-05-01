@@ -2,7 +2,7 @@
 
 %p
   %strong To:
-  = @challenge.friends - [@challenge_comment.friend]).first.name
+  = (@challenge.friends - [@challenge_comment.friend]).first.name
 %p
   %strong Challenge:
   ~ @challenge.event.description
@@ -19,4 +19,4 @@
   - links << link_to( "Reply", new_challenge_comment_path(@challenge) )
   - links << link_to( "All Comments", challenge_comments_path )
   - links << link_to( 'Back to Challenge', @challenge )
-  = links.join(' | ')
+  = links.join(' | ').html_safe!

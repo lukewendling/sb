@@ -33,4 +33,4 @@
   - links << link_to( "Edit", edit_challenge_path(@challenge) ) if can?(:update, @challenge)
   - links << link_to( "View Comments", challenge_comments_path(@challenge) )
   - links << link_to( "Back", challenges_path )
-  = links.join(' | ')
+  = links.join(' | ').html_safe!

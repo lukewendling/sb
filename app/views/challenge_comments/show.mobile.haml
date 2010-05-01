@@ -6,7 +6,7 @@
 %ul
   %li
     To:
-    = @challenge.friends - [@challenge_comment.friend]).first.name
+    = (@challenge.friends - [@challenge_comment.friend]).first.name
   %li
     Challenge:
     ~ @challenge.event.description

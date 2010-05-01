@@ -15,7 +15,7 @@
     #home.current
       - if show_title?
         .toolbar
-          = link_to_unless_current("Home", challenges_path, :class => "button leftButton"){"&nbsp;"}
+          = link_to_unless_current("Home", challenges_path, :class => "button leftButton"){"&nbsp;".html_safe!}
           %h1= yield(:title)
           = yield(:toolbar)
 

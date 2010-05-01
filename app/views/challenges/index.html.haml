@@ -1,8 +1,8 @@
-- title "#{h(current_friend.name)}'s Challenges", false
+- title "#{current_friend.name}'s Challenges", false
 
 %h1
   = image_tag current_friend.twitter_profile_image_url
-  = "#{h(current_friend.name)}'s Challenges"
+  = "#{current_friend.name}'s Challenges"
 
 - if current_friend.contacts.empty?
   %p
@@ -26,8 +26,7 @@
       - preference = challenge.preferences.detect { |p| p.friend == current_friend}
       %tr
         %td
-          = challenge.friends - [current_friend]).first.name
-          = '*' if challenge.challenger == current_friend
+          = (challenge.friends - [current_friend]).first.name
         %td= link_to truncate(challenge.event.description), challenge
         %td= time_ago_in_words(challenge.updated_at) + ' ago'
         %td= link_to_if( can?(:accept, challenge), (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
