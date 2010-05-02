@@ -30,6 +30,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
     run "rm -rf ~/public_html"
     run "ln -nfs #{release_path}/public ~/public_html"
+    run "ln -nfs #{shared_path}/config/.rvmrc #{release_path}/.rvmrc"
   end
 
   desc "Update the crontab file"

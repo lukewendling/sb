@@ -22,7 +22,7 @@
 set :cron_log, "/home/lukewen/shouldbet/current/log/cron.log"
 
 # fetch mail routine
-every 15.minutes do
+every 60.minutes do
   runner "/home/lukewen/shouldbet/current/script/fetch_mail"
 end
 
@@ -32,6 +32,6 @@ every 1.day, :at => "6am" do
 end
 
 #batch mailer
-every 5.minutes do
+every 15.minutes do
   runner "/home/lukewen/shouldbet/current/script/batch_mail"
 end
