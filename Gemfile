@@ -9,6 +9,7 @@ gem 'twitter', '0.6.6'
 gem 'lockfile', '1.4.3'
 gem 'haml', '2.2.24'
 gem 'jeremyevans-exception_notification', '1.0.20090728', :require => 'exception_notification'
+gem 'erubis', '2.6.5' # for rails_xss plugin
 
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
