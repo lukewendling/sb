@@ -7,25 +7,25 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'cancan', :version => '1.1.1'
-  config.gem 'javan-whenever',
-    :lib => false
-  config.gem 'mislav-will_paginate', 
-    :lib => 'will_paginate',
-    :version => '2.3.11'
-  config.gem 'twitter',
-    :lib => 'twitter',
-    :version => '0.6.6'
-  config.gem 'lockfile',
-    :version => '1.4.3'
-  config.gem 'haml',
-    :version => '2.0.9'
-  config.gem 'jeremyevans-exception_notification',
-    :version => '1.0.20090728',
-    :lib => 'exception_notification'
-#  erubis for rails_xss plugin
-  config.gem 'erubis',
-    :version => '2.6.5'
+#  config.gem 'cancan', :version => '1.1.1'
+#  config.gem 'javan-whenever',
+#    :lib => false
+#  config.gem 'mislav-will_paginate', 
+#    :lib => 'will_paginate',
+#    :version => '2.3.11'
+#  config.gem 'twitter',
+#    :lib => 'twitter',
+#    :version => '0.6.6'
+#  config.gem 'lockfile',
+#    :version => '1.4.3'
+#  config.gem 'haml',
+#    :version => '2.0.9'
+#  config.gem 'jeremyevans-exception_notification',
+#    :version => '1.0.20090728',
+#    :lib => 'exception_notification'
+##  erubis for rails_xss plugin
+#  config.gem 'erubis',
+#    :version => '2.6.5'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

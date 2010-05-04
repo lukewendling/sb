@@ -50,6 +50,11 @@ namespace :deploy do
   task :symlink_addon_apps, :roles => :app do
     run "ln -s ~/radiant_dev_blog/public/ ~/public_html/lukewendling.com"
   end
+  
+  desc "Use bundled gems"
+  task :bundle_new_release, :roles => :app do
+    run "cd #{release_path} && bundle install"
+  end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab', 'deploy:symlink_addon_apps'
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab', 'deploy:symlink_addon_apps', 'deploy:bundle_new_release'
