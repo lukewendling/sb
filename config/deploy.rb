@@ -53,7 +53,7 @@ namespace :deploy do
   
   desc "Use bundled gems"
   task :bundle_new_release, :roles => :app do
-    run "cd #{release_path} && export PATH=$PATH:$HOME/ruby/gems/bin && bundle install --without development test"
+    run "cd #{release_path} && bundle install"
   end
 end
 
