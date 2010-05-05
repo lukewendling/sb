@@ -36,13 +36,6 @@ module Rails
   class Boot
     def run
       load_initializer
-      
-      Rails::Initializer.class_eval do
-        def load_gems
-          @bundler_loaded ||= Bundler.require :default, Rails.env
-        end
-      end
-
       Rails::Initializer.run(:set_load_path)
     end
   end
@@ -110,6 +103,21 @@ module Rails
           File.read("#{RAILS_ROOT}/config/environment.rb")
         end
     end
+  end
+end
+
+#Bundler override for Rails 2.3.5 (http://gembundler.com/rails23.html)
+class Rails::Boot
+  def run
+    load_initializer
+
+    Rails::Initializer.class_eval do
+      def load_gems
+        @bundler_loaded ||= Bundler.require :default, Rails.env
+      end
+    end
+
+    Rails::Initializer.run(:set_load_path)
   end
 end
 
