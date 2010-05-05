@@ -11,6 +11,8 @@ gem 'haml', '2.2.24'
 gem 'jeremyevans-exception_notification', '1.0.20090728', :require => 'exception_notification'
 gem 'erubis', '2.6.5' # for rails_xss plugin
 gem 'cancan', '1.1.1'
+gem 'bundler', '0.9.25'
+gem 'pg', '0.9.0'
 
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
