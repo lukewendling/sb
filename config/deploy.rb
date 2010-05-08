@@ -8,7 +8,7 @@ set :use_sudo, false
 default_run_options[:pty] = true
 
 set :scm, "git"
-set :repository, "#{user}@#{domain}:~/git/shouldbet.git"
+set :repository, "git@github.com:lukewendling/sb.git"
 set :branch, "master"
 
 namespace :deploy do
