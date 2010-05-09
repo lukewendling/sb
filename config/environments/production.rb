@@ -1,3 +1,9 @@
+##
+# this file is overwritten in deployment to prevent storing smtp passwords in scm
+##
+
+
+
 # Settings specified here will take precedence over those in config/environment.rb
 
 # The production environment is meant for finished, "live" apps.

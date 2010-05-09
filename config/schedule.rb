@@ -19,11 +19,11 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :cron_log, "/home/lukewen/shouldbet/current/log/cron.log"
+set :cron_log, "/home/shouldbe/shouldbet/current/log/cron.log"
 
 # fetch mail routine
-every 60.minutes do
-  runner "/home/lukewen/shouldbet/current/script/fetch_mail"
+every 30.minutes do
+  runner "/home/shouldbe/shouldbet/current/script/fetch_mail"
 end
 
 # test outgoing email
@@ -32,6 +32,6 @@ every 1.day, :at => "6am" do
 end
 
 #batch mailer
-every 15.minutes do
-  runner "/home/lukewen/shouldbet/current/script/batch_mail"
+every 10.minutes do
+  runner "/home/shouldbe/shouldbet/current/script/batch_mail"
 end

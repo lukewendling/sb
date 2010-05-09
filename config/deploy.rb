@@ -2,14 +2,16 @@ set :application, "shouldbet"
 set :domain, "shouldbet.com"
 server domain, :app, :web, :db, :primary => true
 
-set :user, "lukewen"
+set :user, "shouldbe"
 set :deploy_to, "~/#{application}"
 set :use_sudo, false
-default_run_options[:pty] = true
+
+default_run_options[:pty] = true # required by github
 
 set :scm, "git"
-set :repository, "git@github.com:lukewendling/sb.git"
+set :repository, "git@github.com:lukewendling/sb.git" # use read-write access to allow commits from deploy server
 set :branch, "master"
+set :deploy_via, :remote_cache # don't clone entire repo
 
 namespace :deploy do
   desc "Restarting Passenger with restart.txt"
@@ -28,9 +30,11 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/app_config.yml #{release_path}/config/app_config.yml"
     run "ln -nfs #{shared_path}/config/consumer.yml #{release_path}/config/consumer.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
+    run "ln -nfs #{shared_path}/config/.htaccess #{release_path}/public/.htaccess"
+    run "rm #{release_path}/config/environments/production.rb && ln -nfs #{shared_path}/config/production.rb #{release_path}/config/environments/production.rb"
     run "rm -rf ~/public_html"
     run "ln -nfs #{release_path}/public ~/public_html"
-    run "rm -rf #{release_path}/.rvmrc && ln -nfs #{shared_path}/config/.rvmrc #{release_path}/.rvmrc"
+#    run "rm -rf #{release_path}/.rvmrc && ln -nfs #{shared_path}/config/.rvmrc #{release_path}/.rvmrc"
   end
 
   desc "Update the crontab file"
@@ -41,15 +45,15 @@ namespace :deploy do
 #    3. read "http://www.hostingrails.com/wiki/2/Install-and-freeze-your-own-RubyGems" for a primer. i also googled 'installing gems shared host' for some ideas.
 
 #    change to --update-crontab to keep existing entries -- although this seems to create dupe entries
-    run "cd #{release_path} && export PATH=$PATH:$HOME/ruby/gems/bin && whenever --write-crontab #{application} --set environment=production"
+    run "cd #{release_path} && whenever --write-crontab #{application} --set environment=production"
     # TODO: set env var dynamically for use with future staging env
   end
 
 #  for running multiple apps under 1 shared hosting account (addon domains)
-  desc "Symlink addon apps"
-  task :symlink_addon_apps, :roles => :app do
-    run "ln -s ~/radiant_dev_blog/public/ ~/public_html/lukewendling.com"
-  end
+#  desc "Symlink addon apps"
+#  task :symlink_addon_apps, :roles => :app do
+#    run "ln -s ~/radiant_dev_blog/public/ ~/public_html/lukewendling.com"
+#  end
   
   desc "Use bundled gems"
   task :bundle_new_release, :roles => :app do
@@ -57,4 +61,4 @@ namespace :deploy do
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab', 'deploy:symlink_addon_apps', 'deploy:bundle_new_release'
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab', 'deploy:bundle_new_release' #'deploy:symlink_addon_apps'
