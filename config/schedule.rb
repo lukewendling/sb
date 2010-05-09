@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :cron_log, "/home/shouldbe/shouldbet/current/log/cron.log"
+set :cron_log, "/home/shouldbe/shouldbet/shared/log/cron.log"
 
 # fetch mail routine
 every 30.minutes do
@@ -28,7 +28,7 @@ end
 
 # test outgoing email
 every 1.day, :at => "6am" do
-  runner "InvitationMailer.deliver_invite_complete(Invitation.find(8))"
+  runner "InvitationMailer.deliver_invite_complete(Invitation.find(2))"
 end
 
 #batch mailer
