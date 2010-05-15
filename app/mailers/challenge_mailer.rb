@@ -7,7 +7,10 @@ class ChallengeMailer < ApplicationMailer
     sent_on    Time.now
     content_type "text/plain"
 
-    body       :challenge => challenge
+    shorty = ShortUrl.new(AppConfig[:bitly_username], AppConfig[:bitly_key])
+    long_url = accept_challenge_url(challenge.hashed_id)
+    fun_url = shorty.shorten(long_url).short_url rescue long_url
+    body       :challenge => challenge, :fun_url => fun_url
   end
 
   def update(challenge)
