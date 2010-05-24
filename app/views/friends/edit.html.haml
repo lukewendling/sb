@@ -1,36 +1,17 @@
 - title "Edit Account"
 
-- form_for @friend do |f|
+- semantic_form_for @friend do |f|
   = f.error_messages
-
-  %p
-    = f.label :username
-    %br
-    = f.text_field :username
-  %p
-    = f.label :name, 'Full name'
-    %br
-    = f.text_field :name
-  %p
-    = f.label :email, "Email Address"
-    %br
-    = f.text_field :email
-  %p
-    = f.label :password
-    %br
-    = f.password_field :password, :value => ''
-    %small Leave blank unless you want to change your password
-  %p
-    = f.label :password_confirmation, "Confirm Password"
-    %br
-    = f.password_field :password_confirmation
-  %p
-    = f.label :show_hidden_challenges
-    %br
-    = f.check_box :show_hidden_challenges
-  %p
-    = f.submit "Update"
-    
+  - f.inputs do
+    = f.input :name, :label => 'Full name'
+    = f.input :username
+    = f.input :email
+    = f.input :password, :hint => 'Leave blank unless you want to change your password', :input_html => {:size => 10}
+    = f.input :password_confirmation, :input_html => {:size => 10}
+    = f.input :show_hidden_challenges, :required => false, :as => :radio
+  - f.buttons do
+    = f.commit_button 'Update'
+  
 - if @friend.can_tweet?
   %h3 Tweeting as...
   %p

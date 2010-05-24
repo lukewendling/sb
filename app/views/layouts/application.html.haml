@@ -7,7 +7,7 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{:description => "A fun, simple application to create and track fitness and weight loss challenges"}/
     %meta{:keywords => "weight loss challenge, fitness challenge, friendly bet, track fitness"}/
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'application', 'formtastic', 'formtastic_changes', :cache => true
     = javascript_include_tag :defaults, :cache => true
     = yield(:head)
   
