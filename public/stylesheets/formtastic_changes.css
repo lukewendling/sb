@@ -23,11 +23,11 @@ form.formtastic fieldset > ol > li label { width:20% }
 
 /* NESTED FIELDSETS AND LEGENDS (radio, check boxes and date/time inputs use nested fieldsets)
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li fieldset ol { padding:0 0 0 25%; }
+form.formtastic fieldset > ol > li fieldset ol { padding:0 0 0 20%; }
 
 /* INLINE HINTS
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li p.inline-hints { margin:0.5em 0 0 20%; }
+form.formtastic fieldset > ol > li p.inline-hints { margin:0.5em 0 0 20%; font-size:.8em}
 
 /* INLINE ERRORS
 --------------------------------------------------------------------------------------------------*/
