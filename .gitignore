@@ -3,5 +3,4 @@ tmp/**/*
 config/app_config.yml
 config/consumer.yml
 db/*.sqlite3
-vendor/bundle/gems/**/*
-.bundle/environment.rb
+.bundle/**/*
