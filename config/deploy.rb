@@ -45,7 +45,7 @@ namespace :deploy do
 #    3. read "http://www.hostingrails.com/wiki/2/Install-and-freeze-your-own-RubyGems" for a primer. i also googled 'installing gems shared host' for some ideas.
 
 #    change to --update-crontab to keep existing entries -- although this seems to create dupe entries
-    run "cd #{release_path} && whenever --write-crontab #{application} --set environment=production"
+    run "cd #{release_path} && bundle exec whenever --write-crontab #{application} --set environment=production"
     # TODO: set env var dynamically for use with future staging env
   end
 
@@ -61,4 +61,4 @@ namespace :deploy do
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab', 'deploy:bundle_new_release' #'deploy:symlink_addon_apps'
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:bundle_new_release', 'deploy:update_crontab' #'deploy:symlink_addon_apps'
