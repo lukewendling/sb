@@ -18,3 +18,6 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
+if $0 == "irb"
+  config.logger = Logger.new(STDOUT)
+end
