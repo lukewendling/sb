@@ -15,35 +15,45 @@
     = link_to 'my contacts', contact_list_friend_path(current_friend)
 
 - unless @challenges.empty?
-  %table
-    %tr
-      %th Friend
-      %th Event
-      %th Updated
-      %th Accepted?
-      %th Recent comments
-    - for challenge in @challenges
-      - preference = challenge.preferences.detect { |p| p.friend == current_friend}
+  - for challenge in @challenges
+    - the_friend = (challenge.friends - [current_friend]).first
+    - preference = challenge.preferences.detect { |p| p.friend == current_friend}
+    %table{:style => "width:100%; background-color:#{cycle('#fff', '#eee')}"}
+      %tr
+        %td{:style => 'width:60px'}= image_tag the_friend.twitter_profile_image_url
+        %td== #{the_friend.name} (#{the_friend.twitter_screen_name})
+        %td
+          - if can?(:accept, challenge)
+            Accepted?&nbsp;&nbsp;
+            = link_to( (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off')
       %tr
         %td
-          = (challenge.friends - [current_friend]).first.name
-        %td= link_to truncate(challenge.event.description), challenge
-        %td= time_ago_in_words(challenge.updated_at) + ' ago'
-        %td= link_to_if( can?(:accept, challenge), (challenge.accepted? ? 'Yes' : 'No'), accept_challenge_path(challenge.hashed_id), :title => 'Click to toggle on/off' )
+        %td{:colspan => 2}= link_to truncate(challenge.event.description), challenge
+      %tr
         %td
-          - challenge.comments[0..1].each do |c|
-            = link_to truncate(c.content, :length => 20), challenge_comment_path(challenge, c)
+        %td{:colspan => 2}== Updated #{time_ago_in_words(challenge.updated_at)} ago
+      %tr
+        %td
+        %td{:colspan => 2}
+          - challenge.comments[0..3].each do |c|
+            = link_to truncate(c.content, :length => 40), challenge_comment_path(challenge, c)
             %br
+          - if challenge.comments.empty?
+            = link_to 'Be the first to comment >>', challenge_comments_path(challenge)
+          - elsif challenge.comments.size > 0
+            = link_to 'See All Comments >>', challenge_comments_path(challenge)
+      %tr
         %td
+        %td{:colspan => 2}
           - if can? :update, challenge
-            = link_to 'Edit', edit_challenge_path(challenge)
+            = link_to 'Edit challenge', edit_challenge_path(challenge)
+            |
           - else
-            %span.disabled Edit
-        %td= link_to 'All Comments', challenge_comments_path(challenge)
-        %td
+            %span.disabled Edit challenge
+            |
           - if preference.hidden?
-            = link_to 'Unhide', toggle_hidden_challenge_preference_path(challenge, preference), :method => 'put'
+            = link_to 'Unhide challenge', toggle_hidden_challenge_preference_path(challenge, preference), :method => 'put'
           - else
-            = link_to 'Hide', toggle_hidden_challenge_preference_path(challenge, preference), :method => 'put', :confirm => "Hide this challenge from view? You can later view hidden challenges by updating your settings in My Account."
+            = link_to 'Hide challenge', toggle_hidden_challenge_preference_path(challenge, preference), :method => 'put', :confirm => "Hide this challenge from view? You can later view hidden challenges by updating your settings in My Account."
 
   = will_paginate @challenges
