@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "shouldbet"
 set :domain, "shouldbet.com"
 server domain, :app, :web, :db, :primary => true
@@ -55,10 +57,10 @@ namespace :deploy do
 #    run "ln -s ~/radiant_dev_blog/public/ ~/public_html/lukewendling.com"
 #  end
   
-  desc "Use bundled gems"
-  task :bundle_new_release, :roles => :app do
-    run "cd #{release_path} && export PATH=$PATH:$HOME/ruby/gems/bin && bundle install --deployment --without development test"
-  end
+#  desc "Use bundled gems"
+#  task :bundle_new_release, :roles => :app do
+#    run "cd #{release_path} && export PATH=$PATH:$HOME/ruby/gems/bin && bundle install --deployment --without development test"
+#  end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:bundle_new_release', 'deploy:update_crontab' #'deploy:symlink_addon_apps'
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:update_crontab' #'deploy:bundle_new_release', 'deploy:symlink_addon_apps'

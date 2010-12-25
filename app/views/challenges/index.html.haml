@@ -31,17 +31,19 @@
         %td{:colspan => 2}= link_to truncate(challenge.event.description), challenge
       %tr
         %td
-        %td{:colspan => 2}== Updated #{time_ago_in_words(challenge.updated_at)} ago
+        %td{:colspan => 2}
+          %small
+            %em== Updated #{time_ago_in_words(challenge.updated_at)} ago
       %tr
         %td
         %td{:colspan => 2}
           - challenge.comments[0..3].each do |c|
             = link_to truncate(c.content, :length => 40), challenge_comment_path(challenge, c)
             %br
-          - if challenge.comments.empty?
-            = link_to 'Be the first to comment >>', challenge_comments_path(challenge)
-          - elsif challenge.comments.size > 0
-            = link_to 'See All Comments >>', challenge_comments_path(challenge)
+          = link_to 'Add a comment >>', new_challenge_comment_path(challenge)
+          - unless challenge.comments.empty?
+            |
+            = link_to 'All comments >>', challenge_comments_path(challenge)
       %tr
         %td
         %td{:colspan => 2}

@@ -1,19 +1,23 @@
-- title "Comments for #{h truncate(@challenge.event.description, :length => 20)}"
+- title "Comments for #{truncate(@challenge.event.description, :length => 20)}"
 
 - unless @challenge_comments.empty?
-  %table
-    %tr
-      %th By
-      %th Message
-      %th When?
-    - for challenge_comment in @challenge_comments
+  - for challenge_comment in @challenge_comments
+    %table{:style => "width:100%; background-color:#{cycle('#fff', '#eee')}"}
       %tr
-        %td= challenge_comment.friend.name
-        %td= truncate(challenge_comment.content, :length => 50)
-        %td= time_ago_in_words(challenge_comment.created_at) + ' ago'
-        %td= link_to 'Show', challenge_comment_path(challenge_comment.challenge, challenge_comment)
-        %td
-          = link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment) ) if can?(:update, challenge_comment)
+        %td{:style => 'width:60px'}= image_tag challenge_comment.friend.twitter_profile_image_url
+        %td== #{challenge_comment.friend.name} (#{challenge_comment.friend.twitter_screen_name})
+      %tr
+        %td{:colspan => 2}
+          %small
+            %em== Updated #{time_ago_in_words(challenge_comment.created_at)} ago
+      %tr
+        %td{:colspan => 2}= truncate(challenge_comment.content, :length => 50)
+      %tr
+        %td{:colspan => 2}
+          = link_to 'Show', challenge_comment_path(challenge_comment.challenge, challenge_comment)
+          - if can?(:update, challenge_comment)
+            |
+            = link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment) )
 
   = will_paginate @challenge_comments
   
