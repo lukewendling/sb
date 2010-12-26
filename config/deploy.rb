@@ -14,6 +14,7 @@ set :scm, "git"
 set :repository, "git@github.com:lukewendling/sb.git" # use read-write access to allow commits from deploy server
 set :branch, "master"
 set :deploy_via, :remote_cache # don't clone entire repo
+set :bundle_flags,       "--deployment" # --quiet
 
 namespace :deploy do
   desc "Restarting Passenger with restart.txt"
