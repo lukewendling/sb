@@ -40,7 +40,7 @@ class Challenge < ActiveRecord::Base
     friends.each{ |f| preferences.create(:friend => f) }
     @new_challenge = true # flag to halt update notification
     ChallengeMailer.deliver_the_challenge(self)
-    challenger.client.update("#{AppConfig[:domain]} challenge issued to #{challenged.twitter_screen_name}: \"#{prediction}\"")
+    challenger.client.update("#{AppConfig[:domain]} challenge for #{challenged.twitter_screen_name}: \"#{prediction}\""[0,140])
   end
   
   def after_save
