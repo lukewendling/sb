@@ -47,7 +47,7 @@ class Challenge < ActiveRecord::Base
     super
     unless @new_challenge
       ChallengeMailer.deliver_update(self)
-      challenger.client.update("#{AppConfig[:domain]} challenge update: (#{challenged.twitter_screen_name}) \"#{prediction}\"")
+      challenger.client.update("#{AppConfig[:domain]} update: (#{challenged.twitter_screen_name}) \"#{prediction}\""[0,140])
 #      challenged.client.update("#{AppConfig[:domain]} challenge update: (#{challenger.twitter_screen_name}) \"#{prediction}\"")
     end
   end
