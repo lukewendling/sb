@@ -4,6 +4,12 @@ class ChallengeCommentTest < ActiveSupport::TestCase
   should_belong_to :challenge, :friend
   should_validate_presence_of :challenge, :friend, :content
   
+  should "have valid scopes" do
+    assert_nothing_raised do
+      ChallengeComment.date_sorted
+    end
+  end
+  
   def setup
     @challenge = challenges(:linwood_to_luke)
     @comment = @challenge.comments.first

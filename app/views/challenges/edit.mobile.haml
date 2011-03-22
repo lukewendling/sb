@@ -1,3 +1,5 @@
-- title "Edit Challenge"
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Edit Challenge
 
 = render :partial => 'form'

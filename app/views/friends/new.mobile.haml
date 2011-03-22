@@ -1,7 +1,10 @@
-- title "Sign up"
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Sign Up
 
-%ul
-  %li.arrow== Already have an account? #{link_to "Log in", login_path}
+#log_in
+  Already have an account?
+  = link_to "Log in", login_path, "data-role" => :button
 
 - form_for @friend do |f|
   - unless f.error_messages.empty?
@@ -10,29 +13,23 @@
 
   = f.hidden_field :invitation_token, :value => params[:invitation_token]
   
-  %ul.rounded
-    %li
-      = f.label :username
-      %br
-      = f.text_field :username
-    %li
-      = f.label :name, 'Full name'
-      %br
-      = f.text_field :name
-    %li
-      = f.label :email, "Email Address"
-      %br
-      = f.text_field :email
-    %li
-      = f.label :password
-      %br
-      = f.password_field :password
-    %li
-      = f.label :password_confirmation, "Confirm Password"
-      %br
-      = f.password_field :password_confirmation
-    %li
-      = f.check_box :terms_of_use
-      = f.label :terms_of_use, "I agree to the #{link_to 'terms of use', '/terms.html'}"
+  .form_field{"data-role" => :fieldcontain}
+    = f.label :username
+    = f.text_field :username
+  .form_field{"data-role" => :fieldcontain}
+    = f.label :name, 'Full name'
+    = f.text_field :name
+  .form_field{"data-role" => :fieldcontain}
+    = f.label :email, "Email Address"
+    = f.text_field :email, :type => :email
+  .form_field{"data-role" => :fieldcontain}
+    = f.label :password
+    = f.password_field :password, :type => :password
+  .form_field{"data-role" => :fieldcontain}
+    = f.label :password_confirmation, "Confirm Password"
+    = f.password_field :password_confirmation, :type => :password
+  .form_field{"data-role" => :fieldcontain}
+    = f.check_box :terms_of_use
+    = f.label :terms_of_use, "I agree to the #{link_to 'terms of use', '/terms.html'}"
 
-  = link_to "Submit", nil, :class => "whiteButton submit"
+  = submit_tag 'Save', "data-icon" => :check, "data-theme" => :b

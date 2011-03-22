@@ -1,8 +1,4 @@
-- if logged_in?
-  .plastic
-    %ul
-      %li.arrow= link_to('Log out', logout_path)
-    
-.plastic
-  %ul
-    %li= link_to( "Web version", root_url(:mobile => 0), :rel => "external")
+%div{"data-role" => :controlgroup}
+  - if logged_in?
+    = link_to "Log out", logout_path, "data-role" => :button, "data-theme" => :d
+  = link_to "Old School", toggle_mobile_path, :rel => "external", "data-role" => :button, "data-theme" => :e

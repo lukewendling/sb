@@ -1,12 +1,12 @@
-- title 'My Contacts'
-- contact_links = current_friend.contacts.map{|c| link_to "#{c.name} (#{c.email})", new_challenge_path(:recipient_id => c.hashed_id)}
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 My Contacts
 
-%ul
-  %li.arrow
-    = link_to 'Invite a friend', new_invitation_path
+#new_invite
+  = link_to 'Invite a friend', new_invitation_path, "data-role" => :button, "data-icon" => "arrow-r", "data-iconpos" => :right
 
-- unless contact_links.empty?
-  .info Select a friend to challenge
-  %ul
-    - contact_links.each do |link|
-      %li= link
+- unless current_friend.contacts.empty?
+  #contacts
+    %h3 Select a friend to challenge
+    - current_friend.contacts.each do |contact|
+      = link_to "#{contact.name} (#{contact.email})", new_challenge_path(:recipient_id => contact.hashed_id), "data-role" => :button

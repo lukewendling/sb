@@ -2,15 +2,13 @@
   .info
     = f.error_messages
 /
-  %p
+  .form_field{"data-role" => :fieldcontain}
     = f.label :flagged, 'Flag?'
-    %br
-    = f.check_box :flagged
+    = f.select :flagged, options_for_select([["No", "0"],["Yes", "1"]]), {}, "data-role" => :slider
     %small Keep this challenge near the top of my challenges list
-%ul.rounded
-  %li
-    = f.label :hidden, 'Hide?'
-    %br
-    = f.check_box :hidden
 
-= link_to "Submit", nil, :class => "whiteButton submit"
+.form_field{"data-role" => :fieldcontain}
+  = f.label :hidden, 'Hide?'
+  = f.select :hidden, options_for_select([["No", "0"],["Yes", "1"]]), {}, "data-role" => :slider
+
+= submit_tag "Save", "data-icon" => :check, "data-theme" => :b

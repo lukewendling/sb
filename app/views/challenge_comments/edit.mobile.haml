@@ -1,5 +1,6 @@
-- title "Edit Comment"
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Edit Comment
 
 - form_for :challenge_comment, :url => challenge_comment_path(@challenge, @challenge_comment), :html => { :method => :put } do |f|
   = render :partial => 'form', :locals => {:f => f}
-

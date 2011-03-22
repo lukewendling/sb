@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.id)
   map.accept_challenge 'challenge_accepted/:id', :controller => 'challenges', :action => 'accept'
   map.pages 'pages/:action', :controller => 'pages'
+  map.toggle_mobile 'toggle_mobile', :controller => 'sessions', :action => 'toggle_mobile_rendering'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
@@ -52,7 +53,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => "sessions", :action => "new"
-
+   
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

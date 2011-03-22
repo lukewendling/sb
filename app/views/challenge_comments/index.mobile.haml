@@ -1,21 +1,24 @@
-- title truncate(@challenge.event.description, :length => 20)
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Comments
+    = link_to "New", new_challenge_comment_path(@challenge), :class => "ui-btn-right", "data-theme" => :b, "data-icon" => :plus
 
-- content_for :toolbar do
-  = link_to "Back to Challenge", @challenge, :class => 'button'
+.links{"data-role" => :controlgroup}
+  = link_to 'Back to Challenge', @challenge, "data-role" => :button
 
-%ul
-  %li.arrow= link_to "New Comment", new_challenge_comment_path(@challenge)
-  
 - unless @challenge_comments.empty?
-  %ul
+  %ul{"data-role" => :listview}
     - for challenge_comment in @challenge_comments
-      %li.arrow
-        = challenge_comment.friend.name
-        %br
-        = truncate(challenge_comment.content, :length => 25)
-        %br
-        = time_ago_in_words(challenge_comment.created_at) + ' ago'
-        %br
-        = link_to 'More ...', challenge_comment_path(challenge_comment.challenge, challenge_comment)
-      - if can?(:update, challenge_comment)
-        %li.arrow= link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment))
+      %li
+        %h3
+          = challenge_comment.friend.name
+        %p
+          = truncate(challenge_comment.content, :length => 25)
+        %p
+          %small
+            = time_ago_in_words(challenge_comment.created_at) + ' ago'
+        %p
+          = link_to 'More ...', challenge_comment_path(challenge_comment.challenge, challenge_comment)
+        - if can?(:update, challenge_comment)
+          = link_to 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment)
+

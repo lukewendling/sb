@@ -1,14 +1,14 @@
-- title "Reset Password"
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Reset Password
 
 - form_for @forgot_password do |f|
   - unless f.error_messages.empty?
     .info
       = f.error_messages
       
-  %ul.rounded
-    %li
-      = f.label :email
-      %br
-      = f.text_field :email
+  .form_field{"data-role" => :fieldcontain}
+    = f.label :email
+    = f.text_field :email, :type => :email
   
-  = link_to "Reset my password", nil, :class => "whiteButton submit"
+  = submit_tag "Reset my password", "data-icon" => "arrow-r", "data-iconpos" => :right, "data-theme" => :b

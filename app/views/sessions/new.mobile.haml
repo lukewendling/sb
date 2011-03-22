@@ -1,17 +1,16 @@
-- title "Challenge your friends..."
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Challenge your friends...
 
 - form_tag sessions_path, :id => 'login_form' do
-  %ul.rounded
-    %li
-      = label_tag :login, "Username or Email Address"
-      %br
-      = text_field_tag :login, params[:login]
-    %li
-      = label_tag :password
-      %br
-      = password_field_tag :password
+  .form_field{"data-role" => :fieldcontain}
+    = label_tag :login, "Username or Email Address"
+    = text_field_tag :login, params[:login], :type => :email
+  .form_field{"data-role" => :fieldcontain}
+    = label_tag :password
+    = password_field_tag :password, '', :type => :password
 
-  = link_to "Submit", nil, :class => "whiteButton submit"
-  
-%ul
-  %li.arrow= link_to 'Forgot password?', new_forgot_password_path, :tabindex => 999
+  #forgot_password
+    = link_to 'Forgot password?', new_forgot_password_path
+
+  = submit_tag 'Log In', "data-icon" => "arrow-r", "data-iconpos" => :right, "data-theme" => :b

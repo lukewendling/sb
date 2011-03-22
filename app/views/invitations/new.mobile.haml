@@ -1,13 +1,14 @@
-- title 'Invite a friend'
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Invite a friend
 
 - form_for @invitation do |f|
   - unless f.error_messages.empty?
     .info
       = f.error_messages
-  %ul.rounded
-    %li
-      = f.label :recipient_email, "Friend's email address"
-      %br
-      = f.text_field :recipient_email
+
+  .form_field{"data-role" => :fieldcontain}
+    = f.label :recipient_email, "Friend's email address"
+    = f.text_field :recipient_email, :type => :email
     
-  = link_to "Submit", nil, :class => "whiteButton submit"
+  = submit_tag "Invite", "data-icon" => "arrow-r", "data-iconpos" => :right, "data-theme" => :b

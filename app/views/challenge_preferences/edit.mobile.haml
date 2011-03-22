@@ -1,9 +1,10 @@
-- title "Edit Preferences"
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Preferences
 
-%ul
-  %li
-    Challenge:
-    ~ @challenge.event.description
+%h3
+  Challenge:
+  = truncate(@challenge.event.description)
   
 - form_for :challenge_preference, :url => challenge_preference_path(@challenge, @challenge_preference), :html => { :method => :put } do |f|
   = render :partial => 'form', :locals => {:f => f}

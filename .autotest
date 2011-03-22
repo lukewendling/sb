@@ -1,0 +1,8 @@
+require 'autotest/restart'
+require 'active_support/inflector'
+begin
+  require 'redgreen/autotest'
+  require 'test_notifier/runner/autotest'
+rescue LoadError
+end
+

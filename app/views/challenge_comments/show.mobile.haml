@@ -1,23 +1,25 @@
-- title "Challenge Comment"
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Comment
+    - if can?(:update, @challenge)
+      = link_to("Edit", edit_challenge_comment_path(@challenge, @challenge_comment), :class => "ui-btn-right", "data-theme" => :b, "data-icon" => :grid) if can?(:update, @challenge_comment)
 
-- content_for :toolbar do
-  = link_to( "Edit", edit_challenge_comment_path(@challenge, @challenge_comment), :class => 'button' ) if can?(:update, @challenge_comment)
+%p
+  To:
+  = (@challenge.friends - [@challenge_comment.friend]).first.name
+%p
+  Challenge:
+  ~ @challenge.event.description
+%p
+  Prediction:
+  ~ @challenge.prediction  
+%p
+  Message:
+  ~ @challenge_comment.content
+
+%p
+  = link_to "Reply", new_challenge_comment_path(@challenge), "data-role" => :button
   
-%ul
-  %li
-    To:
-    = (@challenge.friends - [@challenge_comment.friend]).first.name
-  %li
-    Challenge:
-    ~ @challenge.event.description
-  %li
-    Prediction:
-    ~ @challenge.prediction  
-  %li
-    Message:
-    ~ @challenge_comment.content
-  %li.arrow= link_to( "Reply", new_challenge_comment_path(@challenge) )
-  
-%ul
-  %li.arrow= link_to( "All Comments", challenge_comments_path )
-  %li.arrow= link_to( 'Back to Challenge', @challenge )
+.links{"data-role" => :controlgroup}
+  = link_to "All Comments", challenge_comments_path(@challenge), "data-role" => :button
+  = link_to 'Back to Challenge', @challenge, "data-role" => :button

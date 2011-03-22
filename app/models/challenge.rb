@@ -52,6 +52,10 @@ class Challenge < ActiveRecord::Base
     end
   end
   
+  def most_recent_comment
+    comments.date_sorted.last
+  end
+  
   def friends
     [challenger, challenged]
   end

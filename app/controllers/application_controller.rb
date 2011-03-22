@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   
   before_filter :login_required
-  before_filter :prepare_for_mobile
+  before_filter :mobilize
     
   #rescue twitter gem auth errors globally
   rescue_from Twitter::Unauthorized, :with => :twitter_unauthorized
@@ -31,13 +31,9 @@ class ApplicationController < ActionController::Base
     raise 'boom'
   end
 
-  def mobile_device?  
-    if session[:mobile_param]  
-      session[:mobile_param] == "1"  
-    else  
-      request.user_agent =~ /Mobile|webOS/  
-    end  
-  end  
+  def mobile_device?
+    request.user_agent =~ /Mobile|webOS/  
+  end
   helper_method :mobile_device?
   
   private
@@ -48,14 +44,14 @@ class ApplicationController < ActionController::Base
     def mobile_version_missing
       if mobile_device?
         flash[:notice] = "Sorry, the mobile version of the page you requested has not been created. You'll have to use the plain ol' classic version for now..."
-        redirect_to request.path + "?mobile=0"
+        #TODO: gracefully redirect. this fails
+        redirect_to request.path
       else
         raise $!
       end
     end
     
-    def prepare_for_mobile  
-     session[:mobile_param] = params[:mobile] if params[:mobile]
-     request.format = :mobile if mobile_device?
+    def mobilize
+      request.format = :mobile if mobile_device? or session[:mobilize]
     end 
 end

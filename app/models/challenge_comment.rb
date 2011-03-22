@@ -4,6 +4,8 @@ class ChallengeComment < ActiveRecord::Base
   
   validates_presence_of :challenge, :friend, :content
   
+  named_scope :date_sorted, :order => :updated_at
+  
   def self.per_page
     Rails.env == 'development' ? 3 : 10
   end

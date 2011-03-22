@@ -7,17 +7,13 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{:description => "A fun, simple application to create and track fitness and weight loss challenges"}/
     %meta{:keywords => "weight loss challenge, fitness challenge, friendly bet, track fitness"}/
-    = stylesheet_link_tag "/jqtouch/jqtouch.min.css", "/jqtouch/themes/apple/theme.css"
-    = javascript_include_tag "/jqtouch/jquery.1.3.2.min.js", "/jqtouch/jqtouch.min.js", "mobile"
+    = stylesheet_link_tag "http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css"
+    = javascript_include_tag "http://code.jquery.com/jquery-1.5.min.js", "http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"
     = yield(:head)
 
   %body
-    #home.current
-      - if show_title?
-        .toolbar
-          = link_to_unless_current("Home", challenges_path, :class => "button leftButton"){"&nbsp;".html_safe!}
-          %h1= yield(:title)
-          = yield(:toolbar)
+    #page{"data-role" => :page, "data-theme" => :a}
+      = yield(:header)
 
       - unless flash.empty?
         .info
@@ -26,6 +22,6 @@
 
       ~ yield
 
-      = render :partial => 'shared/footer'
+      = render :partial => "shared/footer"
 
     -#= render :partial => 'shared/google_analytics' if Rails.env == 'production'

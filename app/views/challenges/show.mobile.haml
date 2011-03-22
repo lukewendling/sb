@@ -1,34 +1,44 @@
-- title "Challenge"
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Challenge
+    - if can?(:update, @challenge)
+      = link_to "Edit", edit_challenge_path(@challenge), :class => "ui-btn-right", "data-theme" => :b, "data-icon" => :grid
 
-- if can?(:update, @challenge)
-  - content_for :toolbar do
-    = link_to( "Edit", edit_challenge_path(@challenge), :class => 'button' )
+%h3
+  Challenged:
+  = @challenge.challenged.name
+%h3
+  Event:
+  ~ @challenge.event.description
+%p
+  Prediction:
+  ~ @challenge.prediction
 
-%ul
-  %li
-    Challenged:
-    = @challenge.challenged.name
-  %li
-    Event:
-    ~ @challenge.event.description
-  %li
-    Prediction:
-    ~ @challenge.prediction
-  - if @challenge.complete?
-    %li
+%p
+  %small
+    Updated:
+    = time_ago_in_words(@challenge.updated_at) + ' ago'
+
+- unless @challenge.comments.empty?
+  %p
+    %small
+      Last comment:
+      = time_ago_in_words(@challenge.most_recent_comment.updated_at) + ' ago'
+
+- if @challenge.complete?
+  %div{"data-role" => :collapsible, "data-collapsed" => true}
+    %h3 Result
+    %p
       Result:
       ~ @challenge.result
-    %li
+    %p
       Winner:
       = @challenge.winner.try(:name)
-    %li
+    %p
       Contested?:
       = @challenge.contested? ? 'Yes' : 'No'
-  %li
-    Updated:
-    = @challenge.updated_at.to_date.to_s(:db)
-  %li.arrow
-    = link_to( "View Comments", challenge_comments_path(@challenge) )
-  %li.arrow
-    = link_to 'Preferences', edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id))
+
+.links{"data-role" => :controlgroup}
+  = link_to "Comments", challenge_comments_path(@challenge), "data-role" => :button
+  = link_to "Preferences", edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id)), "data-role" => :button
 
