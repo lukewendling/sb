@@ -17,8 +17,9 @@
     %ul{"data-role" => :listview, "data-theme" => :b}
       - for challenge in @challenges
         %li
+          = image_tag( (challenge.friends - [current_friend]).first.twitter_profile_image_url )
+          = link_to truncate(challenge.event.description), challenge
           %p= (challenge.friends - [current_friend]).first.name
-          %h3= link_to truncate(challenge.event.description), challenge
           %p{:class => "ui-li-aside"}
             %small
               Updated:

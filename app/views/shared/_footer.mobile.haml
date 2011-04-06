@@ -1,4 +1,4 @@
-%div{"data-role" => :controlgroup}
-  - if logged_in?
-    = link_to "Log out", logout_path, "data-role" => :button, "data-theme" => :d
-  = link_to "Old School", toggle_mobile_path, :rel => "external", "data-role" => :button, "data-theme" => :e
+- if logged_in?
+  = link_to_unless_current 'My Challenges', challenges_path, "data-role" => :button, "data-theme" => :e
+- if @challenge
+  = link_to_unless_current 'Challenge', @challenge, "data-role" => :button

@@ -13,6 +13,10 @@ class Friend
     @dummy ||= TwitterDumDum.new
   end
   
+  def twitter_profile_image_url
+    '/images/rails.png'
+  end
+  
 #  mock Twitter client methods
   class TwitterDumDum
     def update(msg)

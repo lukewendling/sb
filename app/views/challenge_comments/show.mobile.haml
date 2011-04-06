@@ -17,9 +17,6 @@
   Message:
   ~ @challenge_comment.content
 
-%p
-  = link_to "Reply", new_challenge_comment_path(@challenge), "data-role" => :button
-  
 .links{"data-role" => :controlgroup}
+  = link_to "Reply", new_challenge_comment_path(@challenge), "data-role" => :button
   = link_to "All Comments", challenge_comments_path(@challenge), "data-role" => :button
-  = link_to 'Back to Challenge', @challenge, "data-role" => :button

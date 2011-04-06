@@ -5,4 +5,5 @@ config/consumer.yml
 db/*.sqlite3
 .bundle
 public/stylesheets/application.css
+public/stylesheets/mobile.css
 db/*.sqlite3-journal

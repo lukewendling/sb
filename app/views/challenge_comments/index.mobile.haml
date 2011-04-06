@@ -3,22 +3,16 @@
     %h1 Comments
     = link_to "New", new_challenge_comment_path(@challenge), :class => "ui-btn-right", "data-theme" => :b, "data-icon" => :plus
 
-.links{"data-role" => :controlgroup}
-  = link_to 'Back to Challenge', @challenge, "data-role" => :button
-
 - unless @challenge_comments.empty?
-  %ul{"data-role" => :listview}
+  %ul{"data-role" => :listview, "data-theme" => :b}
     - for challenge_comment in @challenge_comments
       %li
-        %h3
-          = challenge_comment.friend.name
+        = link_to challenge_comment.friend.name, challenge_comment_path(challenge_comment.challenge, challenge_comment)
         %p
           = truncate(challenge_comment.content, :length => 25)
         %p
           %small
             = time_ago_in_words(challenge_comment.created_at) + ' ago'
-        %p
-          = link_to 'More ...', challenge_comment_path(challenge_comment.challenge, challenge_comment)
         - if can?(:update, challenge_comment)
           = link_to 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment)
 

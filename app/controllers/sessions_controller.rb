@@ -24,9 +24,4 @@ class SessionsController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_to root_url
   end
-  
-  def toggle_mobile_rendering
-    session[:mobilize] = session[:mobilize] ? nil : true 
-    redirect_to challenges_path
-  end
 end
