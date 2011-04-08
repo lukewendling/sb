@@ -39,6 +39,6 @@
       = @challenge.contested? ? 'Yes' : 'No'
 
 .links{"data-role" => :controlgroup}
-  = link_to "Comments", challenge_comments_path(@challenge), "data-role" => :button
+  = link_to "Comments", challenge_challenge_comments_path(@challenge), "data-role" => :button
   = link_to "Preferences", edit_challenge_preference_path(@challenge, @challenge.preferences.find_by_friend_id(current_friend.id)), "data-role" => :button
 

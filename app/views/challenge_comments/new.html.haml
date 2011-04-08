@@ -1,6 +1,6 @@
 - title "New Comment"
 
-- form_for @challenge_comment do |f|
+- form_for [challenge, challenge_comment] do |f|
   = render :partial => 'form', :locals => {:f => f}
 
-%p= link_to "Back to Comments", challenge_comments_path
+%p= link_to "Cancel", challenge_challenge_comments_path(challenge)

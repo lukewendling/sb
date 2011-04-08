@@ -2,5 +2,5 @@
   .header{"data-role" => :header, "data-position" => :fixed}
     %h1 Edit Comment
 
-- form_for :challenge_comment, :url => challenge_comment_path(@challenge, @challenge_comment), :html => { :method => :put } do |f|
+- form_for [challenge, challenge_comment] do |f|
   = render :partial => 'form', :locals => {:f => f}

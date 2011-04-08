@@ -1,54 +1,67 @@
 require 'test_helper'
 
 class ChallengeCommentsControllerTest < ActionController::TestCase
-#  def test_index
-#    get :index
-#    assert_template 'index'
-#  end
-#  
-#  def test_show
-#    get :show, :id => ChallengeComment.first
-#    assert_template 'show'
-#  end
-#  
-#  def test_new
-#    get :new
-#    assert_template 'new'
-#  end
-#  
-#  def test_create_invalid
-#    ChallengeComment.any_instance.stubs(:valid?).returns(false)
-#    post :create
-#    assert_template 'new'
-#  end
-#  
-#  def test_create_valid
-#    ChallengeComment.any_instance.stubs(:valid?).returns(true)
-#    post :create
-#    assert_redirected_to challenge_comment_url(assigns(:challenge_comment))
-#  end
-#  
-#  def test_edit
-#    get :edit, :id => ChallengeComment.first
-#    assert_template 'edit'
-#  end
-#  
-#  def test_update_invalid
-#    ChallengeComment.any_instance.stubs(:valid?).returns(false)
-#    put :update, :id => ChallengeComment.first
-#    assert_template 'edit'
-#  end
-#  
-#  def test_update_valid
-#    ChallengeComment.any_instance.stubs(:valid?).returns(true)
-#    put :update, :id => ChallengeComment.first
-#    assert_redirected_to challenge_comment_url(assigns(:challenge_comment))
-#  end
-#  
-#  def test_destroy
-#    challenge_comment = ChallengeComment.first
-#    delete :destroy, :id => challenge_comment
-#    assert_redirected_to challenge_comments_url
-#    assert !ChallengeComment.exists?(challenge_comment.id)
-#  end
+  context "for a challenge," do
+    setup do
+      @challenge = challenges(:linwood_to_luke)
+      @challenge_comment = @challenge.comments.first
+      login_with('linwood', 'secret')
+    end
+    
+    context "index action" do
+      should "render index template" do
+        get :index, :challenge_id => @challenge
+        assert_template 'index'
+      end
+    end
+    
+    context "show action" do
+      should "render show template" do
+        get :show, :id => @challenge_comment, :challenge_id => @challenge
+        assert_template 'show'
+      end
+    end
+    
+    context "new action" do
+      should "render new template" do
+        get :new, :challenge_id => @challenge
+        assert_template 'new'
+      end
+    end
+    
+    context "create action" do
+      should "render new template when model is invalid" do
+        ChallengeComment.any_instance.stubs(:valid?).returns(false)
+        post :create, :challenge_id => @challenge
+        assert_template 'new'
+      end
+      
+      should "redirect when model is valid" do
+        ChallengeComment.any_instance.stubs(:valid?).returns(true)
+        post :create, :challenge_id => @challenge
+        assert_response :redirect
+      end
+    end
+    
+    context "edit action" do
+      should "render edit template" do
+        get :edit, :id => @challenge_comment, :challenge_id => @challenge
+        assert_template 'edit'
+      end
+    end
+    
+    context "update action" do
+      should "render edit template when model is invalid" do
+        ChallengeComment.any_instance.stubs(:valid?).returns(false)
+        put :update, :id => @challenge_comment, :challenge_id => @challenge
+        assert_template 'edit'
+      end
+    
+      should "redirect when model is valid" do
+        ChallengeComment.any_instance.stubs(:valid?).returns(true)
+        put :update, :id => @challenge_comment, :challenge_id => @challenge
+        assert_redirected_to [@challenge, @challenge_comment]
+      end
+    end
+  end
 end

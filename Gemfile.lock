@@ -17,6 +17,7 @@ GEM
     chronic (0.3.0)
     columnize (0.3.2)
     crack (0.1.8)
+    decent_exposure (1.0.1)
     erubis (2.6.5)
       abstract (>= 1.0.0)
     formtastic (0.9.8)
@@ -67,6 +68,7 @@ PLATFORMS
 
 DEPENDENCIES
   cancan (= 1.1.1)
+  decent_exposure (= 1.0.1)
   erubis (= 2.6.5)
   formtastic (= 0.9.8)
   haml (= 2.2.24)

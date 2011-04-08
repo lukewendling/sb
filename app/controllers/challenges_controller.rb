@@ -16,7 +16,6 @@ class ChallengesController < ApplicationController
   end
   
   def show
-#    @challenge ||= Challenge.find(params[:id])
   end
   
   def new
@@ -53,13 +52,6 @@ class ChallengesController < ApplicationController
     end
   end
   
-#  def destroy
-#    @challenge ||= Challenge.find(params[:id])
-#    @challenge.destroy
-#    flash[:notice] = "Successfully destroyed challenge."
-#    redirect_to challenges_url
-#  end
-  
   def accept
 #    @challenge = Challenge.find_by_hashed_id(params[:id])
 #    if @challenge.challenged != current_friend
@@ -85,13 +77,4 @@ class ChallengesController < ApplicationController
     def find_by_hashed_id
       @challenge = Challenge.find_by_hashed_id(params[:id])
     end
-#    only challenger can update/destroy, friends can view
-#    def authorize
-#      @challenge = Challenge.find(params[:id])
-#      if %w(edit update destroy).include?(action_name)
-#        render(:text => 'Unauthorized', :status => 401) unless @challenge.challenger == current_friend
-#      else
-#        render(:text => 'Unauthorized',:status => 401) unless @challenge.friends.include?(current_friend)
-#      end
-#    end
 end

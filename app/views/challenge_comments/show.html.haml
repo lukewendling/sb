@@ -2,21 +2,21 @@
 
 %p
   %strong To:
-  = (@challenge.friends - [@challenge_comment.friend]).first.name
+  = (challenge.friends - [challenge_comment.friend]).first.name
 %p
   %strong Challenge:
-  ~ @challenge.event.description
+  ~ challenge.event.description
 %p
   %strong Prediction:
-  ~ @challenge.prediction  
+  ~ challenge.prediction  
 %p
   %strong Message:
-  ~ @challenge_comment.content
+  ~ challenge_comment.content
 
 %p
   - links = []
-  - links << link_to( "Edit", edit_challenge_comment_path(@challenge, @challenge_comment) ) if can?(:update, @challenge_comment)
-  - links << link_to( "Reply", new_challenge_comment_path(@challenge) )
-  - links << link_to( "All Comments", challenge_comments_path )
-  - links << link_to( 'Back to Challenge', @challenge )
+  - links << link_to( "Edit", edit_challenge_challenge_comment_path(challenge, challenge_comment) ) if can?(:update, challenge_comment)
+  - links << link_to( "Reply", new_challenge_challenge_comment_path(challenge) )
+  - links << link_to( "All Comments", challenge_challenge_comments_path(challenge) )
+  - links << link_to( 'Back to Challenge', challenge )
   = links.join(' | ').html_safe!

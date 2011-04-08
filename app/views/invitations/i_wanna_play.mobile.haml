@@ -1,0 +1,16 @@
+- content_for :header do
+  .header{"data-role" => :header, "data-position" => :fixed}
+    %h1 Let me play!
+
+- form_tag( :action => 'send_request' ) do |f|
+  .form_field{"data-role" => :fieldcontain}
+    = label :invitation_request, :email, "Your email address"
+    = text_field :invitation_request, :email, :type => :email
+  .form_field{"data-role" => :fieldcontain}
+    = label :invitation_request, :message, "How do we know that you're a human? (Have fun with this)"
+    = text_area :invitation_request, :message
+  .form_field{"data-role" => :fieldcontain}
+    = label :invitation_request, :answer, "What is 9 + 6?"
+    = text_field :invitation_request, :answer
+
+  = submit_tag "Send", "data-icon" => "arrow-r", "data-iconpos" => :right, "data-theme" => :b

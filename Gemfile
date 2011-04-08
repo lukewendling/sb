@@ -12,6 +12,7 @@ gem 'jeremyevans-exception_notification', '1.0.20090728', :require => 'exception
 gem 'erubis', '2.6.5' # for rails_xss plugin
 gem 'cancan', '1.1.1'
 gem 'formtastic', '0.9.8'
+gem 'decent_exposure', '1.0.1'
 
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'

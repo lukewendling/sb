@@ -1,22 +1,21 @@
 - content_for :header do
   .header{"data-role" => :header, "data-position" => :fixed}
     %h1 Comment
-    - if can?(:update, @challenge)
-      = link_to("Edit", edit_challenge_comment_path(@challenge, @challenge_comment), :class => "ui-btn-right", "data-theme" => :b, "data-icon" => :grid) if can?(:update, @challenge_comment)
+    = link_to("Edit", edit_challenge_challenge_comment_path(challenge, challenge_comment), :class => "ui-btn-right", "data-theme" => :b, "data-icon" => :grid) if can?(:update, challenge_comment)
 
 %p
   To:
-  = (@challenge.friends - [@challenge_comment.friend]).first.name
+  = (challenge.friends - [challenge_comment.friend]).first.name
 %p
   Challenge:
-  ~ @challenge.event.description
+  ~ challenge.event.description
 %p
   Prediction:
-  ~ @challenge.prediction  
+  ~ challenge.prediction  
 %p
   Message:
-  ~ @challenge_comment.content
+  ~ challenge_comment.content
 
 .links{"data-role" => :controlgroup}
-  = link_to "Reply", new_challenge_comment_path(@challenge), "data-role" => :button
-  = link_to "All Comments", challenge_comments_path(@challenge), "data-role" => :button
+  = link_to "Reply", new_challenge_challenge_comment_path(challenge), "data-role" => :button
+  = link_to "All Comments", challenge_challenge_comments_path(challenge), "data-role" => :button

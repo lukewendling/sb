@@ -1,4 +1,5 @@
 - if logged_in?
   = link_to_unless_current 'My Challenges', challenges_path, "data-role" => :button, "data-theme" => :e
+- @challenge ||= challenge rescue nil  # decent_exposure
 - if @challenge
   = link_to_unless_current 'Challenge', @challenge, "data-role" => :button

@@ -2,6 +2,6 @@
   .header{"data-role" => :header, "data-position" => :fixed}
     %h1 New Comment
 
-- form_for @challenge_comment do |f|
+- form_for [challenge, challenge_comment] do |f|
   = render :partial => 'form', :locals => {:f => f}
 

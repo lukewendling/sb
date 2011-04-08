@@ -1,4 +1,9 @@
-- title "Comments for #{truncate(@challenge.event.description, :length => 20)}"
+- title "Comments for #{truncate(challenge.event.description, :length => 20)}"
+
+%p
+  = link_to "New Comment", new_challenge_challenge_comment_path(challenge)
+  |
+  = link_to "Back to Challenge", challenge
 
 - unless @challenge_comments.empty?
   - for challenge_comment in @challenge_comments
@@ -11,17 +16,17 @@
           %small
             %em== Updated #{time_ago_in_words(challenge_comment.created_at)} ago
       %tr
-        %td{:colspan => 2}= truncate(challenge_comment.content, :length => 50)
+        %td{:colspan => 2}
+          .pad-left
+            "
+            = truncate(challenge_comment.content, :length => 50)
+            "
       %tr
         %td{:colspan => 2}
-          = link_to 'Show', challenge_comment_path(challenge_comment.challenge, challenge_comment)
+          = link_to 'Show', challenge_challenge_comment_path(challenge_comment.challenge, challenge_comment)
           - if can?(:update, challenge_comment)
             |
-            = link_to( 'Edit', edit_challenge_comment_path(challenge_comment.challenge, challenge_comment) )
+            = link_to( 'Edit', edit_challenge_challenge_comment_path(challenge_comment.challenge, challenge_comment) )
 
-  = will_paginate @challenge_comments
-  
-%p
-  = link_to "New Comment", new_challenge_comment_path(@challenge)
-  |
-  = link_to "Back to Challenge", @challenge
+  %p.pad-top
+    = will_paginate @challenge_comments

@@ -34,16 +34,22 @@
         %td{:colspan => 2}
           %small
             %em== Updated #{time_ago_in_words(challenge.updated_at)} ago
+            - unless challenge.comments.empty?
+              %br
+              %em== Last comment #{time_ago_in_words(challenge.most_recent_comment.updated_at)} ago
       %tr
         %td
         %td{:colspan => 2}
-          - challenge.comments[0..3].each do |c|
-            = link_to truncate(c.content, :length => 40), challenge_comment_path(challenge, c)
-            %br
-          = link_to 'Add a comment >>', new_challenge_comment_path(challenge)
+          - challenge.comments[0..2].each do |c|
+            %p.pad-left
+              "
+              = truncate(c.content, :length => 40)
+              "
+              %small= link_to 'more...', challenge_challenge_comment_path(challenge, c)
+          = link_to 'Add a comment >>', new_challenge_challenge_comment_path(challenge)
           - unless challenge.comments.empty?
             |
-            = link_to 'All comments >>', challenge_comments_path(challenge)
+            = link_to 'All comments >>', challenge_challenge_comments_path(challenge)
       %tr
         %td
         %td{:colspan => 2}
