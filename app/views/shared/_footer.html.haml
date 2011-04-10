@@ -1,7 +1,7 @@
-.boat{:style => "width: 30%"}
+.boat{:style => "padding-left: 33%; width: 33%"}
   .float-left{:style => "width: 33%"}
     = link_to 'terms of use', '/terms.html'
   .float-left{:style => "width: 33%"}
-    = link_to image_tag('mobile_phone_icon.png'), toggle_mobile_path, :alt => 'Friendly bets on your mobile!'
+    = link_to image_tag('mobile_phone_icon.png', :alt => 'Friendly bets on your mobile device!'), toggle_mobile_path
   .float-left{:style => "width: 33%"}
-    = link_to image_tag('twitter.jpg', :style => "height: 16px; width: 16px"), "http://twitter.com/shouldbet", :alt => 'Follow us on Twitter', :target => "_blank"
+    = link_to image_tag("http://twitter-badges.s3.amazonaws.com/t_mini-b.png", :alt => "Follow shouldbet on Twitter"), "http://www.twitter.com/shouldbet", :target => "_blank"
