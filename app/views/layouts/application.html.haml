@@ -9,6 +9,8 @@
     %meta{:keywords => "friendly bet, bet friends"}/
     = stylesheet_link_tag 'application', 'formtastic', 'formtastic_changes', :cache => true
     = javascript_include_tag :defaults, :cache => true
+    = javascript_include_tag "http://code.jquery.com/jquery-1.5.2.min.js"
+    = javascript_include_tag 'jq_page_transition'
     = yield(:head)
   
   %body
