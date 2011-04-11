@@ -1,8 +1,9 @@
 - title "Challenge"
 
+- my_friend = (@challenge.friends - [current_friend]).first
 %p
-  %strong Challenged:
-  = @challenge.challenged.name
+  = image_tag my_friend.twitter_profile_image_url
+  == #{my_friend.name} (#{my_friend.twitter_screen_name})
 %p
   %strong Event:
   ~ @challenge.event.description
@@ -32,5 +33,5 @@
   - links = []
   - links << link_to( "Edit", edit_challenge_path(@challenge) ) if can?(:update, @challenge)
   - links << link_to( "View Comments", challenge_challenge_comments_path(@challenge) )
-  - links << link_to( "Back", challenges_path )
+  - links << link_to( "Challenges", challenges_path )
   = links.join(' | ').html_safe!

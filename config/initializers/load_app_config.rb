@@ -8,3 +8,5 @@ ExceptionNotifier.sender_address = %("Application Error" <debug@shouldbet.com>)
 ExceptionNotifier.email_prefix = "[Oops] "
 
 INVALID_CONTENT_PATTERN = /<iframe|<script|<frame|\.\.\//i
+
+UrlShortener = ShortUrl.new(AppConfig[:bitly_username], AppConfig[:bitly_key])

@@ -18,7 +18,7 @@ Prediction
 
 Now what? Click here (or paste into your browser) to accept:
 --------------------
-<%= @short_url %>
+<%= UrlShortener.shorten(accept_challenge_url(@challenge.hashed_id)) %>
 
 
 

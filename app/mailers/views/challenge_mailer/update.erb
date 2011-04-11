@@ -15,17 +15,17 @@ Event
 
 
 
-<% if @challenge.winner -%>    
+<% if @challenge.winner -%>
   Winner
   ------
   <%= h(@challenge.winner.name) %>
 <% end -%>
-    
 
-    
+
+
 Event page
 ----------
-<%= @short_url %>
+<%= UrlShortener.shorten(challenge_url(@challenge)) %>
 
 
 

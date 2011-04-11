@@ -4,9 +4,10 @@
     - if can?(:update, @challenge)
       = link_to "Edit", edit_challenge_path(@challenge), :class => "ui-btn-right", "data-theme" => :b, "data-icon" => :grid
 
-%h3
-  Challenged:
-  = @challenge.challenged.name
+- my_friend = (@challenge.friends - [current_friend]).first
+%p
+  = image_tag my_friend.twitter_profile_image_url
+  == #{my_friend.name} (#{my_friend.twitter_screen_name})
 %h3
   Event:
   ~ @challenge.event.description

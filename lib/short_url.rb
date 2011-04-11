@@ -8,8 +8,13 @@ class ShortUrl
  
   def shorten(long_url, opts={})
     query = { :longUrl => long_url }.merge(opts)
-    response = get('/shorten', :query => query)
-    return Url.new(self, response['data'])
+    begin
+      response = get('/shorten', :query => query)
+      url = Url.new(self, response['data'])
+      return url.short_url
+    rescue
+      return long_url
+    end
   end
  
   def get(method, opts={})

@@ -1,15 +1,15 @@
-<%= h @invitation_request.email %>
+<%= @invitation_request.email.html_safe! %>
 
-<%= h @invitation_request.message %>
+<%= @invitation_request.message.html_safe! %>
  
-* URL       : <%= @request.protocol %><%= @host %><%= @request.request_uri %>
+* URL       : <%= @request.protocol.html_safe! %><%= @host.html_safe! %><%= @request.request_uri.html_safe! %>
 * IP address: <%= @request.env["HTTP_X_FORWARDED_FOR"] || @request.env["REMOTE_ADDR"] %>
-* Parameters: <%= @request.parameters.inspect %>
+* Parameters: <%= @request.parameters.inspect.html_safe! %>
 
 
 <% max = @request.env.keys.max { |a,b| a.length <=> b.length } -%>
 <% @request.env.keys.sort.each do |key| -%>
-* <%= "%-*s: %s" % [max.length, key, @request.env[key].to_s.strip] %>
+* <%= "%-*s: %s" % [max.length, key, @request.env[key].to_s.strip.html_safe!] %>
 <% end -%>
 
 * Process: <%= $$ %>
