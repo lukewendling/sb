@@ -3,10 +3,10 @@
   
   %head
     %title
-      == ShouldBet.com - #{yield(:title) || AppConfig[:title]} - friendly bet, bet friends
+      == ShouldBet.com - #{yield(:title) || AppConfig[:title]} - friendly bet, friendly wager, bet friends
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{:description => "A fun, simple application to create and record bets with friends"}/
-    %meta{:keywords => "friendly bet, bet friends"}/
+    %meta{:keywords => "friendly bet, friendly wager, bet friends"}/
     = stylesheet_link_tag "http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css", "mobile"
     = javascript_include_tag "http://code.jquery.com/jquery-1.5.2.min.js", "http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"
     = yield(:head)
