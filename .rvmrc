@@ -1,7 +1,7 @@
 
 if [[ -d "${rvm_path:-$HOME/.rvm}/environments" \
-  && -s "${rvm_path:-$HOME/.rvm}/environments/ruby-1.8.7-head@shouldbet" ]] ; then
-  \. "${rvm_path:-$HOME/.rvm}/environments/ruby-1.8.7-head@shouldbet"
+  && -s "${rvm_path:-$HOME/.rvm}/environments/ruby-1.8.7-p334@shouldbet" ]] ; then
+  \. "${rvm_path:-$HOME/.rvm}/environments/ruby-1.8.7-p334@shouldbet"
 else
-  rvm --create  "ruby-1.8.7-head@shouldbet"
+  rvm --create  "ruby-1.8.7-p334@shouldbet"
 fi
