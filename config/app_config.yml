@@ -1,0 +1,27 @@
+site: &site
+  title: ShouldBet
+  reply_to: ShouldBet.com <friendlywager@gmail.com>
+  mail_from: ShouldBet.com <no-reply@shouldbet.com>
+  
+imap: &imap
+  imap_server: imap.gmail.com
+  imap_port: 993
+  imap_username: friendlywager
+  imap_pwd: Fri3ndlyWager
+  
+development:
+  domain: "localhost:3000"
+  <<: *imap
+  <<: *site
+
+test:
+  domain: "test.host"
+  <<: *imap
+  <<: *site
+    
+production:
+  domain: shouldbet.com
+  bitly_username: lukewendling
+  bitly_key: R_9868990275dd90c412e6e063a27df647
+  <<: *imap
+  <<: *site

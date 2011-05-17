@@ -1,7 +1,5 @@
 log/*.log
 tmp/**/*
-config/app_config.yml
-config/consumer.yml
 db/*.sqlite3
 .bundle
 public/stylesheets/application.css
