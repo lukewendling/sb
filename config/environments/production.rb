@@ -1,9 +1,3 @@
-##
-# this file is overwritten in deployment to prevent storing smtp passwords in scm
-##
-
-
-
 # Settings specified here will take precedence over those in config/environment.rb
 
 # The production environment is meant for finished, "live" apps.
@@ -29,25 +23,6 @@ config.action_view.cache_template_loading            = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
-
+config.action_mailer.default_url_options = { :host => "shouldbet.com" }
 # Enable threaded mode
 # config.threadsafe!
-config.action_mailer.delivery_method = :sendmail  
-config.action_mailer.perform_deliveries = true  
-config.action_mailer.raise_delivery_errors = true  
-config.action_mailer.default_charset = "utf-8"
-#config.action_mailer.delivery_method = :smtp
-#config.action_mailer.raise_delivery_errors = true
-#config.action_mailer.perform_deliveries = true
-#config.action_mailer.default_charset = "utf-8"
-config.action_mailer.default_url_options = { :host => "shouldbet.com" }
-
-#config.action_mailer.smtp_settings = {
-#  :address => "mail.shouldbet.com",
-#  :port => 25,
-#  :domain => "shouldbet.com",
-#  :authentication => :login,
-#  :user_name => "lukewen",
-#  :password => ""
-#}
-
