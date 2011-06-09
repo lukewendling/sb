@@ -18,7 +18,7 @@ class MailFetcher
   end
     
   def self.fetch
-    Lockfile('lock' , :retries => 0) do
+#    Lockfile('lock' , :retries => 0) do
       imap = Net::IMAP.new(AppConfig[:imap_server], AppConfig[:imap_port], true)
       imap.login(AppConfig[:imap_username], AppConfig[:imap_pwd])
       imap.select('INBOX')
@@ -40,7 +40,7 @@ class MailFetcher
       imap.expunge
       imap.logout
       imap.disconnect
-    end
+#    end
   end
   
   class DisorderlyMailException < Exception;  end
