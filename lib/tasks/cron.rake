@@ -11,8 +11,6 @@ task :cron => :environment do
 #  end
 
 #  from script/batch_mail
-  SentMail.incomplete.each do |m| 
-    ApplicationMailer.deliver_without_serialization(m.serialized_mail)
-    m.toggle!(:complete)
-  end
+  MailSender.deliver_unsent
+  MailFetcher.fetch
 end

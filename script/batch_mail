@@ -1,5 +1,2 @@
 # heroku: see cron.rake
-SentMail.incomplete.each do |m| 
-  ApplicationMailer.deliver_without_serialization(m.serialized_mail)
-  m.toggle!(:complete)
-end
+MailSender.deliver_unsent

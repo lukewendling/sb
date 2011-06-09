@@ -1,3 +1,6 @@
+require 'lockfile'
+require 'net/imap'
+
 class MailFetcher
   def self.receive(mail)
     c_id = mail.body.match(/\|\|(\S+)\|\|/)
@@ -12,6 +15,32 @@ class MailFetcher
     raise DisorderlyMailException, 'Reply delimiter is missing' unless reply
     message = reply.captures.first
     comment = challenge.comments.create(:friend => friend, :content => message)
+  end
+    
+  def self.fetch
+    Lockfile('lock' , :retries => 0) do
+      imap = Net::IMAP.new(AppConfig[:imap_server], AppConfig[:imap_port], true)
+      imap.login(AppConfig[:imap_username], AppConfig[:imap_pwd])
+      imap.select('INBOX')
+      imap.search(["NOT", "DELETED"]).each do |message_id|
+        email = imap.fetch(message_id, 'RFC822' )[0].attr['RFC822']
+        parsed_mail = TMail::Mail.parse(email)
+        unless parsed_mail.to.nil? # Spam
+          begin
+            self.receive(parsed_mail)
+          rescue DisorderlyMailException
+            imap.copy message_id, 'Disorderly'
+          rescue
+            imap.copy message_id, 'Failed'
+          end
+        end
+        imap.store(message_id, "+FLAGS" , [:Deleted]) unless Rails.env == 'development'
+      end
+
+      imap.expunge
+      imap.logout
+      imap.disconnect
+    end
   end
   
   class DisorderlyMailException < Exception;  end
